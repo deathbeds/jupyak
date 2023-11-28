@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+set -eux
+export IN_BINDER=1
+export JPYK_ALLOW_NO_CONFIG=1
+doit bootstrap

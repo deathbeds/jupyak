@@ -1,0 +1,133 @@
+[build-system]
+build-backend = "flit_core.buildapi"
+requires = ["flit_core<4,>=3.9.0"]
+
+[project]
+name = "jupyak"
+version = "0.1.0"
+description = "A tool for building JupyterLite preview sites from Jupyter PRs"
+readme = "README.md"
+authors = [{name = "jupyak contributors", email = "deathbeds@googlegroups.com"}]
+requires-python = ">=3.9"
+classifiers = [
+  "License :: OSI Approved :: BSD License",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3",
+]
+dependencies = [
+    "doit[toml] >=0.36.0",
+    "importnb",
+    "jinja2",
+    "traitlets",
+]
+[project.urls]
+"Bug Tracker" = "https://github.com/deathbeds/jupyak/issues"
+"Changelog" = "https://github.com/deathbeds/jupyak/blob/main/CHANGELOG.md"
+"Documentation" = "https://jupyak.rtfd.io"
+"PyPI" = "https://pypi.org/project/jupyak"
+"Source" = "https://github.com/deathbeds/jupyak/tree/main"
+
+[tool.doit]
+backend = "sqlite3"
+verbosity = 2
+par_type = "thread"
+
+[tool.doit.commands.list]
+status = true
+subtasks = true
+
+[tool.ruff]
+cache-dir = "build/.cache/ruff"
+extend-include = ["*.ipynb"]
+extend-exclude = [".ipynb_checkpoints"]
+ignore = [
+  "D211",
+  "D213",
+  "COM812",
+  "ISC001",
+]
+select = [
+  "A",
+  # "ANN",
+  "ARG",
+  "B",
+  "BLE",
+  "C4",
+  "C90",
+  "COM",
+  "D",
+  "DJ",
+  "DTZ",
+  "E",
+  "EM",
+  "ERA",
+  "EXE",
+  "F",
+  # "FBT",
+  "G",
+  "I",
+  "ICN",
+  "INP",
+  "ISC",
+  "N",
+  "NPY",
+  "PD",
+  "PGH",
+  "PIE",
+  "PL",
+  "PT",
+  "PTH",
+  "PYI",
+  "Q",
+  "RET",
+  "RSE",
+  "RUF",
+  "S",
+  "SIM",
+  "SLF",
+  "T10",
+  "T20",
+  "TCH",
+  "TID",
+  # "TRY",
+  "UP",
+  "W",
+  "YTT",
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["jupyak"]
+
+[tool.pytest.ini_options]
+cache_dir = "build/.cache/pytest"
+testpaths = ["tests"]
+addopts = [
+  # for humans
+  "--html=build/reports/pytest.html",
+  "--self-contained-html",
+  "--cov-report=html:build/reports/htmlcov",
+  "--cov-report=term-missing:skip-covered",
+  "--color=yes",
+  # cov
+  "--cov=jupyak",
+  "--cov-branch",
+  "--cov-context=test",
+  "--no-cov-on-fail",
+  # misc
+  "--ff",
+  "--tb=long",
+]
+
+[tool.coverage.html]
+show_contexts = true
+
+[tool.coverage.report]
+exclude_lines = [
+  "except ImportError as err:",
+  "except MissingDependencyError as err:",
+  "if TYPE_CHECKING:",
+  "pragma: no cover",
+]
+
+[tool.coverage.run]
+data_file = "build/reports/coverage/.coverage"

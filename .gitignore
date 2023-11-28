@@ -1,0 +1,9 @@
+__pycache__/
+.doit.*
+.ipynb_checkpoints/
+.venv/
+build/
+dist/
+lib/
+work/
+jupyak_config.*

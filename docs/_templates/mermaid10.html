@@ -1,0 +1,11 @@
+<script type="module">
+  document.addEventListener("DOMContentLoaded", () => {
+    const diagrams = document.querySelectorAll(".jp-Mermaid");
+    // do not load mermaidjs if not needed
+    console.info(`🧜‍♀️ diagrams found: ${diagrams.length}`);
+    if (!diagrams.length) {
+      return;
+    }
+    import(`./{{ pathto("_static/js/mermaid.mjs", 1) }}`).then((mmd) => mmd.init());
+  });
+</script>

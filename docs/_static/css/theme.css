@@ -1,0 +1,92 @@
+/* variables */
+html[data-theme="light"],
+html[data-theme="dark"] {
+  --pst-color-primary: #9556cf;
+}
+
+html[data-theme="dark"] {
+  --pst-color-border: #444;
+}
+
+/* pydata-sphinx-them */
+.bd-main .bd-content .bd-article-container {
+  max-width: 100%;
+}
+
+.bd-page-width {
+  max-width: 100%;
+}
+
+/* sphinx-design */
+.sd-tab-content {
+  border-top: solid 1px var(--pst-color-border);
+  box-shadow: unset;
+}
+
+/* mermaid */
+.jp-Mermaid > .mermaid,
+.jp-Mermaid:not(.jp-RenderedMermaid) {
+  display: none;
+}
+
+.jp-Mermaid > svg {
+  display: block;
+  margin: auto;
+}
+
+.jp-RenderedMermaid > .jp-mod-warning {
+  width: auto;
+  padding: 10px;
+}
+
+.jp-RenderedMermaid > .jp-mod-warning details > pre {
+  margin-top: 1em;
+}
+
+.jp-RenderedMermaid > .jp-mod-warning summary > pre {
+  display: inline-block;
+}
+
+/* jsonschema */
+table.jsonschema td {
+  padding: 0.125em;
+}
+
+table.jsonschema td:first-child ul {
+  font-family: var(--pst-font-family-monospace);
+  list-style: none;
+  font-weight: bold;
+}
+
+table.jsonschema h2 {
+  font-family: var(--pst-font-family-monospace);
+}
+
+/* mermaid */
+.jp-Mermaid p,
+.mermaid p,
+.mermaid-temp p {
+  color: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+.flowchart-link:hover {
+  stroke: var(--pst-color-primary) !important;
+  stroke-width: 8px !important;
+  transition: stroke stroke-width 0.5s;
+}
+
+#task-graph-legend {
+  position: fixed;
+  top: 100px;
+  right: 0;
+  pointer-events: none;
+  opacity: 0.75;
+  width: 800px;
+}
+
+input[id*="svg-zoom-1"]:checked ~ svg { width: 100%; transition: width 0.5s;}
+input[id*="svg-zoom-2"]:checked ~ svg { width: 200%; transition: width 0.5s;}
+input[id*="svg-zoom-4"]:checked ~ svg { width: 400%; transition: width 0.5s;}
+input[id*="svg-zoom-8"]:checked ~ svg { width: 800%; transition: width 0.5s;}

@@ -1,0 +1,44 @@
+channels:
+  - conda-forge
+  - conda-forge/label/jupyterlab_alpha
+  - conda-forge/label/notebook_alpha
+  - nodefaults
+dependencies:
+  # jupyter
+  - ipywidgets >=8.1.1,<9.0.0
+  - jupyterlab >=4.1.0a3,<5.0.0
+  - notebook >=7.1.0a0,<8
+  # build
+  - git
+  - flit >=3.9.0,<4
+  # fix
+  - ruff
+  - nbstripout
+  - scour
+  # test
+  - pytest
+  - pytest-cov
+  - pytest-html
+  ### docs/environment.yml ###
+  # runtimes
+  - nodejs >=20,<21
+  - python >=3.11,<3.12
+  # run
+  - importnb
+  - pyyaml
+  - tomli
+  - doit-with-toml
+  # build
+  - pip
+  # docs
+  - jupyterlite-core >=0.2.0,<0.3.0
+  - jupyterlite-pyodide-kernel >=0.2.0,<0.3.0
+  - python-libarchive-c
+  - docutils >=0.19
+  - myst-nb
+  - pydata-sphinx-theme
+  - sphinx-copybutton
+  - sphinx-design
+  - sphinxcontrib-mermaid
+  - lxml
+  ### docs/environment.yml ###
