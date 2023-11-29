@@ -4,6 +4,15 @@ channels:
 platforms:
   - linux-64
 dependencies:
+  ### .github/environment.yml ###
+  # fix
+  - ruff
+  - nbstripout
+  - scour
+  # test
+  - pytest
+  - pytest-cov
+  - pytest-html
   ### docs/environment.yml ###
   # runtimes
   - python >=3.11,<3.12
@@ -25,3 +34,4 @@ dependencies:
   - sphinxcontrib-mermaid
   - sphinxext-rediraffe
   ### docs/environment.yml ###
+  ### .github/environment.yml ###

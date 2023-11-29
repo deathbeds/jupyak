@@ -1,13 +1,21 @@
 # jupyak
 
-> Bot-assisted previews of (multiple) PRs to the Jupyter(Lite) stack.
+> get a JupyterLite preview of pull requests across the Jupyter stack
 
-## What does it do?
+## what does it do?
 
-This repo accepts [issues](#how-does-it-work) to build static [preview sites](#how-do-i-get-a-preview-site)
-of Pull Requests to the [Jupyter(Lite) stack](#what-can-it-build).
+This repo accepts [pull requests](#how-does-it-work) that build static [preview sites](#how-do-i-get-a-preview-site) to the [Jupyter(Lite) stack](#what-can-it-build).
 
-## Where does it do it?
+## how do I get a preview site?
+
+- Use the _Request Preview Site_ form to propose a `jupyak_config.json` file to this repo
+  - or manually fork, clone, and build one
+    - the `.toml`, `.yaml`, and `.yml`) extensions are also discovered
+- Make a [pull request][pulls] to this repo
+- Wait for the PR to build a site on ReadTheDocs
+- Make changes to the _PR_ to trigger re-building the preview site
+
+## where does it do it?
 
 - `https://github.com/deathbeds/jupyak`
     - a GitHub repo where the source code for this package, and all Issues, Pull Requests, and source code are stored
@@ -21,36 +29,28 @@ of Pull Requests to the [Jupyter(Lite) stack](#what-can-it-build).
         - PR-based [preview site](#how-do-i-get-a-preview-site)
         - preview of the docs for the site itself
 
-## How do I get a preview site?
-
-- Make an [issue][issues], filling out the form
-- Wait for the bot to make a PR
-- Wait for the PR to build a site on ReadTheDocs
-
-## How does it work?
+## how does it work?
 
 Delivering a preview site uses a few different GitHub Actions workflows and ReadTheDocs.
 
 - A nightly Github Actions job builds `https://deathbeds.github.io/jupyak`
-  - This site includes an accessible HTML form of available PRs, tags, etc. for all
-    supported repos
-  - Filling out this form redirects to a new [issue][issues], requiring a GitHub login
-- The issue is parsed by a lightweight JS-based workflow
-  - It creates a PR with a checked-in file describing the order
-    - If this **fails**, the bot should respond to the original issue with help
-- ReadTheDocs checks out the PR and builds a preview JupyterLite site on a custom
+  - This site includes an HTML form of available PRs, tags, etc. for supported
+    [repos](#what-can-it-build).
+  - Clicking the _submit_ button will open a "new file" GitHub page against this repo
+  - Click _Commit Changes..._
+  - Follow the Pull Request template and submit
+- ReadTheDocs will check out the PR and build a preview JupyterLite site on a custom
     domain
-  - If this **fails**, the site will contain human-readable error logs
-- Additional bot commands on the PR (or original issue)
-  can trigger a rebuild of the site, preserving a copy of last-known-good build
+  - If the preview site **fails** to build, the built RTD site will contain
+    human-readable error logs
+- Additional commits on the PR can trigger a rebuild of the site
 
+## what can it build?
 
-## What can it build?
-
-The bots understand how to work with one or more human-readable HTML URLs of the forms:
+`jupyak` understand how to work with one or more human-readable HTML URLs of the forms:
 
   - `{:repo}/pull/{:pull-id}`
-  - `{:repo}/tree/{:branch-or-commit}`
+  - `{:repo}/tree/{:branch}`
   - `{:repo}/releases/tag/{:tag}`
     - > note that the `/tree/{:tag}` form will fail loudly
 
@@ -70,3 +70,4 @@ The bots understand how to work with one or more human-readable HTML URLs of the
   - https://github.com/jupyterlite/pyodide-kernel
 
 [issues]: https://github.com/deathbeds/jupyak/issues
+[pulls]: https://github.com/deathbeds/jupyak/pulls
