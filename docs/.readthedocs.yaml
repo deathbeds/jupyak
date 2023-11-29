@@ -1,0 +1,20 @@
+version: 2
+
+build:
+  os: ubuntu-22.04
+  tools:
+    python: mambaforge-22.9
+  jobs:
+    pre_build:
+      - JPYK_ALLOW_NO_CONFIG=1 doit bootstrap
+      - if [ "$(ls -l jupyak_config.* | wc -l)" = "1" ]; then JPYK_LOG_JSON=work/build/logs/git.json doit shave:git:*; fi
+      - if [ "$(ls -l jupyak_config.* | wc -l)" = "1" ]; then JPYK_LOG_JSON=work/build/logs/shave.json doit shave; fi
+      - JPYK_ALLOW_NO_CONFIG=1 doit self:docs:graph
+
+sphinx:
+  builder: html
+  configuration: docs/conf.py
+  # fail_on_warning: true
+
+conda:
+  environment: docs/environment.yml

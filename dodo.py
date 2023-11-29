@@ -54,7 +54,6 @@ class E:
     WORK_DIR = os.environ.get("JPYK_WORK_DIR", "work")
     LOG_NAME = os.environ.get("JPYK_LOG_NAME")
     CI = bool(json.loads(os.environ.get("CI", "0").lower()))
-    CONDA_PREFIX = os.environ.get("CONDA_PREFIX")
 
 
 class P:
@@ -62,7 +61,7 @@ class P:
     ROOT = DODO.parent
     PPT = ROOT / "pyproject.toml"
     ENV_YAML = ROOT / ".binder/environment.yml"
-    ENV = Path(E.CONDA_PREFIX if (E.CI or E.RTD or E.BINDER) else ROOT / ".venv")
+    ENV = Path(sys.prefix if (E.CI or E.RTD or E.BINDER) else ROOT / ".venv")
     HISTORY = ENV / "conda-meta/history"
     LOGS = ROOT / E.WORK_DIR / "build/logs"
 

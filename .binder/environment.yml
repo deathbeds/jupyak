@@ -4,14 +4,15 @@ channels:
   - conda-forge/label/notebook_alpha
   - nodefaults
 dependencies:
+  # more runtimes
+  - nodejs >=20,<21
   # jupyter
   - ipywidgets >=8.1.1,<9.0.0
   - jupyterlab >=4.1.0a3,<5.0.0
   - notebook >=7.1.0a0,<8
   # build
   - git
-  - flit >=3.9.0,<4
-  - python-build
+  - flit
   # fix
   - ruff
   - nbstripout
@@ -22,7 +23,6 @@ dependencies:
   - pytest-html
   ### docs/environment.yml ###
   # runtimes
-  - nodejs >=20,<21
   - python >=3.11,<3.12
   # run
   - importnb
@@ -30,7 +30,9 @@ dependencies:
   - tomli
   - doit-with-toml
   # build
+  - flit-core >=3.9.0,<4
   - pip
+  - python-build
   # docs
   - jupyterlite-core >=0.2.0,<0.3.0
   - jupyterlite-pyodide-kernel >=0.2.0,<0.3.0
