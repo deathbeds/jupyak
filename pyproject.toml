@@ -117,6 +117,9 @@ addopts = [
   "--ff",
   "--tb=long",
 ]
+filterwarnings = [
+  "error",
+]
 
 [tool.coverage.html]
 show_contexts = true

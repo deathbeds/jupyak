@@ -1,0 +1,38 @@
+name: self
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - "*"
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  PYTHONUNBUFFERED: 1
+  PIP_DISABLE_PIP_VERSION_CHECK: 1
+  JPYK_ALLOW_NO_CONFIG: 1
+
+jobs:
+  self:
+    name: self
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash -el {0}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: conda-incubator/setup-miniconda@v3
+        with:
+          environment-file: .binder/environment.yml
+          miniforge-variant: Mambaforge
+          use-mamba: true
+      - run: doit bootstrap
+      - run: doit self:build:*
+      - run: doit self:test:*
+      - run: doit self:docs:*

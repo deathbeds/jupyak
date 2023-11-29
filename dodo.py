@@ -3,7 +3,6 @@ import json
 import os
 import sys
 import time
-import warnings
 from io import StringIO
 from pathlib import Path
 
@@ -21,7 +20,7 @@ try:
     globals().update(load_tasks())
 except ImportError as err:
     if "bootstrap" not in sys.argv:
-        warnings.warn(f"Please run `doit bootstrap` to get more tasks: {err}")
+        print(f"Please run `doit bootstrap` to get more tasks: {err}")
 
 __all__ = ["tasks"]
 
@@ -29,7 +28,7 @@ __all__ = ["tasks"]
 def task_bootstrap():
     """# ensure a sane working environment."""
     history = []
-    if not E.RTD or E.BINDER:
+    if not (E.RTD or E.BINDER or E.CI):
         history += [P.HISTORY]
         yield dict(
             name="mamba",
@@ -40,6 +39,7 @@ def task_bootstrap():
             targets=history,
             file_dep=[P.ENV_YAML],
         )
+
     yield dict(
         name="pip",
         doc="> ensure the package-under-development is installed",
@@ -53,6 +53,8 @@ class E:
     BINDER = json.loads(os.environ.get("IN_BINDER", "False").lower())
     WORK_DIR = os.environ.get("JPYK_WORK_DIR", "work")
     LOG_NAME = os.environ.get("JPYK_LOG_NAME")
+    CI = bool(json.loads(os.environ.get("CI", "0").lower()))
+    CONDA_PREFIX = os.environ.get("CONDA_PREFIX")
 
 
 class P:
@@ -60,7 +62,7 @@ class P:
     ROOT = DODO.parent
     PPT = ROOT / "pyproject.toml"
     ENV_YAML = ROOT / ".binder/environment.yml"
-    ENV = ROOT / ".venv"
+    ENV = Path(E.CONDA_PREFIX if (E.CI or E.RTD or E.BINDER) else ROOT / ".venv")
     HISTORY = ENV / "conda-meta/history"
     LOGS = ROOT / E.WORK_DIR / "build/logs"
 
