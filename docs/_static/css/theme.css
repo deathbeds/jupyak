@@ -17,6 +17,19 @@ html[data-theme="dark"] {
   max-width: 100%;
 }
 
+html[data-theme=dark] .bd-content div.cell_output .text_html,
+html[data-theme=dark] .bd-content div.cell_output img {
+  background: unset !important;
+  color: unset !important;
+}
+
+div.cell_output table  {
+  color: unset !important;
+}
+
+div.cell_output tbody tr:nth-child(odd) {
+  background-color: unset !important;
+}
 /* sphinx-design */
 .sd-tab-content {
   border-top: solid 1px var(--pst-color-border);
