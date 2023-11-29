@@ -14,8 +14,6 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  PYTHONUNBUFFERED: 1
-  PIP_DISABLE_PIP_VERSION_CHECK: 1
   JPYK_ALLOW_NO_CONFIG: 1
 
 jobs:

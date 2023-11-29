@@ -1,0 +1,52 @@
+name: pages
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+env:
+  JPYK_ALLOW_NO_CONFIG: 1
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash -l {0}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: conda-incubator/setup-miniconda@v3
+        with:
+          environment-file: .binder/environment.yml
+          miniforge-variant: Mambaforge
+          use-mamba: true
+      - run: doit bootstrap
+        env:
+          JPYK_LOG_NAME: bootstrap
+      - run: doit shave:git:*
+        env:
+          JPYK_LOG_NAME: git
+      - run: doit shave
+        env:
+          JPYK_LOG_NAME: shave
+      - run: doit self:docs:*
+      - uses: actions/upload-pages-artifact@v1
+        with:
+          path: build/docs
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v1
