@@ -9,6 +9,8 @@ from pathlib import Path
 import doit.reporter
 
 os.environ.update(
+    PYTHONUNBUFFERED="1",
+    PIP_DISABLE_PIP_VERSION_CHECK="1",
     PYDEVD_DISABLE_FILE_VALIDATION="1",
     JPYK_SELF="1",
 )
@@ -137,12 +139,23 @@ class JsonReporter(doit.reporter.JsonReporter):
 
     def get_status(self, task):
         """Called when task is selected (check if up-to-date)"""
+        print(f"- {task.name}: >", file=self._old_out, flush=True)
         self.t_results[task.name] = TaskResult(task)
+
+    def skip_uptodate(self, task):
+        """Skipped up-to-date task"""
+        super().skip_uptodate(task)
+        print("    ...", file=self._old_out, flush=True)
+
+    def skip_ignore(self, task):
+        """Skipped ignored task"""
+        super().skip_ignore(task)
+        print("    ...", file=self._old_out, flush=True)
 
     def add_success(self, task):
         """Called when execution finishes successfully"""
         super().add_success(task)
-        print(".", file=self._old_out, end="")
+        print("    ok", file=self._old_out, flush=True)
 
     def complete_run(self):
         """Called when finished running all tasks"""
