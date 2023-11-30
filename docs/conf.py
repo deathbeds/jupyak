@@ -1,5 +1,7 @@
 """documentation for ``jupyak``."""
 import datetime
+import json
+import os
 import re
 from pathlib import Path
 
@@ -24,6 +26,7 @@ JUPYAK_CONF_CANDIDATES = [
     for ext in ["toml", "yaml", "yml", "json"]
     if (ROOT / f"jupyak_config.{ext}").exists()
 ]
+ALLOW_NO_CONFIG = json.loads(os.environ.get("JUPYAK_ALLOW_NO_CONFIG", "0").lower())
 
 # metadata
 author = PROJ_DATA["project"]["authors"][0]["name"]
@@ -101,7 +104,7 @@ html_sidebars = {"*": ["page-toc", "edit-this-page", "sourcelink"], "graph": []}
 if REPO_INFO is not None:
     html_context = {**REPO_INFO.groupdict(), "doc_path": "docs"}
 
-if JUPYAK_CONF_CANDIDATES:
+if ALLOW_NO_CONFIG or JUPYAK_CONF_CANDIDATES:
     html_sidebars["*"] = [
         "demo",
         *html_sidebars["*"],
