@@ -16,5 +16,5 @@ jobs:
           script: |
             const issue_number = context.issue.number;
             const {repo, owner} = context.repo;
-            const body = `[![lite-badge](https://jupyak.rtfd.io/en/latest/_static/badge.svg)](https://jupyak--${issue_number}.org.readthedocs.build/en/${issue_number}) :point_left: Try it on ReadTheDocs`;
+            const body = `[![lite-badge](https://jupyak.rtfd.io/en/latest/_static/img/badge.svg)](https://jupyak--${issue_number}.org.readthedocs.build/en/${issue_number}) :point_left: Try it on ReadTheDocs`;
             github.rest.issues.createComment({issue_number, owner, repo, body});
