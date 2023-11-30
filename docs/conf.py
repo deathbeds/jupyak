@@ -26,7 +26,7 @@ JUPYAK_CONF_CANDIDATES = [
     for ext in ["toml", "yaml", "yml", "json"]
     if (ROOT / f"jupyak_config.{ext}").exists()
 ]
-ALLOW_NO_CONFIG = json.loads(os.environ.get("JUPYAK_ALLOW_NO_CONFIG", "0").lower())
+ALLOW_NO_CONFIG = json.loads(os.environ.get("JPYK_ALLOW_NO_CONFIG", "0").lower())
 
 # metadata
 author = PROJ_DATA["project"]["authors"][0]["name"]
