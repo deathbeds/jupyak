@@ -1,4 +1,9 @@
 /* variables */
+:root {
+  --jpyk-color-wasm-purple: #654ff0;
+  --jpyk-color-jupyter-orange: #f37726;
+}
+
 html[data-theme="light"],
 html[data-theme="dark"] {
   --pst-color-primary: #9556cf;
@@ -30,11 +35,20 @@ div.cell_output table  {
 div.cell_output tbody tr:nth-child(odd) {
   background-color: unset !important;
 }
-/* sphinx-design */
-.sd-tab-content {
-  border-top: solid 1px var(--pst-color-border);
-  box-shadow: unset;
+
+.bd-sidebar-primary .sidebar-primary-items__end {
+  margin: 0;
 }
+
+.bd-sidebar-primary {
+  padding-top: 1rem;
+}
+
+.sidebar-primary-item {
+  padding-top: 0 !important;
+  padding-bottom: 1rem;
+}
+
 
 /* mermaid */
 .jp-Mermaid > .mermaid,
@@ -103,3 +117,32 @@ input[id*="svg-zoom-1"]:checked ~ svg { width: 100%; transition: width 0.5s;}
 input[id*="svg-zoom-2"]:checked ~ svg { width: 200%; transition: width 0.5s;}
 input[id*="svg-zoom-4"]:checked ~ svg { width: 400%; transition: width 0.5s;}
 input[id*="svg-zoom-8"]:checked ~ svg { width: 800%; transition: width 0.5s;}
+
+/* work */
+.work-sidebar {
+  border: solid 2px var(--jpyk-color-wasm-purple);
+  padding: 0;
+}
+
+.work-sidebar-fail {
+  border-color: var(--jpyk-color-jupyter-orange);
+}
+
+.work-sidebar-header {
+  padding: 0.5rem;
+  background-color: var(--jpyk-color-wasm-purple);
+  color: #fff;
+}
+
+.work-sidebar-fail .work-sidebar-header {
+  background-color: var(--jpyk-color-jupyter-orange);
+}
+
+.work-sidebar-content {
+  padding: 1em;
+  padding-bottom: 0;
+}
+
+.work-sidebar .btn {
+  padding: 1rem;
+}

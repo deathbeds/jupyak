@@ -30,17 +30,27 @@ __all__ = ["tasks"]
 def task_bootstrap():
     """# ensure a sane working environment."""
     history = []
+
     if not (E.RTD or E.BINDER or E.CI):
         history += [P.HISTORY]
-        yield dict(
-            name="mamba",
-            doc="> ensure the development environment is installed",
-            actions=[
-                ["mamba", "env", "update", "--file", P.ENV_YAML, "--prefix", P.ENV]
-            ],
-            targets=history,
-            file_dep=[P.ENV_YAML],
-        )
+        prefix = ["--prefix", P.ENV]
+
+        if P.BINDER_LOCK.exists():
+            yield dict(
+                name="mamba:create",
+                doc="> ensure the host environment is installed (from lockfile)",
+                actions=[["mamba", "create", "-y", *prefix, "--file", P.BINDER_LOCK]],
+                targets=history,
+                file_dep=[P.BINDER_LOCK],
+            )
+        else:
+            yield dict(
+                name="mamba:update",
+                doc="> ensure the host environment is installed (from loose env)",
+                actions=[["mamba", "env", *prefix, "--update", P.ENV_YAML]],
+                targets=history,
+                file_dep=[P.ENV_YAML],
+            )
 
     yield dict(
         name="pip",
@@ -61,16 +71,18 @@ class E:
 class P:
     DODO = Path(__file__)
     ROOT = DODO.parent
+    BINDER = ROOT / ".binder"
     PPT = ROOT / "pyproject.toml"
     ENV_YAML = ROOT / ".binder/environment.yml"
     ENV = Path(sys.prefix if (E.CI or E.RTD or E.BINDER) else ROOT / ".venv")
     HISTORY = ENV / "conda-meta/history"
     LOGS = ROOT / E.WORK_DIR / "build/logs"
+    BINDER_LOCK = BINDER / "conda-linux-64.lock"
 
 
 class C:
     CONDA_RUN = ["conda", "run", "--no-capture-output"]
-    PIP = ["python", "-m", "pip"]
+    PIP = ["python3", "-m", "pip"]
     PIP_E = [*PIP, "install", "-e", ".", "-vv", "--no-deps", "--no-build-isolation"]
 
 
@@ -139,23 +151,29 @@ class JsonReporter(doit.reporter.JsonReporter):
 
     def get_status(self, task):
         """Called when task is selected (check if up-to-date)"""
-        print(f"- {task.name}: >", file=self._old_out, flush=True)
+        print(f"- {task.name}:", file=self._old_out, flush=True)
         self.t_results[task.name] = TaskResult(task)
 
     def skip_uptodate(self, task):
         """Skipped up-to-date task"""
         super().skip_uptodate(task)
-        print("    ...", file=self._old_out, flush=True)
+        print("    - skip", file=self._old_out, flush=True)
 
     def skip_ignore(self, task):
         """Skipped ignored task"""
         super().skip_ignore(task)
-        print("    ...", file=self._old_out, flush=True)
+        print("    - skip", file=self._old_out, flush=True)
 
     def add_success(self, task):
         """Called when execution finishes successfully"""
         super().add_success(task)
-        print("    ok", file=self._old_out, flush=True)
+        print("    - ok", file=self._old_out, flush=True)
+
+    def add_failure(self, task, exception):
+        """Called when execution finishes with a failure"""
+        print(exception.get_msg(), flush=True)
+        print(exception.get_msg(), file=self._old_out, flush=True)
+        super().add_failure(task, exception)
 
     def complete_run(self):
         """Called when finished running all tasks"""

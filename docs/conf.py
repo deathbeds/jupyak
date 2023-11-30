@@ -1,16 +1,9 @@
 """documentation for ``jupyak``."""
 import datetime
-import os
 import re
 from pathlib import Path
 
-import importnb
 import tomli
-
-with importnb.Notebook():
-    from jupyak.tasks._yak import Yak
-
-os.environ.update(JPYK_ALLOW_NO_CONFIG="1")
 
 CONF_PY = Path(__file__)
 HERE = CONF_PY.parent
@@ -25,7 +18,12 @@ RE_GH = (
 )
 REPO_INFO = re.search(RE_GH, PROJ_DATA["project"]["urls"]["Source"])
 NOW = datetime.datetime.now(tz=datetime.timezone.utc).date()
-YAK = Yak()
+WORK_DIST = HERE / "_static/work"
+JUPYAK_CONF_CANDIDATES = [
+    ROOT / f"jupyak_config.{ext}"
+    for ext in ["toml", "yaml", "yml", "json"]
+    if (ROOT / f"jupyak_config.{ext}").exists()
+]
 
 # metadata
 author = PROJ_DATA["project"]["authors"][0]["name"]
@@ -46,8 +44,8 @@ extensions = [
     "myst_nb",
     "sphinx.ext.autosectionlabel",
     "sphinx_copybutton",
-    "sphinx_design",
     "sphinxcontrib.mermaid",
+    "sphinxext.rediraffe",
 ]
 
 # content
@@ -61,15 +59,13 @@ intersphinx_mapping = {
 mermaid_version = ""
 mermaid_init_js = "false"
 
+
 # warnings
 suppress_warnings = ["autosectionlabel.*"]
 
 # theme
 templates_path = ["_templates"]
-html_static_path = [
-    "_static",
-    *([str(YAK.dist_path)] if YAK.dist_path.exists() else []),
-]
+html_static_path = ["_static"]
 html_theme = "pydata_sphinx_theme"
 html_logo = "_static/img/logo.svg"
 html_favicon = "_static/img/logo.svg"
@@ -94,7 +90,30 @@ html_theme_options = {
         },
     ],
     "footer_end": ["mermaid10"],
+    "secondary_sidebar_items": [],
 }
+
+
+html_context = {}
+rediraffe_redirects = {}
+html_sidebars = {"*": ["page-toc", "edit-this-page", "sourcelink"], "graph": []}
 
 if REPO_INFO is not None:
     html_context = {**REPO_INFO.groupdict(), "doc_path": "docs"}
+
+if JUPYAK_CONF_CANDIDATES:
+    html_sidebars["*"] = [
+        "demo",
+        *html_sidebars["*"],
+    ]
+    if WORK_DIST.exists():
+        html_context["lite_links"] = {
+            "lab": {"label": "Lab", "icon": "fas fa-flask"},
+            "repl": {"label": "Console", "icon": "fas fa-terminal"},
+            "tree": {"label": "File Tree", "icon": "fas fa-folder-tree"},
+        }
+
+        rediraffe_redirects = {
+            f"preview/{frag}/index": f"_static/work/lite/{frag}/index"
+            for frag in html_context["lite_links"]
+        }
