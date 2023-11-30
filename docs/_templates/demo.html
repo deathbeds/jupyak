@@ -1,0 +1,32 @@
+<div class="work-sidebar {% if not lite_links %}work-sidebar-fail{% endif %}">
+  <div class="work-sidebar-header">
+    <i class="fas fa-{% if lite_links %}square-arrow-up-right{% else %}bomb{% endif %}"></i>
+    Preview Site
+  </div>
+  <div class="work-sidebar-content">
+    <blockquote>
+      {% if lite_links %}
+        The preview site built successfully.
+      {% else %}
+        The site <strong>FAILED</strong> to build.
+      {% endif %}
+    </blockquote>
+    {% if lite_links %}
+      <p>
+        {% for frag, info in lite_links.items() %}
+          <a
+            href="{{ pathto('preview/' ~ frag ~ '/index') }}"
+            class="btn btn-primary"
+            target="_blank"
+            title="Try {{ info.label }} in your browser."
+          >
+            <i class="{{ info.icon }}"></i> {{ info.label }}
+          </a>
+        {% endfor %}
+      </p>
+    {% endif %}
+    <p>
+      See the <a href="{{ pathto('work') }}">work page</a> for details.
+    </p>
+  </div>
+</div>

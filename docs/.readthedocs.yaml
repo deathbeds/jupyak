@@ -6,15 +6,24 @@ build:
     python: mambaforge-22.9
   jobs:
     pre_build:
-      - JPYK_ALLOW_NO_CONFIG=1 doit bootstrap
-      - if [ "$(ls -l jupyak_config.* | wc -l)" = "1" ]; then JPYK_LOG_NAME=git doit shave:git:*; fi
-      - if [ "$(ls -l jupyak_config.* | wc -l)" = "1" ]; then JPYK_LOG_NAME=shave doit shave; fi
-      - JPYK_ALLOW_NO_CONFIG=1 doit self:docs:graph
+      - git config --global user.email "jupyak@example.com"
+      - git config --global user.name "jupyak"
+      - JPYK_ALLOW_NO_CONFIG=1 doit bootstrap                             || echo 'ok'
+      # check out everything
+      - JPYK_LOG_NAME=git         doit shave:git:*                        || echo 'ok'
+      # prepare the work conda env
+      - JPYK_LOG_NAME=env         doit shave:env:*                        || echo 'ok'
+      # preflight some JS stuff
+      - JPYK_LOG_NAME=lumino      doit shave:js:lumino:*                  || echo 'ok'
+      # final pass
+      - JPYK_LOG_NAME=shave       doit shave                              || echo 'ok'
+      - JPYK_LOG_NAME=shave2      doit shave                              || echo 'ok'
+      - doit self:docs:deploy:work                                        || echo 'ok'
+      - JPYK_ALLOW_NO_CONFIG=1 doit self:docs:graph                       || echo 'ok'
 
 sphinx:
   builder: html
   configuration: docs/conf.py
-  # fail_on_warning: true
 
 conda:
   environment: docs/environment.yml
