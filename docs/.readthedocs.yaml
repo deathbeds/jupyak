@@ -8,7 +8,7 @@ build:
     pre_build:
       - git config --global user.email "jupyak@example.com"
       - git config --global user.name "jupyak"
-      - JPYK_ALLOW_NO_CONFIG=1 doit bootstrap                             || echo 'ok'
+      - JPYK_ALLOW_NO_CONFIG=1    doit bootstrap                          || echo 'ok'
       # check out everything
       - JPYK_LOG_NAME=git         doit shave:git:*                        || echo 'ok'
       # prepare the work conda env
@@ -19,7 +19,7 @@ build:
       - JPYK_LOG_NAME=shave       doit shave                              || echo 'ok'
       - JPYK_LOG_NAME=shave2      doit shave                              || echo 'ok'
       - doit self:docs:deploy:work                                        || echo 'ok'
-      - JPYK_ALLOW_NO_CONFIG=1 doit self:docs:graph                       || echo 'ok'
+      - JPYK_ALLOW_NO_CONFIG=1    doit self:docs:graph                    || echo 'ok'
 
 sphinx:
   builder: html

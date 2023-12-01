@@ -106,7 +106,7 @@ table.jsonschema h2 {
 
 #task-graph-legend {
   position: fixed;
-  top: 100px;
+  bottom: 100px;
   right: 0;
   pointer-events: none;
   opacity: 0.75;
