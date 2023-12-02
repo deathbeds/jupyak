@@ -109,6 +109,7 @@ shave:git:lumino:checkout --> shave:js:lumino:yarn:install
 shave:js:yarnrc --> shave:js:lumino:yarn:install
 shave:js:lumino:yarn:install --> shave:js:lumino:yarn:build:.
 shave:git:lumino:checkout --> shave:js:lumino:dist
+shave:js:lumino:yarn:build:. --> shave:js:lumino:dist
 shave:git:jupyterlab:checkout --> shave:js:jupyterlab:yarn:install
 shave:js:yarnrc --> shave:js:jupyterlab:yarn:install
 shave:js:lumino:dist --> shave:js:jupyterlab:yarn:install
@@ -269,6 +270,11 @@ shave:py:comm:pip:comm --> shave:py:ipywidgets:pip:widgetsnbextension
 shave:py:ipython:pip:ipython --> shave:py:ipywidgets:pip:widgetsnbextension
 shave:py:jupyterlab:pip:jupyterlab --> shave:py:ipywidgets:pip:widgetsnbextension
 jupyterlab:sweep:labextension --> shave:py:ipywidgets:labext:jupyterlab_widgets
+shave:js:ipywidgets:yarn:build:base --> shave:py:ipywidgets:labext:jupyterlab_widgets
+shave:js:ipywidgets:yarn:build:controls --> shave:py:ipywidgets:labext:jupyterlab_widgets
+shave:js:ipywidgets:yarn:build:base-manager --> shave:py:ipywidgets:labext:jupyterlab_widgets
+shave:js:ipywidgets:yarn:build:html-manager --> shave:py:ipywidgets:labext:jupyterlab_widgets
+shave:js:ipywidgets:yarn:build:output --> shave:py:ipywidgets:labext:jupyterlab_widgets
 shave:js:ipywidgets:yarn:build:jupyterlab_widgets --> shave:py:ipywidgets:labext:jupyterlab_widgets
 shave:py:jupyterlab:pip:jupyterlab --> shave:py:ipywidgets:labext:jupyterlab_widgets
 shave:git:jupyterlite:checkout --> shave:py:jupyterlite:pip:jupyterlite
@@ -324,182 +330,182 @@ shave:py:jupyterlite_pyodide_kernel:pip:jupyterlite_pyodide_kernel --> shave:lit
 shave:py:jupyterlite_pyodide_kernel:labext:pyodide-kernel-extension --> shave:lite:build
 shave:lite:config --> shave:lite:build
 subgraph jupyterlab
-  jupyterlab:sweep:assets(("`💭 **assets**`")):::hack
-  jupyterlab:sweep:labextension(("`💭 **labextension**`")):::hack
-  shave:git:jupyterlab:init[("`💭 **init**`")]:::git
-  shave:git:jupyterlab:fetch:main[("`💭 **fetch main**`")]:::git
-  shave:git:jupyterlab:fetch:pr-15443[("`💭 **fetch pr-15443**`")]:::git
-  shave:git:jupyterlab:fetch:pr-15347[("`💭 **fetch pr-15347**`")]:::git
-  shave:git:jupyterlab:checkout[("`💭 **checkout**`")]:::git
-  shave:js:jupyterlab:yarn:install{{"`💭 **yarn install**`"}}:::js
-  shave:js:jupyterlab:yarn:buildutils:.{{"`💭 **yarn buildutils .**`"}}:::js
-  shave:js:jupyterlab:yarn:builder:.{{"`💭 **yarn builder .**`"}}:::js
-  shave:js:jupyterlab:yarn:build:metapackage{{"`💭 **yarn build metapackage**`"}}:::js
-  shave:js:jupyterlab:yarn:build:prod:dev_mode{{"`💭 **yarn build prod dev_mode**`"}}:::js
-  shave:js:jupyterlab:dist{{"`💭 **dist**`"}}:::js
-  shave:py:jupyterlab:pip:jupyterlab["`💭 **pip jupyterlab**`"]:::py
+  jupyterlab:sweep:assets(("`✅ **assets**`")):::hack
+  jupyterlab:sweep:labextension(("`✅ **labextension**`")):::hack
+  shave:git:jupyterlab:init[("`✅ **init**`")]:::git
+  shave:git:jupyterlab:fetch:main[("`✅ **fetch main**`")]:::git
+  shave:git:jupyterlab:fetch:pr-15443[("`✅ **fetch pr-15443**`")]:::git
+  shave:git:jupyterlab:fetch:pr-15347[("`✅ **fetch pr-15347**`")]:::git
+  shave:git:jupyterlab:checkout[("`✅ **checkout**`")]:::git
+  shave:js:jupyterlab:yarn:install{{"`✅ **yarn install**`"}}:::js
+  shave:js:jupyterlab:yarn:buildutils:.{{"`✅ **yarn buildutils .**`"}}:::js
+  shave:js:jupyterlab:yarn:builder:.{{"`✅ **yarn builder .**`"}}:::js
+  shave:js:jupyterlab:yarn:build:metapackage{{"`✅ **yarn build metapackage**`"}}:::js
+  shave:js:jupyterlab:yarn:build:prod:dev_mode{{"`✅ **yarn build prod dev_mode**`"}}:::js
+  shave:js:jupyterlab:dist{{"`✅ **dist**`"}}:::js
+  shave:py:jupyterlab:pip:jupyterlab["`✅ **pip jupyterlab**`"]:::py
 end
 subgraph lite
-  shave:git:lite:gist:init[("`💭 **gist init**`")]:::git
-  shave:git:lite:gist:fetch:main[("`💭 **gist fetch main**`")]:::git
-  shave:git:lite:gist:checkout[("`💭 **gist checkout**`")]:::git
-  shave:lite:config(["`💭 **config**`"]):::jupyter
-  shave:lite:build(["`💭 **build**`"]):::jupyter
+  shave:git:lite:gist:init[("`✅ **gist init**`")]:::git
+  shave:git:lite:gist:fetch:main[("`✅ **gist fetch main**`")]:::git
+  shave:git:lite:gist:checkout[("`✅ **gist checkout**`")]:::git
+  shave:lite:config(["`✅ **config**`"]):::jupyter
+  shave:lite:build(["`✅ **build**`"]):::jupyter
 end
 subgraph traitlets
-  shave:git:traitlets:init[("`💭 **init**`")]:::git
-  shave:git:traitlets:fetch:main[("`💭 **fetch main**`")]:::git
-  shave:git:traitlets:checkout[("`💭 **checkout**`")]:::git
-  shave:py:traitlets:pip:traitlets["`💭 **pip traitlets**`"]:::py
-  shave:py:traitlets:wheel:traitlets["`💭 **wheel traitlets**`"]:::py
+  shave:git:traitlets:init[("`✅ **init**`")]:::git
+  shave:git:traitlets:fetch:main[("`✅ **fetch main**`")]:::git
+  shave:git:traitlets:checkout[("`✅ **checkout**`")]:::git
+  shave:py:traitlets:pip:traitlets["`✅ **pip traitlets**`"]:::py
+  shave:py:traitlets:wheel:traitlets["`✅ **wheel traitlets**`"]:::py
 end
 subgraph comm
-  shave:git:comm:init[("`💭 **init**`")]:::git
-  shave:git:comm:fetch:main[("`💭 **fetch main**`")]:::git
-  shave:git:comm:checkout[("`💭 **checkout**`")]:::git
-  shave:py:comm:pip:comm["`💭 **pip comm**`"]:::py
-  shave:py:comm:wheel:comm["`💭 **wheel comm**`"]:::py
+  shave:git:comm:init[("`✅ **init**`")]:::git
+  shave:git:comm:fetch:main[("`✅ **fetch main**`")]:::git
+  shave:git:comm:checkout[("`✅ **checkout**`")]:::git
+  shave:py:comm:pip:comm["`✅ **pip comm**`"]:::py
+  shave:py:comm:wheel:comm["`✅ **wheel comm**`"]:::py
 end
 subgraph lumino
-  shave:git:lumino:init[("`💭 **init**`")]:::git
-  shave:git:lumino:fetch:main[("`💭 **fetch main**`")]:::git
-  shave:git:lumino:fetch:pr-655[("`💭 **fetch pr-655**`")]:::git
-  shave:git:lumino:checkout[("`💭 **checkout**`")]:::git
-  shave:js:lumino:yarn:install{{"`💭 **yarn install**`"}}:::js
-  shave:js:lumino:yarn:build:.{{"`❌ **yarn build .**`"}}:::js
-  shave:js:lumino:dist{{"`💭 **dist**`"}}:::js
+  shave:git:lumino:init[("`✅ **init**`")]:::git
+  shave:git:lumino:fetch:main[("`✅ **fetch main**`")]:::git
+  shave:git:lumino:fetch:pr-655[("`✅ **fetch pr-655**`")]:::git
+  shave:git:lumino:checkout[("`✅ **checkout**`")]:::git
+  shave:js:lumino:yarn:install{{"`✅ **yarn install**`"}}:::js
+  shave:js:lumino:yarn:build:.{{"`✅ **yarn build .**`"}}:::js
+  shave:js:lumino:dist{{"`✅ **dist**`"}}:::js
 end
 subgraph jupyter_server_terminals
-  shave:git:jupyter_server_terminals:init[("`💭 **init**`")]:::git
-  shave:git:jupyter_server_terminals:fetch:main[("`💭 **fetch main**`")]:::git
-  shave:git:jupyter_server_terminals:checkout[("`💭 **checkout**`")]:::git
-  shave:py:jupyter_server_terminals:pip:jupyter_server_terminals["`💭 **pip jupyter_server_terminals**`"]:::py
+  shave:git:jupyter_server_terminals:init[("`✅ **init**`")]:::git
+  shave:git:jupyter_server_terminals:fetch:main[("`✅ **fetch main**`")]:::git
+  shave:git:jupyter_server_terminals:checkout[("`✅ **checkout**`")]:::git
+  shave:py:jupyter_server_terminals:pip:jupyter_server_terminals["`✅ **pip jupyter_server_terminals**`"]:::py
 end
 subgraph jupyter_core
-  shave:git:jupyter_core:init[("`💭 **init**`")]:::git
-  shave:git:jupyter_core:fetch:main[("`💭 **fetch main**`")]:::git
-  shave:git:jupyter_core:checkout[("`💭 **checkout**`")]:::git
-  shave:py:jupyter_core:pip:jupyter_core["`💭 **pip jupyter_core**`"]:::py
-  shave:py:jupyter_core:wheel:jupyter_core["`💭 **wheel jupyter_core**`"]:::py
+  shave:git:jupyter_core:init[("`✅ **init**`")]:::git
+  shave:git:jupyter_core:fetch:main[("`✅ **fetch main**`")]:::git
+  shave:git:jupyter_core:checkout[("`✅ **checkout**`")]:::git
+  shave:py:jupyter_core:pip:jupyter_core["`✅ **pip jupyter_core**`"]:::py
+  shave:py:jupyter_core:wheel:jupyter_core["`✅ **wheel jupyter_core**`"]:::py
 end
 subgraph jupyter_events
-  shave:git:jupyter_events:init[("`💭 **init**`")]:::git
-  shave:git:jupyter_events:fetch:main[("`💭 **fetch main**`")]:::git
-  shave:git:jupyter_events:checkout[("`💭 **checkout**`")]:::git
-  shave:py:jupyter_events:pip:jupyter_events["`💭 **pip jupyter_events**`"]:::py
+  shave:git:jupyter_events:init[("`✅ **init**`")]:::git
+  shave:git:jupyter_events:fetch:main[("`✅ **fetch main**`")]:::git
+  shave:git:jupyter_events:checkout[("`✅ **checkout**`")]:::git
+  shave:py:jupyter_events:pip:jupyter_events["`✅ **pip jupyter_events**`"]:::py
 end
 subgraph ipython
-  shave:git:ipython:init[("`💭 **init**`")]:::git
-  shave:git:ipython:fetch:main[("`💭 **fetch main**`")]:::git
-  shave:git:ipython:checkout[("`💭 **checkout**`")]:::git
-  shave:py:ipython:pip:ipython["`💭 **pip ipython**`"]:::py
-  shave:py:ipython:wheel:ipython["`💭 **wheel ipython**`"]:::py
+  shave:git:ipython:init[("`✅ **init**`")]:::git
+  shave:git:ipython:fetch:main[("`✅ **fetch main**`")]:::git
+  shave:git:ipython:checkout[("`✅ **checkout**`")]:::git
+  shave:py:ipython:pip:ipython["`✅ **pip ipython**`"]:::py
+  shave:py:ipython:wheel:ipython["`✅ **wheel ipython**`"]:::py
 end
 subgraph jupyter_client
-  shave:git:jupyter_client:init[("`💭 **init**`")]:::git
-  shave:git:jupyter_client:fetch:main[("`💭 **fetch main**`")]:::git
-  shave:git:jupyter_client:checkout[("`💭 **checkout**`")]:::git
-  shave:py:jupyter_client:pip:jupyter_client["`💭 **pip jupyter_client**`"]:::py
+  shave:git:jupyter_client:init[("`✅ **init**`")]:::git
+  shave:git:jupyter_client:fetch:main[("`✅ **fetch main**`")]:::git
+  shave:git:jupyter_client:checkout[("`✅ **checkout**`")]:::git
+  shave:py:jupyter_client:pip:jupyter_client["`✅ **pip jupyter_client**`"]:::py
 end
 subgraph nbformat
-  shave:git:nbformat:init[("`💭 **init**`")]:::git
-  shave:git:nbformat:fetch:main[("`💭 **fetch main**`")]:::git
-  shave:git:nbformat:checkout[("`💭 **checkout**`")]:::git
-  shave:py:nbformat:pip:nbformat["`💭 **pip nbformat**`"]:::py
+  shave:git:nbformat:init[("`✅ **init**`")]:::git
+  shave:git:nbformat:fetch:main[("`✅ **fetch main**`")]:::git
+  shave:git:nbformat:checkout[("`✅ **checkout**`")]:::git
+  shave:py:nbformat:pip:nbformat["`✅ **pip nbformat**`"]:::py
 end
 subgraph nbconvert
-  shave:git:nbconvert:init[("`💭 **init**`")]:::git
-  shave:git:nbconvert:fetch:main[("`💭 **fetch main**`")]:::git
-  shave:git:nbconvert:checkout[("`💭 **checkout**`")]:::git
-  shave:py:nbconvert:pip:nbconvert["`💭 **pip nbconvert**`"]:::py
+  shave:git:nbconvert:init[("`✅ **init**`")]:::git
+  shave:git:nbconvert:fetch:main[("`✅ **fetch main**`")]:::git
+  shave:git:nbconvert:checkout[("`✅ **checkout**`")]:::git
+  shave:py:nbconvert:pip:nbconvert["`✅ **pip nbconvert**`"]:::py
 end
 subgraph ipykernel
-  shave:git:ipykernel:init[("`💭 **init**`")]:::git
-  shave:git:ipykernel:fetch:main[("`💭 **fetch main**`")]:::git
-  shave:git:ipykernel:checkout[("`💭 **checkout**`")]:::git
-  shave:py:ipykernel:pip:ipykernel["`💭 **pip ipykernel**`"]:::py
+  shave:git:ipykernel:init[("`✅ **init**`")]:::git
+  shave:git:ipykernel:fetch:main[("`✅ **fetch main**`")]:::git
+  shave:git:ipykernel:checkout[("`✅ **checkout**`")]:::git
+  shave:py:ipykernel:pip:ipykernel["`✅ **pip ipykernel**`"]:::py
 end
 subgraph nbclient
-  shave:git:nbclient:init[("`💭 **init**`")]:::git
-  shave:git:nbclient:fetch:main[("`💭 **fetch main**`")]:::git
-  shave:git:nbclient:checkout[("`💭 **checkout**`")]:::git
-  shave:py:nbclient:pip:nbclient["`💭 **pip nbclient**`"]:::py
+  shave:git:nbclient:init[("`✅ **init**`")]:::git
+  shave:git:nbclient:fetch:main[("`✅ **fetch main**`")]:::git
+  shave:git:nbclient:checkout[("`✅ **checkout**`")]:::git
+  shave:py:nbclient:pip:nbclient["`✅ **pip nbclient**`"]:::py
 end
 subgraph jupyter_server
-  shave:git:jupyter_server:init[("`💭 **init**`")]:::git
-  shave:git:jupyter_server:fetch:main[("`💭 **fetch main**`")]:::git
-  shave:git:jupyter_server:checkout[("`💭 **checkout**`")]:::git
-  shave:py:jupyter_server:pip:jupyter_server["`💭 **pip jupyter_server**`"]:::py
+  shave:git:jupyter_server:init[("`✅ **init**`")]:::git
+  shave:git:jupyter_server:fetch:main[("`✅ **fetch main**`")]:::git
+  shave:git:jupyter_server:checkout[("`✅ **checkout**`")]:::git
+  shave:py:jupyter_server:pip:jupyter_server["`✅ **pip jupyter_server**`"]:::py
 end
 subgraph notebook_shim
-  shave:git:notebook_shim:init[("`💭 **init**`")]:::git
-  shave:git:notebook_shim:fetch:main[("`💭 **fetch main**`")]:::git
-  shave:git:notebook_shim:checkout[("`💭 **checkout**`")]:::git
-  shave:py:notebook_shim:pip:notebook_shim["`💭 **pip notebook_shim**`"]:::py
+  shave:git:notebook_shim:init[("`✅ **init**`")]:::git
+  shave:git:notebook_shim:fetch:main[("`✅ **fetch main**`")]:::git
+  shave:git:notebook_shim:checkout[("`✅ **checkout**`")]:::git
+  shave:py:notebook_shim:pip:notebook_shim["`✅ **pip notebook_shim**`"]:::py
 end
 subgraph jupyterlab_server
-  shave:git:jupyterlab_server:init[("`💭 **init**`")]:::git
-  shave:git:jupyterlab_server:fetch:main[("`💭 **fetch main**`")]:::git
-  shave:git:jupyterlab_server:checkout[("`💭 **checkout**`")]:::git
-  shave:py:jupyterlab_server:pip:jupyterlab_server["`💭 **pip jupyterlab_server**`"]:::py
+  shave:git:jupyterlab_server:init[("`✅ **init**`")]:::git
+  shave:git:jupyterlab_server:fetch:main[("`✅ **fetch main**`")]:::git
+  shave:git:jupyterlab_server:checkout[("`✅ **checkout**`")]:::git
+  shave:py:jupyterlab_server:pip:jupyterlab_server["`✅ **pip jupyterlab_server**`"]:::py
 end
 subgraph notebook
-  shave:git:notebook:init[("`💭 **init**`")]:::git
-  shave:git:notebook:fetch:main[("`💭 **fetch main**`")]:::git
-  shave:git:notebook:checkout[("`💭 **checkout**`")]:::git
-  shave:js:notebook:yarn:install{{"`💭 **yarn install**`"}}:::js
+  shave:git:notebook:init[("`✅ **init**`")]:::git
+  shave:git:notebook:fetch:main[("`✅ **fetch main**`")]:::git
+  shave:git:notebook:checkout[("`✅ **checkout**`")]:::git
+  shave:js:notebook:yarn:install{{"`✅ **yarn install**`"}}:::js
   shave:js:notebook:yarn:meta:build:_metapackage{{"`💭 **yarn meta build _metapackage**`"}}:::js
-  shave:js:notebook:yarn:app:build:prod:app{{"`💭 **yarn app build prod app**`"}}:::js
-  shave:js:notebook:dist{{"`💭 **dist**`"}}:::js
-  shave:py:notebook:pip:notebook["`💭 **pip notebook**`"]:::py
-  shave:py:notebook:labext:lab-extension(["`💭 **labext lab-extension**`"]):::jupyter
+  shave:js:notebook:yarn:app:build:prod:app{{"`✅ **yarn app build prod app**`"}}:::js
+  shave:js:notebook:dist{{"`✅ **dist**`"}}:::js
+  shave:py:notebook:pip:notebook["`✅ **pip notebook**`"]:::py
+  shave:py:notebook:labext:lab-extension(["`✅ **labext lab-extension**`"]):::jupyter
 end
 subgraph ipywidgets
-  shave:git:ipywidgets:init[("`💭 **init**`")]:::git
-  shave:git:ipywidgets:fetch:main[("`💭 **fetch main**`")]:::git
-  shave:git:ipywidgets:fetch:pr-3847[("`💭 **fetch pr-3847**`")]:::git
-  shave:git:ipywidgets:checkout[("`💭 **checkout**`")]:::git
-  shave:js:ipywidgets:yarn:install{{"`💭 **yarn install**`"}}:::js
-  shave:js:ipywidgets:yarn:build:base{{"`💭 **yarn build base**`"}}:::js
-  shave:js:ipywidgets:yarn:build:controls{{"`💭 **yarn build controls**`"}}:::js
-  shave:js:ipywidgets:yarn:build:base-manager{{"`💭 **yarn build base-manager**`"}}:::js
-  shave:js:ipywidgets:yarn:build:html-manager{{"`💭 **yarn build html-manager**`"}}:::js
-  shave:js:ipywidgets:yarn:build:output{{"`💭 **yarn build output**`"}}:::js
-  shave:js:ipywidgets:yarn:build:jupyterlab_widgets{{"`💭 **yarn build jupyterlab_widgets**`"}}:::js
-  shave:js:ipywidgets:dist{{"`💭 **dist**`"}}:::js
-  shave:py:ipywidgets:pip:ipywidgets["`💭 **pip ipywidgets**`"]:::py
-  shave:py:ipywidgets:wheel:ipywidgets["`💭 **wheel ipywidgets**`"]:::py
-  shave:py:ipywidgets:pip:jupyterlab_widgets["`💭 **pip jupyterlab_widgets**`"]:::py
-  shave:py:ipywidgets:wheel:jupyterlab_widgets["`💭 **wheel jupyterlab_widgets**`"]:::py
-  shave:py:ipywidgets:pip:widgetsnbextension["`💭 **pip widgetsnbextension**`"]:::py
+  shave:git:ipywidgets:init[("`✅ **init**`")]:::git
+  shave:git:ipywidgets:fetch:main[("`✅ **fetch main**`")]:::git
+  shave:git:ipywidgets:fetch:pr-3847[("`✅ **fetch pr-3847**`")]:::git
+  shave:git:ipywidgets:checkout[("`✅ **checkout**`")]:::git
+  shave:js:ipywidgets:yarn:install{{"`✅ **yarn install**`"}}:::js
+  shave:js:ipywidgets:yarn:build:base{{"`✅ **yarn build base**`"}}:::js
+  shave:js:ipywidgets:yarn:build:controls{{"`✅ **yarn build controls**`"}}:::js
+  shave:js:ipywidgets:yarn:build:base-manager{{"`✅ **yarn build base-manager**`"}}:::js
+  shave:js:ipywidgets:yarn:build:html-manager{{"`✅ **yarn build html-manager**`"}}:::js
+  shave:js:ipywidgets:yarn:build:output{{"`✅ **yarn build output**`"}}:::js
+  shave:js:ipywidgets:yarn:build:jupyterlab_widgets{{"`✅ **yarn build jupyterlab_widgets**`"}}:::js
+  shave:js:ipywidgets:dist{{"`✅ **dist**`"}}:::js
+  shave:py:ipywidgets:pip:ipywidgets["`✅ **pip ipywidgets**`"]:::py
+  shave:py:ipywidgets:wheel:ipywidgets["`✅ **wheel ipywidgets**`"]:::py
+  shave:py:ipywidgets:pip:jupyterlab_widgets["`✅ **pip jupyterlab_widgets**`"]:::py
+  shave:py:ipywidgets:wheel:jupyterlab_widgets["`✅ **wheel jupyterlab_widgets**`"]:::py
+  shave:py:ipywidgets:pip:widgetsnbextension["`✅ **pip widgetsnbextension**`"]:::py
   shave:py:ipywidgets:labext:jupyterlab_widgets(["`💭 **labext jupyterlab_widgets**`"]):::jupyter
 end
 subgraph jupyterlite
-  shave:git:jupyterlite:init[("`💭 **init**`")]:::git
-  shave:git:jupyterlite:fetch:main[("`💭 **fetch main**`")]:::git
-  shave:git:jupyterlite:checkout[("`💭 **checkout**`")]:::git
-  shave:js:jupyterlite:yarn:install{{"`💭 **yarn install**`"}}:::js
-  shave:js:jupyterlite:yarn:build:.{{"`💭 **yarn build .**`"}}:::js
-  shave:js:jupyterlite:dist{{"`💭 **dist**`"}}:::js
-  shave:py:jupyterlite:pip:jupyterlite["`💭 **pip jupyterlite**`"]:::py
-  shave:py:jupyterlite:pip:jupyterlite-core["`💭 **pip jupyterlite-core**`"]:::py
-  shave:py:jupyterlite:pip:jupyterlite-javascript-kernel["`💭 **pip jupyterlite-javascript-kernel**`"]:::py
-  shave:py:jupyterlite:labext:jupyterlite-javascript-kernel(["`💭 **labext jupyterlite-javascript-kernel**`"]):::jupyter
+  shave:git:jupyterlite:init[("`✅ **init**`")]:::git
+  shave:git:jupyterlite:fetch:main[("`✅ **fetch main**`")]:::git
+  shave:git:jupyterlite:checkout[("`✅ **checkout**`")]:::git
+  shave:js:jupyterlite:yarn:install{{"`✅ **yarn install**`"}}:::js
+  shave:js:jupyterlite:yarn:build:.{{"`✅ **yarn build .**`"}}:::js
+  shave:js:jupyterlite:dist{{"`✅ **dist**`"}}:::js
+  shave:py:jupyterlite:pip:jupyterlite["`✅ **pip jupyterlite**`"]:::py
+  shave:py:jupyterlite:pip:jupyterlite-core["`✅ **pip jupyterlite-core**`"]:::py
+  shave:py:jupyterlite:pip:jupyterlite-javascript-kernel["`✅ **pip jupyterlite-javascript-kernel**`"]:::py
+  shave:py:jupyterlite:labext:jupyterlite-javascript-kernel(["`✅ **labext jupyterlite-javascript-kernel**`"]):::jupyter
 end
 subgraph jupyterlite_pyodide_kernel
-  shave:git:jupyterlite_pyodide_kernel:init[("`💭 **init**`")]:::git
-  shave:git:jupyterlite_pyodide_kernel:fetch:main[("`💭 **fetch main**`")]:::git
-  shave:git:jupyterlite_pyodide_kernel:checkout[("`💭 **checkout**`")]:::git
-  shave:js:jupyterlite_pyodide_kernel:yarn:install{{"`💭 **yarn install**`"}}:::js
-  shave:js:jupyterlite_pyodide_kernel:yarn:build:py:wheels:pyodide-kernel{{"`💭 **yarn build py wheels pyodide-kernel**`"}}:::js
-  shave:js:jupyterlite_pyodide_kernel:yarn:build:js:pyodide-kernel{{"`💭 **yarn build js pyodide-kernel**`"}}:::js
-  shave:js:jupyterlite_pyodide_kernel:yarn:build:lib:pyodide-kernel-extension{{"`💭 **yarn build lib pyodide-kernel-extension**`"}}:::js
-  shave:js:jupyterlite_pyodide_kernel:dist{{"`💭 **dist**`"}}:::js
-  shave:py:jupyterlite_pyodide_kernel:pip:jupyterlite_pyodide_kernel["`💭 **pip jupyterlite_pyodide_kernel**`"]:::py
-  shave:py:jupyterlite_pyodide_kernel:labext:pyodide-kernel-extension(["`💭 **labext pyodide-kernel-extension**`"]):::jupyter
+  shave:git:jupyterlite_pyodide_kernel:init[("`✅ **init**`")]:::git
+  shave:git:jupyterlite_pyodide_kernel:fetch:main[("`✅ **fetch main**`")]:::git
+  shave:git:jupyterlite_pyodide_kernel:checkout[("`✅ **checkout**`")]:::git
+  shave:js:jupyterlite_pyodide_kernel:yarn:install{{"`✅ **yarn install**`"}}:::js
+  shave:js:jupyterlite_pyodide_kernel:yarn:build:py:wheels:pyodide-kernel{{"`✅ **yarn build py wheels pyodide-kernel**`"}}:::js
+  shave:js:jupyterlite_pyodide_kernel:yarn:build:js:pyodide-kernel{{"`✅ **yarn build js pyodide-kernel**`"}}:::js
+  shave:js:jupyterlite_pyodide_kernel:yarn:build:lib:pyodide-kernel-extension{{"`✅ **yarn build lib pyodide-kernel-extension**`"}}:::js
+  shave:js:jupyterlite_pyodide_kernel:dist{{"`✅ **dist**`"}}:::js
+  shave:py:jupyterlite_pyodide_kernel:pip:jupyterlite_pyodide_kernel["`✅ **pip jupyterlite_pyodide_kernel**`"]:::py
+  shave:py:jupyterlite_pyodide_kernel:labext:pyodide-kernel-extension(["`✅ **labext pyodide-kernel-extension**`"]):::jupyter
 end
 subgraph yarnrc
-  shave:js:yarnrc{{"`💭 **yarnrc**`"}}:::js
+  shave:js:yarnrc{{"`✅ **yarnrc**`"}}:::js
 end
 </div>
 </div>

@@ -99,7 +99,11 @@ html_theme_options = {
 
 html_context = {}
 rediraffe_redirects = {}
-html_sidebars = {"*": ["page-toc", "edit-this-page", "sourcelink"], "graph": []}
+html_sidebars = {
+    "*": ["page-toc", "edit-this-page", "sourcelink"],
+    "graph": [],
+    "new": ["new-form"],
+}
 
 if REPO_INFO is not None:
     html_context = {**REPO_INFO.groupdict(), "doc_path": "docs"}
