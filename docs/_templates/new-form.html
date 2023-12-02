@@ -9,9 +9,6 @@
   .bd-sidebar-primary {
     padding-bottom: 0;
   }
-  h1 {
-    display: none;
-  }
   footer {
     display: none;
   }
@@ -24,15 +21,16 @@
   </div>
   <div class="work-sidebar-content">
     <form id="propose" method="get" action="https://github.com/deathbeds/jupyak/new/main" target="_blank">
-      <div>
-        <label for="toml-preview"><code>jupyak_config.toml</code> contents</label>
-        <textarea
-          id="toml-preview"
-          name="value"
-          spellcheck="false"
-        ># make choices in the form</textarea>
-        <input type="hidden" name="filename" value="jupyak_config.toml"/>
-      </div>
+      <label for="toml-preview"><code>jupyak_config.toml</code> contents</label>
+      <textarea
+        required="true"
+        id="toml-preview"
+        name="value"
+        spellcheck="false"
+        placeholder="# make choices in the form"
+      ></textarea>
+      <input type="hidden" name="filename" value="jupyak_config.toml"/>
+      <br/>
       <button class="btn btn-success" form="propose">
         <i class="fas fa-code-pull-request"></i> New Pull Request
       </button>
@@ -50,9 +48,9 @@
   document.addEventListener('DOMContentLoaded', async () => {
     const form = document.querySelector('form#new');
     const preview = document.querySelector('#toml-preview');
-    const selector = 'form#new input[type="text"], form#new textarea'
+    const selector = 'form#new input[type="text"], form#new select';
     const inputs = [...document.querySelectorAll(selector)];
-    const split_fields = ['merge_with'];
+    const split_fields = ['merge_with', 'merge_options'];
     async function update() {
       const json2toml = (await import('json2toml')).default;
       const config = find_config();
@@ -65,8 +63,6 @@
         if(document.querySelector(`input[name="${name}"]:invalid`)) {
             continue
         }
-        const input = document.querySelector(`input[name="${name}"]`);
-        const prefix = input.dataset.jpykPrefix || "";
         let bits = name.split("|");
         if(value.trim() === "" || bits.length == 1){
           continue;
@@ -81,8 +77,8 @@
         let last_bit = bits[bits.length - 1];
         current[last_bit] = (
           split_fields.includes(last_bit) ?
-          value.split(/[\s\n]+/).map((v) => `${prefix}${v}`) :
-          prefix + value
+          value.split(/[\s\n]+/):
+          value
         );
       }
       return config;

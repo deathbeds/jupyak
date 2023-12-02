@@ -1,8 +1,4 @@
----
-html_theme.sidebar_secondary.remove: true
----
-
-# task graph
+# graph
 
 
 The graph below shows the current state of the executed graph of tasks to go from
@@ -338,10 +334,10 @@ subgraph jupyterlab
   shave:git:jupyterlab:fetch:pr-15347[("`✅ **fetch pr-15347**`")]:::git
   shave:git:jupyterlab:checkout[("`✅ **checkout**`")]:::git
   shave:js:jupyterlab:yarn:install{{"`✅ **yarn install**`"}}:::js
-  shave:js:jupyterlab:yarn:buildutils:.{{"`✅ **yarn buildutils .**`"}}:::js
-  shave:js:jupyterlab:yarn:builder:.{{"`✅ **yarn builder .**`"}}:::js
-  shave:js:jupyterlab:yarn:build:metapackage{{"`✅ **yarn build metapackage**`"}}:::js
-  shave:js:jupyterlab:yarn:build:prod:dev_mode{{"`✅ **yarn build prod dev_mode**`"}}:::js
+  shave:js:jupyterlab:yarn:buildutils:.{{"`💭 **yarn buildutils .**`"}}:::js
+  shave:js:jupyterlab:yarn:builder:.{{"`💭 **yarn builder .**`"}}:::js
+  shave:js:jupyterlab:yarn:build:metapackage{{"`💭 **yarn build metapackage**`"}}:::js
+  shave:js:jupyterlab:yarn:build:prod:dev_mode{{"`💭 **yarn build prod dev_mode**`"}}:::js
   shave:js:jupyterlab:dist{{"`✅ **dist**`"}}:::js
   shave:py:jupyterlab:pip:jupyterlab["`✅ **pip jupyterlab**`"]:::py
 end
@@ -478,7 +474,7 @@ subgraph ipywidgets
   shave:py:ipywidgets:pip:jupyterlab_widgets["`✅ **pip jupyterlab_widgets**`"]:::py
   shave:py:ipywidgets:wheel:jupyterlab_widgets["`✅ **wheel jupyterlab_widgets**`"]:::py
   shave:py:ipywidgets:pip:widgetsnbextension["`✅ **pip widgetsnbextension**`"]:::py
-  shave:py:ipywidgets:labext:jupyterlab_widgets(["`💭 **labext jupyterlab_widgets**`"]):::jupyter
+  shave:py:ipywidgets:labext:jupyterlab_widgets(["`✅ **labext jupyterlab_widgets**`"]):::jupyter
 end
 subgraph jupyterlite
   shave:git:jupyterlite:init[("`✅ **init**`")]:::git
