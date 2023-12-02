@@ -1,65 +1,93 @@
 <style>
-    #propose textarea {
-        width: 100%;
-        min-height: 10rem;
-        margin-top: 1rem;
-        font-family: monospace;
-    }
+  .bd-footer,
+  .header-article-items {
+    display: none;
+  }
+  .bd-main .bd-content .bd-article-container .bd-article {
+    padding: 0;
+  }
+  .bd-sidebar-primary {
+    padding-bottom: 0;
+  }
+  h1 {
+    display: none;
+  }
+  footer {
+    display: none;
+  }
 </style>
-<form id="propose" method="get" action="https://github.com/deathbeds/jupyak/new/main" target="_blank">
-    <button class="btn btn-success" form="propose">
-        <i class="fas fa-code-pull-request"></i> New Pull Request
-    </button>
-    <div>
+
+<div class="work-sidebar">
+  <div class="work-sidebar-header">
+    <i class="fas fa-code-pull-request"></i>
+    Request Preview Site
+  </div>
+  <div class="work-sidebar-content">
+    <form id="propose" method="get" action="https://github.com/deathbeds/jupyak/new/main" target="_blank">
+      <div>
         <label for="toml-preview"><code>jupyak_config.toml</code> contents</label>
         <textarea
-            id="toml-preview"
-            name="value"
-            spellcheck="false"
+          id="toml-preview"
+          name="value"
+          spellcheck="false"
         ># make choices in the form</textarea>
         <input type="hidden" name="filename" value="jupyak_config.toml"/>
-    </div>
-</form>
+      </div>
+      <button class="btn btn-success" form="propose">
+        <i class="fas fa-code-pull-request"></i> New Pull Request
+      </button>
+    </form>
+  </div>
+</div>
 <script type="importmap">
 {
-    "imports": {
-        "json2toml": "https://cdn.skypack.dev/pin/json2toml@v6.0.0-d8Y8va9lNUE85BZ5GSQ2/mode=imports,min/optimized/json2toml.js"
-    }
+  "imports": {
+    "json2toml": "https://cdn.skypack.dev/pin/json2toml@v6.0.0-d8Y8va9lNUE85BZ5GSQ2/mode=imports,min/optimized/json2toml.js"
+  }
 }
 </script>
 <script type="module">
-    document.addEventListener('DOMContentLoaded', async () => {
-        const form = document.querySelector('form#new');
-        const preview = document.querySelector('#toml-preview');
-        const selector = 'form#new input[type="text"], form#new textarea'
-        const inputs = [...document.querySelectorAll(selector)];
-        const split_fields = ['merge_with'];
-        async function update() {
-            const json2toml = (await import('json2toml')).default;
-            const config = find_config();
-            preview.value = json2toml(config);
+  document.addEventListener('DOMContentLoaded', async () => {
+    const form = document.querySelector('form#new');
+    const preview = document.querySelector('#toml-preview');
+    const selector = 'form#new input[type="text"], form#new textarea'
+    const inputs = [...document.querySelectorAll(selector)];
+    const split_fields = ['merge_with'];
+    async function update() {
+      const json2toml = (await import('json2toml')).default;
+      const config = find_config();
+      preview.value = json2toml(config);
+    }
+    function find_config() {
+      const config = {};
+      const data = new FormData(form);
+      for (const [name, value] of data.entries()) {
+        if(document.querySelector(`input[name="${name}"]:invalid`)) {
+            continue
         }
-        function find_config() {
-            const config = {};
-            const data = new FormData(form);
-            for (const [name, value] of data.entries()) {
-                let bits = name.split("|");
-                if(value.trim() === "" || bits.length == 1){
-                    continue;
-                }
-                let current = config;
-                for(const bit of bits.slice(0, -1)) {
-                    if(!current[bit]) {
-                        current[bit] = {};
-                    }
-                    current = current[bit];
-                }
-                let last_bit = bits[bits.length - 1];
-                current[last_bit] = split_fields.includes(last_bit) ? value.split("\n") : value;
-            }
-            return config;
+        const input = document.querySelector(`input[name="${name}"]`);
+        const prefix = input.dataset.jpykPrefix || "";
+        let bits = name.split("|");
+        if(value.trim() === "" || bits.length == 1){
+          continue;
         }
-        inputs.map((input) => input.addEventListener('input', update))
-    })
+        let current = config;
+        for(const bit of bits.slice(0, -1)) {
+          if(!current[bit]) {
+            current[bit] = {};
+          }
+          current = current[bit];
+        }
+        let last_bit = bits[bits.length - 1];
+        current[last_bit] = (
+          split_fields.includes(last_bit) ?
+          value.split(/[\s\n]+/).map((v) => `${prefix}${v}`) :
+          prefix + value
+        );
+      }
+      return config;
+    }
+    inputs.map((input) => input.addEventListener('input', update))
+  })
 
 </script>
