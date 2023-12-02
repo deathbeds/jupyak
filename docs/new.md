@@ -187,7 +187,7 @@ additional space-delimeted <code>-X</code> options to pass to <code>git merge</c
 <th><code>https://github.com/ipython/traitlets/</code></th>
 <td>
 <input id="repos-traitlets-github-baseline"
-name="repos|traitlets|github|baseline" 
+name="repos|traitlets|github|baseline"
 type="text"
 title="the baseline GitHub URL for traitlets"
 spellcheck="false"
@@ -203,7 +203,7 @@ must be empty, or one of:<br/>
 </td>
 <td>
 <input id="repos-traitlets-github-merge_with"
-name="repos|traitlets|github|merge_with" 
+name="repos|traitlets|github|merge_with"
 title="one or more space-delimited GitHub URLs to merge into the traitlets baseline"
 type="text"
 spellcheck="false"
@@ -218,21 +218,21 @@ must be empty, or one or more (separated by space) of:<br/>
 </label>
 </td>
 <td>
-<select 
-name="repos|traitlets|github|merge_strategy" 
+<select
+name="repos|traitlets|github|merge_strategy"
 title="choose a different git merge strategy"
 >
 <option value="">ort (default)</option>
-<option>resolve</option> 
+<option>resolve</option>
 <option>octopus</option>
 <option>ours</option>
 <option>subtree</option>
 </select>
 </td>
 <td>
-<input 
-name="repos|traitlets|github|merge_options" 
-type="text" 
+<input
+name="repos|traitlets|github|merge_options"
+type="text"
 title="add space-delimted -X options for the merge strategy"
 />
 </td>
@@ -246,7 +246,7 @@ title="add space-delimted -X options for the merge strategy"
 <th><code>https://github.com/ipython/comm/</code></th>
 <td>
 <input id="repos-comm-github-baseline"
-name="repos|comm|github|baseline" 
+name="repos|comm|github|baseline"
 type="text"
 title="the baseline GitHub URL for comm"
 spellcheck="false"
@@ -262,7 +262,7 @@ must be empty, or one of:<br/>
 </td>
 <td>
 <input id="repos-comm-github-merge_with"
-name="repos|comm|github|merge_with" 
+name="repos|comm|github|merge_with"
 title="one or more space-delimited GitHub URLs to merge into the comm baseline"
 type="text"
 spellcheck="false"
@@ -277,21 +277,21 @@ must be empty, or one or more (separated by space) of:<br/>
 </label>
 </td>
 <td>
-<select 
-name="repos|comm|github|merge_strategy" 
+<select
+name="repos|comm|github|merge_strategy"
 title="choose a different git merge strategy"
 >
 <option value="">ort (default)</option>
-<option>resolve</option> 
+<option>resolve</option>
 <option>octopus</option>
 <option>ours</option>
 <option>subtree</option>
 </select>
 </td>
 <td>
-<input 
-name="repos|comm|github|merge_options" 
-type="text" 
+<input
+name="repos|comm|github|merge_options"
+type="text"
 title="add space-delimted -X options for the merge strategy"
 />
 </td>
@@ -305,7 +305,7 @@ title="add space-delimted -X options for the merge strategy"
 <th><code>https://github.com/jupyterlab/lumino/</code></th>
 <td>
 <input id="repos-lumino-github-baseline"
-name="repos|lumino|github|baseline" 
+name="repos|lumino|github|baseline"
 type="text"
 title="the baseline GitHub URL for lumino"
 spellcheck="false"
@@ -321,7 +321,7 @@ must be empty, or one of:<br/>
 </td>
 <td>
 <input id="repos-lumino-github-merge_with"
-name="repos|lumino|github|merge_with" 
+name="repos|lumino|github|merge_with"
 title="one or more space-delimited GitHub URLs to merge into the lumino baseline"
 type="text"
 spellcheck="false"
@@ -336,21 +336,21 @@ must be empty, or one or more (separated by space) of:<br/>
 </label>
 </td>
 <td>
-<select 
-name="repos|lumino|github|merge_strategy" 
+<select
+name="repos|lumino|github|merge_strategy"
 title="choose a different git merge strategy"
 >
 <option value="">ort (default)</option>
-<option>resolve</option> 
+<option>resolve</option>
 <option>octopus</option>
 <option>ours</option>
 <option>subtree</option>
 </select>
 </td>
 <td>
-<input 
-name="repos|lumino|github|merge_options" 
-type="text" 
+<input
+name="repos|lumino|github|merge_options"
+type="text"
 title="add space-delimted -X options for the merge strategy"
 />
 </td>
@@ -364,7 +364,7 @@ title="add space-delimted -X options for the merge strategy"
 <th><code>https://github.com/jupyter-server/jupyter_server_terminals/</code></th>
 <td>
 <input id="repos-jupyter_server_terminals-github-baseline"
-name="repos|jupyter_server_terminals|github|baseline" 
+name="repos|jupyter_server_terminals|github|baseline"
 type="text"
 title="the baseline GitHub URL for jupyter_server_terminals"
 spellcheck="false"
@@ -380,7 +380,7 @@ must be empty, or one of:<br/>
 </td>
 <td>
 <input id="repos-jupyter_server_terminals-github-merge_with"
-name="repos|jupyter_server_terminals|github|merge_with" 
+name="repos|jupyter_server_terminals|github|merge_with"
 title="one or more space-delimited GitHub URLs to merge into the jupyter_server_terminals baseline"
 type="text"
 spellcheck="false"
@@ -395,21 +395,21 @@ must be empty, or one or more (separated by space) of:<br/>
 </label>
 </td>
 <td>
-<select 
-name="repos|jupyter_server_terminals|github|merge_strategy" 
+<select
+name="repos|jupyter_server_terminals|github|merge_strategy"
 title="choose a different git merge strategy"
 >
 <option value="">ort (default)</option>
-<option>resolve</option> 
+<option>resolve</option>
 <option>octopus</option>
 <option>ours</option>
 <option>subtree</option>
 </select>
 </td>
 <td>
-<input 
-name="repos|jupyter_server_terminals|github|merge_options" 
-type="text" 
+<input
+name="repos|jupyter_server_terminals|github|merge_options"
+type="text"
 title="add space-delimted -X options for the merge strategy"
 />
 </td>
@@ -423,7 +423,7 @@ title="add space-delimted -X options for the merge strategy"
 <th><code>https://github.com/jupyter/jupyter_core/</code></th>
 <td>
 <input id="repos-jupyter_core-github-baseline"
-name="repos|jupyter_core|github|baseline" 
+name="repos|jupyter_core|github|baseline"
 type="text"
 title="the baseline GitHub URL for jupyter_core"
 spellcheck="false"
@@ -439,7 +439,7 @@ must be empty, or one of:<br/>
 </td>
 <td>
 <input id="repos-jupyter_core-github-merge_with"
-name="repos|jupyter_core|github|merge_with" 
+name="repos|jupyter_core|github|merge_with"
 title="one or more space-delimited GitHub URLs to merge into the jupyter_core baseline"
 type="text"
 spellcheck="false"
@@ -454,21 +454,21 @@ must be empty, or one or more (separated by space) of:<br/>
 </label>
 </td>
 <td>
-<select 
-name="repos|jupyter_core|github|merge_strategy" 
+<select
+name="repos|jupyter_core|github|merge_strategy"
 title="choose a different git merge strategy"
 >
 <option value="">ort (default)</option>
-<option>resolve</option> 
+<option>resolve</option>
 <option>octopus</option>
 <option>ours</option>
 <option>subtree</option>
 </select>
 </td>
 <td>
-<input 
-name="repos|jupyter_core|github|merge_options" 
-type="text" 
+<input
+name="repos|jupyter_core|github|merge_options"
+type="text"
 title="add space-delimted -X options for the merge strategy"
 />
 </td>
@@ -482,7 +482,7 @@ title="add space-delimted -X options for the merge strategy"
 <th><code>https://github.com/jupyter/jupyter_events/</code></th>
 <td>
 <input id="repos-jupyter_events-github-baseline"
-name="repos|jupyter_events|github|baseline" 
+name="repos|jupyter_events|github|baseline"
 type="text"
 title="the baseline GitHub URL for jupyter_events"
 spellcheck="false"
@@ -498,7 +498,7 @@ must be empty, or one of:<br/>
 </td>
 <td>
 <input id="repos-jupyter_events-github-merge_with"
-name="repos|jupyter_events|github|merge_with" 
+name="repos|jupyter_events|github|merge_with"
 title="one or more space-delimited GitHub URLs to merge into the jupyter_events baseline"
 type="text"
 spellcheck="false"
@@ -513,21 +513,21 @@ must be empty, or one or more (separated by space) of:<br/>
 </label>
 </td>
 <td>
-<select 
-name="repos|jupyter_events|github|merge_strategy" 
+<select
+name="repos|jupyter_events|github|merge_strategy"
 title="choose a different git merge strategy"
 >
 <option value="">ort (default)</option>
-<option>resolve</option> 
+<option>resolve</option>
 <option>octopus</option>
 <option>ours</option>
 <option>subtree</option>
 </select>
 </td>
 <td>
-<input 
-name="repos|jupyter_events|github|merge_options" 
-type="text" 
+<input
+name="repos|jupyter_events|github|merge_options"
+type="text"
 title="add space-delimted -X options for the merge strategy"
 />
 </td>
@@ -541,7 +541,7 @@ title="add space-delimted -X options for the merge strategy"
 <th><code>https://github.com/ipython/ipython/</code></th>
 <td>
 <input id="repos-ipython-github-baseline"
-name="repos|ipython|github|baseline" 
+name="repos|ipython|github|baseline"
 type="text"
 title="the baseline GitHub URL for ipython"
 spellcheck="false"
@@ -557,7 +557,7 @@ must be empty, or one of:<br/>
 </td>
 <td>
 <input id="repos-ipython-github-merge_with"
-name="repos|ipython|github|merge_with" 
+name="repos|ipython|github|merge_with"
 title="one or more space-delimited GitHub URLs to merge into the ipython baseline"
 type="text"
 spellcheck="false"
@@ -572,21 +572,21 @@ must be empty, or one or more (separated by space) of:<br/>
 </label>
 </td>
 <td>
-<select 
-name="repos|ipython|github|merge_strategy" 
+<select
+name="repos|ipython|github|merge_strategy"
 title="choose a different git merge strategy"
 >
 <option value="">ort (default)</option>
-<option>resolve</option> 
+<option>resolve</option>
 <option>octopus</option>
 <option>ours</option>
 <option>subtree</option>
 </select>
 </td>
 <td>
-<input 
-name="repos|ipython|github|merge_options" 
-type="text" 
+<input
+name="repos|ipython|github|merge_options"
+type="text"
 title="add space-delimted -X options for the merge strategy"
 />
 </td>
@@ -600,7 +600,7 @@ title="add space-delimted -X options for the merge strategy"
 <th><code>https://github.com/jupyter/jupyter_client/</code></th>
 <td>
 <input id="repos-jupyter_client-github-baseline"
-name="repos|jupyter_client|github|baseline" 
+name="repos|jupyter_client|github|baseline"
 type="text"
 title="the baseline GitHub URL for jupyter_client"
 spellcheck="false"
@@ -616,7 +616,7 @@ must be empty, or one of:<br/>
 </td>
 <td>
 <input id="repos-jupyter_client-github-merge_with"
-name="repos|jupyter_client|github|merge_with" 
+name="repos|jupyter_client|github|merge_with"
 title="one or more space-delimited GitHub URLs to merge into the jupyter_client baseline"
 type="text"
 spellcheck="false"
@@ -631,21 +631,21 @@ must be empty, or one or more (separated by space) of:<br/>
 </label>
 </td>
 <td>
-<select 
-name="repos|jupyter_client|github|merge_strategy" 
+<select
+name="repos|jupyter_client|github|merge_strategy"
 title="choose a different git merge strategy"
 >
 <option value="">ort (default)</option>
-<option>resolve</option> 
+<option>resolve</option>
 <option>octopus</option>
 <option>ours</option>
 <option>subtree</option>
 </select>
 </td>
 <td>
-<input 
-name="repos|jupyter_client|github|merge_options" 
-type="text" 
+<input
+name="repos|jupyter_client|github|merge_options"
+type="text"
 title="add space-delimted -X options for the merge strategy"
 />
 </td>
@@ -659,7 +659,7 @@ title="add space-delimted -X options for the merge strategy"
 <th><code>https://github.com/jupyter/nbformat/</code></th>
 <td>
 <input id="repos-nbformat-github-baseline"
-name="repos|nbformat|github|baseline" 
+name="repos|nbformat|github|baseline"
 type="text"
 title="the baseline GitHub URL for nbformat"
 spellcheck="false"
@@ -675,7 +675,7 @@ must be empty, or one of:<br/>
 </td>
 <td>
 <input id="repos-nbformat-github-merge_with"
-name="repos|nbformat|github|merge_with" 
+name="repos|nbformat|github|merge_with"
 title="one or more space-delimited GitHub URLs to merge into the nbformat baseline"
 type="text"
 spellcheck="false"
@@ -690,21 +690,21 @@ must be empty, or one or more (separated by space) of:<br/>
 </label>
 </td>
 <td>
-<select 
-name="repos|nbformat|github|merge_strategy" 
+<select
+name="repos|nbformat|github|merge_strategy"
 title="choose a different git merge strategy"
 >
 <option value="">ort (default)</option>
-<option>resolve</option> 
+<option>resolve</option>
 <option>octopus</option>
 <option>ours</option>
 <option>subtree</option>
 </select>
 </td>
 <td>
-<input 
-name="repos|nbformat|github|merge_options" 
-type="text" 
+<input
+name="repos|nbformat|github|merge_options"
+type="text"
 title="add space-delimted -X options for the merge strategy"
 />
 </td>
@@ -718,7 +718,7 @@ title="add space-delimted -X options for the merge strategy"
 <th><code>https://github.com/jupyter/nbconvert/</code></th>
 <td>
 <input id="repos-nbconvert-github-baseline"
-name="repos|nbconvert|github|baseline" 
+name="repos|nbconvert|github|baseline"
 type="text"
 title="the baseline GitHub URL for nbconvert"
 spellcheck="false"
@@ -734,7 +734,7 @@ must be empty, or one of:<br/>
 </td>
 <td>
 <input id="repos-nbconvert-github-merge_with"
-name="repos|nbconvert|github|merge_with" 
+name="repos|nbconvert|github|merge_with"
 title="one or more space-delimited GitHub URLs to merge into the nbconvert baseline"
 type="text"
 spellcheck="false"
@@ -749,21 +749,21 @@ must be empty, or one or more (separated by space) of:<br/>
 </label>
 </td>
 <td>
-<select 
-name="repos|nbconvert|github|merge_strategy" 
+<select
+name="repos|nbconvert|github|merge_strategy"
 title="choose a different git merge strategy"
 >
 <option value="">ort (default)</option>
-<option>resolve</option> 
+<option>resolve</option>
 <option>octopus</option>
 <option>ours</option>
 <option>subtree</option>
 </select>
 </td>
 <td>
-<input 
-name="repos|nbconvert|github|merge_options" 
-type="text" 
+<input
+name="repos|nbconvert|github|merge_options"
+type="text"
 title="add space-delimted -X options for the merge strategy"
 />
 </td>
@@ -777,7 +777,7 @@ title="add space-delimted -X options for the merge strategy"
 <th><code>https://github.com/ipython/ipykernel/</code></th>
 <td>
 <input id="repos-ipykernel-github-baseline"
-name="repos|ipykernel|github|baseline" 
+name="repos|ipykernel|github|baseline"
 type="text"
 title="the baseline GitHub URL for ipykernel"
 spellcheck="false"
@@ -793,7 +793,7 @@ must be empty, or one of:<br/>
 </td>
 <td>
 <input id="repos-ipykernel-github-merge_with"
-name="repos|ipykernel|github|merge_with" 
+name="repos|ipykernel|github|merge_with"
 title="one or more space-delimited GitHub URLs to merge into the ipykernel baseline"
 type="text"
 spellcheck="false"
@@ -808,21 +808,21 @@ must be empty, or one or more (separated by space) of:<br/>
 </label>
 </td>
 <td>
-<select 
-name="repos|ipykernel|github|merge_strategy" 
+<select
+name="repos|ipykernel|github|merge_strategy"
 title="choose a different git merge strategy"
 >
 <option value="">ort (default)</option>
-<option>resolve</option> 
+<option>resolve</option>
 <option>octopus</option>
 <option>ours</option>
 <option>subtree</option>
 </select>
 </td>
 <td>
-<input 
-name="repos|ipykernel|github|merge_options" 
-type="text" 
+<input
+name="repos|ipykernel|github|merge_options"
+type="text"
 title="add space-delimted -X options for the merge strategy"
 />
 </td>
@@ -836,7 +836,7 @@ title="add space-delimted -X options for the merge strategy"
 <th><code>https://github.com/jupyter/nbclient/</code></th>
 <td>
 <input id="repos-nbclient-github-baseline"
-name="repos|nbclient|github|baseline" 
+name="repos|nbclient|github|baseline"
 type="text"
 title="the baseline GitHub URL for nbclient"
 spellcheck="false"
@@ -852,7 +852,7 @@ must be empty, or one of:<br/>
 </td>
 <td>
 <input id="repos-nbclient-github-merge_with"
-name="repos|nbclient|github|merge_with" 
+name="repos|nbclient|github|merge_with"
 title="one or more space-delimited GitHub URLs to merge into the nbclient baseline"
 type="text"
 spellcheck="false"
@@ -867,21 +867,21 @@ must be empty, or one or more (separated by space) of:<br/>
 </label>
 </td>
 <td>
-<select 
-name="repos|nbclient|github|merge_strategy" 
+<select
+name="repos|nbclient|github|merge_strategy"
 title="choose a different git merge strategy"
 >
 <option value="">ort (default)</option>
-<option>resolve</option> 
+<option>resolve</option>
 <option>octopus</option>
 <option>ours</option>
 <option>subtree</option>
 </select>
 </td>
 <td>
-<input 
-name="repos|nbclient|github|merge_options" 
-type="text" 
+<input
+name="repos|nbclient|github|merge_options"
+type="text"
 title="add space-delimted -X options for the merge strategy"
 />
 </td>
@@ -895,7 +895,7 @@ title="add space-delimted -X options for the merge strategy"
 <th><code>https://github.com/jupyter-server/jupyter_server/</code></th>
 <td>
 <input id="repos-jupyter_server-github-baseline"
-name="repos|jupyter_server|github|baseline" 
+name="repos|jupyter_server|github|baseline"
 type="text"
 title="the baseline GitHub URL for jupyter_server"
 spellcheck="false"
@@ -911,7 +911,7 @@ must be empty, or one of:<br/>
 </td>
 <td>
 <input id="repos-jupyter_server-github-merge_with"
-name="repos|jupyter_server|github|merge_with" 
+name="repos|jupyter_server|github|merge_with"
 title="one or more space-delimited GitHub URLs to merge into the jupyter_server baseline"
 type="text"
 spellcheck="false"
@@ -926,21 +926,21 @@ must be empty, or one or more (separated by space) of:<br/>
 </label>
 </td>
 <td>
-<select 
-name="repos|jupyter_server|github|merge_strategy" 
+<select
+name="repos|jupyter_server|github|merge_strategy"
 title="choose a different git merge strategy"
 >
 <option value="">ort (default)</option>
-<option>resolve</option> 
+<option>resolve</option>
 <option>octopus</option>
 <option>ours</option>
 <option>subtree</option>
 </select>
 </td>
 <td>
-<input 
-name="repos|jupyter_server|github|merge_options" 
-type="text" 
+<input
+name="repos|jupyter_server|github|merge_options"
+type="text"
 title="add space-delimted -X options for the merge strategy"
 />
 </td>
@@ -954,7 +954,7 @@ title="add space-delimted -X options for the merge strategy"
 <th><code>https://github.com/jupyter/notebook_shim/</code></th>
 <td>
 <input id="repos-notebook_shim-github-baseline"
-name="repos|notebook_shim|github|baseline" 
+name="repos|notebook_shim|github|baseline"
 type="text"
 title="the baseline GitHub URL for notebook_shim"
 spellcheck="false"
@@ -970,7 +970,7 @@ must be empty, or one of:<br/>
 </td>
 <td>
 <input id="repos-notebook_shim-github-merge_with"
-name="repos|notebook_shim|github|merge_with" 
+name="repos|notebook_shim|github|merge_with"
 title="one or more space-delimited GitHub URLs to merge into the notebook_shim baseline"
 type="text"
 spellcheck="false"
@@ -985,21 +985,21 @@ must be empty, or one or more (separated by space) of:<br/>
 </label>
 </td>
 <td>
-<select 
-name="repos|notebook_shim|github|merge_strategy" 
+<select
+name="repos|notebook_shim|github|merge_strategy"
 title="choose a different git merge strategy"
 >
 <option value="">ort (default)</option>
-<option>resolve</option> 
+<option>resolve</option>
 <option>octopus</option>
 <option>ours</option>
 <option>subtree</option>
 </select>
 </td>
 <td>
-<input 
-name="repos|notebook_shim|github|merge_options" 
-type="text" 
+<input
+name="repos|notebook_shim|github|merge_options"
+type="text"
 title="add space-delimted -X options for the merge strategy"
 />
 </td>
@@ -1013,7 +1013,7 @@ title="add space-delimted -X options for the merge strategy"
 <th><code>https://github.com/jupyterlab/jupyterlab_server/</code></th>
 <td>
 <input id="repos-jupyterlab_server-github-baseline"
-name="repos|jupyterlab_server|github|baseline" 
+name="repos|jupyterlab_server|github|baseline"
 type="text"
 title="the baseline GitHub URL for jupyterlab_server"
 spellcheck="false"
@@ -1029,7 +1029,7 @@ must be empty, or one of:<br/>
 </td>
 <td>
 <input id="repos-jupyterlab_server-github-merge_with"
-name="repos|jupyterlab_server|github|merge_with" 
+name="repos|jupyterlab_server|github|merge_with"
 title="one or more space-delimited GitHub URLs to merge into the jupyterlab_server baseline"
 type="text"
 spellcheck="false"
@@ -1044,21 +1044,21 @@ must be empty, or one or more (separated by space) of:<br/>
 </label>
 </td>
 <td>
-<select 
-name="repos|jupyterlab_server|github|merge_strategy" 
+<select
+name="repos|jupyterlab_server|github|merge_strategy"
 title="choose a different git merge strategy"
 >
 <option value="">ort (default)</option>
-<option>resolve</option> 
+<option>resolve</option>
 <option>octopus</option>
 <option>ours</option>
 <option>subtree</option>
 </select>
 </td>
 <td>
-<input 
-name="repos|jupyterlab_server|github|merge_options" 
-type="text" 
+<input
+name="repos|jupyterlab_server|github|merge_options"
+type="text"
 title="add space-delimted -X options for the merge strategy"
 />
 </td>
@@ -1072,7 +1072,7 @@ title="add space-delimted -X options for the merge strategy"
 <th><code>https://github.com/jupyterlab/jupyterlab/</code></th>
 <td>
 <input id="repos-jupyterlab-github-baseline"
-name="repos|jupyterlab|github|baseline" 
+name="repos|jupyterlab|github|baseline"
 type="text"
 title="the baseline GitHub URL for jupyterlab"
 spellcheck="false"
@@ -1088,7 +1088,7 @@ must be empty, or one of:<br/>
 </td>
 <td>
 <input id="repos-jupyterlab-github-merge_with"
-name="repos|jupyterlab|github|merge_with" 
+name="repos|jupyterlab|github|merge_with"
 title="one or more space-delimited GitHub URLs to merge into the jupyterlab baseline"
 type="text"
 spellcheck="false"
@@ -1103,21 +1103,21 @@ must be empty, or one or more (separated by space) of:<br/>
 </label>
 </td>
 <td>
-<select 
-name="repos|jupyterlab|github|merge_strategy" 
+<select
+name="repos|jupyterlab|github|merge_strategy"
 title="choose a different git merge strategy"
 >
 <option value="">ort (default)</option>
-<option>resolve</option> 
+<option>resolve</option>
 <option>octopus</option>
 <option>ours</option>
 <option>subtree</option>
 </select>
 </td>
 <td>
-<input 
-name="repos|jupyterlab|github|merge_options" 
-type="text" 
+<input
+name="repos|jupyterlab|github|merge_options"
+type="text"
 title="add space-delimted -X options for the merge strategy"
 />
 </td>
@@ -1131,7 +1131,7 @@ title="add space-delimted -X options for the merge strategy"
 <th><code>https://github.com/jupyter/notebook/</code></th>
 <td>
 <input id="repos-notebook-github-baseline"
-name="repos|notebook|github|baseline" 
+name="repos|notebook|github|baseline"
 type="text"
 title="the baseline GitHub URL for notebook"
 spellcheck="false"
@@ -1147,7 +1147,7 @@ must be empty, or one of:<br/>
 </td>
 <td>
 <input id="repos-notebook-github-merge_with"
-name="repos|notebook|github|merge_with" 
+name="repos|notebook|github|merge_with"
 title="one or more space-delimited GitHub URLs to merge into the notebook baseline"
 type="text"
 spellcheck="false"
@@ -1162,21 +1162,21 @@ must be empty, or one or more (separated by space) of:<br/>
 </label>
 </td>
 <td>
-<select 
-name="repos|notebook|github|merge_strategy" 
+<select
+name="repos|notebook|github|merge_strategy"
 title="choose a different git merge strategy"
 >
 <option value="">ort (default)</option>
-<option>resolve</option> 
+<option>resolve</option>
 <option>octopus</option>
 <option>ours</option>
 <option>subtree</option>
 </select>
 </td>
 <td>
-<input 
-name="repos|notebook|github|merge_options" 
-type="text" 
+<input
+name="repos|notebook|github|merge_options"
+type="text"
 title="add space-delimted -X options for the merge strategy"
 />
 </td>
@@ -1190,7 +1190,7 @@ title="add space-delimted -X options for the merge strategy"
 <th><code>https://github.com/jupyter-widgets/ipywidgets/</code></th>
 <td>
 <input id="repos-ipywidgets-github-baseline"
-name="repos|ipywidgets|github|baseline" 
+name="repos|ipywidgets|github|baseline"
 type="text"
 title="the baseline GitHub URL for ipywidgets"
 spellcheck="false"
@@ -1206,7 +1206,7 @@ must be empty, or one of:<br/>
 </td>
 <td>
 <input id="repos-ipywidgets-github-merge_with"
-name="repos|ipywidgets|github|merge_with" 
+name="repos|ipywidgets|github|merge_with"
 title="one or more space-delimited GitHub URLs to merge into the ipywidgets baseline"
 type="text"
 spellcheck="false"
@@ -1221,21 +1221,21 @@ must be empty, or one or more (separated by space) of:<br/>
 </label>
 </td>
 <td>
-<select 
-name="repos|ipywidgets|github|merge_strategy" 
+<select
+name="repos|ipywidgets|github|merge_strategy"
 title="choose a different git merge strategy"
 >
 <option value="">ort (default)</option>
-<option>resolve</option> 
+<option>resolve</option>
 <option>octopus</option>
 <option>ours</option>
 <option>subtree</option>
 </select>
 </td>
 <td>
-<input 
-name="repos|ipywidgets|github|merge_options" 
-type="text" 
+<input
+name="repos|ipywidgets|github|merge_options"
+type="text"
 title="add space-delimted -X options for the merge strategy"
 />
 </td>
@@ -1249,7 +1249,7 @@ title="add space-delimted -X options for the merge strategy"
 <th><code>https://github.com/jupyterlite/jupyterlite/</code></th>
 <td>
 <input id="repos-jupyterlite-github-baseline"
-name="repos|jupyterlite|github|baseline" 
+name="repos|jupyterlite|github|baseline"
 type="text"
 title="the baseline GitHub URL for jupyterlite"
 spellcheck="false"
@@ -1265,7 +1265,7 @@ must be empty, or one of:<br/>
 </td>
 <td>
 <input id="repos-jupyterlite-github-merge_with"
-name="repos|jupyterlite|github|merge_with" 
+name="repos|jupyterlite|github|merge_with"
 title="one or more space-delimited GitHub URLs to merge into the jupyterlite baseline"
 type="text"
 spellcheck="false"
@@ -1280,21 +1280,21 @@ must be empty, or one or more (separated by space) of:<br/>
 </label>
 </td>
 <td>
-<select 
-name="repos|jupyterlite|github|merge_strategy" 
+<select
+name="repos|jupyterlite|github|merge_strategy"
 title="choose a different git merge strategy"
 >
 <option value="">ort (default)</option>
-<option>resolve</option> 
+<option>resolve</option>
 <option>octopus</option>
 <option>ours</option>
 <option>subtree</option>
 </select>
 </td>
 <td>
-<input 
-name="repos|jupyterlite|github|merge_options" 
-type="text" 
+<input
+name="repos|jupyterlite|github|merge_options"
+type="text"
 title="add space-delimted -X options for the merge strategy"
 />
 </td>
@@ -1308,7 +1308,7 @@ title="add space-delimted -X options for the merge strategy"
 <th><code>https://github.com/jupyterlite/pyodide-kernel/</code></th>
 <td>
 <input id="repos-jupyterlite_pyodide_kernel-github-baseline"
-name="repos|jupyterlite_pyodide_kernel|github|baseline" 
+name="repos|jupyterlite_pyodide_kernel|github|baseline"
 type="text"
 title="the baseline GitHub URL for jupyterlite_pyodide_kernel"
 spellcheck="false"
@@ -1324,7 +1324,7 @@ must be empty, or one of:<br/>
 </td>
 <td>
 <input id="repos-jupyterlite_pyodide_kernel-github-merge_with"
-name="repos|jupyterlite_pyodide_kernel|github|merge_with" 
+name="repos|jupyterlite_pyodide_kernel|github|merge_with"
 title="one or more space-delimited GitHub URLs to merge into the jupyterlite_pyodide_kernel baseline"
 type="text"
 spellcheck="false"
@@ -1339,21 +1339,21 @@ must be empty, or one or more (separated by space) of:<br/>
 </label>
 </td>
 <td>
-<select 
-name="repos|jupyterlite_pyodide_kernel|github|merge_strategy" 
+<select
+name="repos|jupyterlite_pyodide_kernel|github|merge_strategy"
 title="choose a different git merge strategy"
 >
 <option value="">ort (default)</option>
-<option>resolve</option> 
+<option>resolve</option>
 <option>octopus</option>
 <option>ours</option>
 <option>subtree</option>
 </select>
 </td>
 <td>
-<input 
-name="repos|jupyterlite_pyodide_kernel|github|merge_options" 
-type="text" 
+<input
+name="repos|jupyterlite_pyodide_kernel|github|merge_options"
+type="text"
 title="add space-delimted -X options for the merge strategy"
 />
 </td>
