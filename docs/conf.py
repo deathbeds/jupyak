@@ -42,7 +42,6 @@ version = ".".join(release.rsplit(".", 1))
 
 # sphinx config
 extensions = [
-    "sphinx.ext.intersphinx",
     "sphinx.ext.viewcode",
     "myst_nb",
     "sphinx.ext.autosectionlabel",
@@ -54,10 +53,6 @@ extensions = [
 # content
 autosectionlabel_prefix_document = True
 myst_heading_anchors = 3
-
-intersphinx_mapping = {
-    "python": ("https://docs.python.org/3", None),
-}
 
 mermaid_version = ""
 mermaid_init_js = "false"
@@ -99,7 +94,10 @@ html_theme_options = {
 
 html_context = {}
 rediraffe_redirects = {}
-html_sidebars = {"*": ["page-toc", "edit-this-page", "sourcelink"], "graph": []}
+html_sidebars = {
+    "*": ["page-toc", "edit-this-page", "sourcelink"],
+    "graph": [],
+}
 
 if REPO_INFO is not None:
     html_context = {**REPO_INFO.groupdict(), "doc_path": "docs"}

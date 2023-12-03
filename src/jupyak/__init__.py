@@ -1,6 +1,2 @@
-__all__ = ["__version__", "_STDOUT", "_STDERR"]
+__all__ = ["__version__"]
 __version__ = __import__("importlib.metadata").metadata.version("jupyak")
-
-
-_STDOUT = None
-_STDERR = None

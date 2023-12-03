@@ -1,24 +1,14 @@
-[pr]
-title = "jupyak demo 2023-11-29"
-description = """
-A demo of jupyak.
-"""
-
 [lite]
-gist = "https://gist.github.com/bollwyvl/c9efdd860fe031887c948ecc6cf27a5a"
+gist = "c9efdd860fe031887c948ecc6cf27a5a"
 
 [repos]
-lumino.github.merge_with = [
-  "https://github.com/jupyterlab/lumino/pull/655"
-]
-ipywidgets.github.merge_with = [
-  "https://github.com/jupyter-widgets/ipywidgets/pull/3847"
-]
+lumino.github.merge_with = ["pull/655"]
+ipywidgets.github.merge_with = ["pull/3847"]
 
 [repos.jupyterlab.github]
 merge_strategy = "ort"
 merge_options = ["theirs"]
 merge_with = [
-  "https://github.com/jupyterlab/jupyterlab/pull/15443",
-  "https://github.com/jupyterlab/jupyterlab/pull/15347"
+  "pull/15443",
+  "pull/15347"
 ]

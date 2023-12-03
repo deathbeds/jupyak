@@ -4,11 +4,6 @@
   --jpyk-color-jupyter-orange: #f37726;
 }
 
-html[data-theme="light"],
-html[data-theme="dark"] {
-  --pst-color-primary: #9556cf;
-}
-
 html[data-theme="dark"] {
   --pst-color-border: #444;
 }
@@ -106,7 +101,7 @@ table.jsonschema h2 {
 
 #task-graph-legend {
   position: fixed;
-  top: 100px;
+  bottom: 100px;
   right: 0;
   pointer-events: none;
   opacity: 0.75;
@@ -118,7 +113,65 @@ input[id*="svg-zoom-2"]:checked ~ svg { width: 200%; transition: width 0.5s;}
 input[id*="svg-zoom-4"]:checked ~ svg { width: 400%; transition: width 0.5s;}
 input[id*="svg-zoom-8"]:checked ~ svg { width: 800%; transition: width 0.5s;}
 
-/* work */
+/* form sidebar*/
+
+form#propose button {
+  width: 100%;
+  margin: 0.5rem 0 1rem;
+}
+form#propose textarea {
+  width: 100%;
+  min-height: 10rem;
+}
+form#propose textarea:placeholder-shown ~ button {
+  display: none;
+}
+/* form main */
+.show-repo-label {
+  padding-right: 1rem;
+}
+
+form#new input[type="text"] {
+  width: 100%;
+}
+
+form#new select {
+  width: 100%;
+  height: 2rem;
+}
+
+form#new code {
+  text-wrap: nowrap;
+}
+
+form#new input[id*="merge_with"] {
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
+form#new table {
+  width: 100%;
+}
+
+form#new table label {
+  display: block;
+}
+
+form#new input[pattern]:invalid {
+  border: solid 1px var(--jpyk-color-jupyter-orange);
+  color: solid 1px var(--jpyk-color-jupyter-orange);
+}
+
+form#new input[pattern]:not(:invalid) ~ label {
+  display: none;
+}
+
+form#new th,
+form#new td {
+  vertical-align: top;
+}
+
+/* work sidebar */
 .work-sidebar {
   border: solid 2px var(--jpyk-color-wasm-purple);
   padding: 0;
