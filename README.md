@@ -1,6 +1,7 @@
 # jupyak
 
-> get a JupyterLite preview of pull requests across the Jupyter stack
+> get a statically-hosted JupyterLite preview of pull requests from across the
+> Jupyter stack
 
 ## what does it do?
 
@@ -29,6 +30,10 @@ This repo accepts [pull requests](#how-does-it-work) that build static [preview 
         - PR-based [preview site](#how-do-i-get-a-preview-site)
         - preview of the docs for the site itself
 
+> The above works on at least _one_ Ubuntu 22.03 LTS machine, but little care has
+> been taken to make _anything_ run on any other system, and likely won't be tested
+> anywhere else.
+
 ## how does it work?
 
 Delivering a preview site uses a few different GitHub Actions workflows and ReadTheDocs.
@@ -38,7 +43,12 @@ Delivering a preview site uses a few different GitHub Actions workflows and Read
     [repos](#what-can-it-build).
   - Clicking the _submit_ button will open a "new file" GitHub page against this repo
   - Click _Commit Changes..._
-  - Follow the Pull Request template and submit
+  - Follow the _Pull Request_ template and submit
+- A GitHub Action job will create a link to the current site
+  - This will initially return `404`, as the site isn't built yet
+  - Clicking instead on the ReadTheDocs check at the bottom of the Pull Request
+    will show build logs, but these are _intentionally_ sparse, capturing most output
+    as logs to present in the built site.
 - ReadTheDocs will check out the PR and build a preview JupyterLite site on a custom
     domain
   - If the preview site **fails** to build, the built RTD site will contain
@@ -47,11 +57,11 @@ Delivering a preview site uses a few different GitHub Actions workflows and Read
 
 ## what can it build?
 
-`jupyak` understand how to work with one or more human-readable HTML URLs of the forms:
+`jupyak` understand how to work with one or more human-readable URLs fragments of the forms:
 
-  - `{:repo}/pull/{:pull-id}`
-  - `{:repo}/tree/{:branch}`
-  - `{:repo}/releases/tag/{:tag}`
+  - `/pull/{:pull-id}`
+  - `/tree/{:branch}`
+  - `/releases/tag/{:tag}`
     - > note that the `/tree/{:tag}` form will fail loudly
 
 ...from the following repos:
@@ -69,18 +79,23 @@ Delivering a preview site uses a few different GitHub Actions workflows and Read
   - https://github.com/jupyterlite/jupyterlite
   - https://github.com/jupyterlite/pyodide-kernel
 
-## what does it not build?
+Additionally, a single GitHub gist can be used as the contents of the preview site,
+and can further configure the build- and runtime behavior of JupyterLite by providing
+a custom `jupyter_lite_config.json` and/or `jupyter-lite.json`.
 
-A few more things that _could_ be built, and might be interesting to evaluate
-a PR stack. However, each of these would come at the expense of a lower chance
-of a usable JupyterLite site at the end of each PR build. These include:
+## what does it _not_ build?
+
+A few more things _could_ be built, and might be interesting to evaluate
+a PR stack, ar note. However, each of these would come at the expense of a lower
+chance of a usable JupyterLite site at the end of each PR build. These include:
 
 - test reports
 - examples
 - per-project documentation
 - lint reports
 - anything that doesn't work in the browser
-- anything that requires a compiler
+- anything that requires a `c`/`rust`/`emscripten` compiler or other heavy dependencies
+  such as `pandas`
 
 [issues]: https://github.com/deathbeds/jupyak/issues
 [pulls]: https://github.com/deathbeds/jupyak/pulls
