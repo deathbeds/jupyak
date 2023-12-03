@@ -69,5 +69,18 @@ Delivering a preview site uses a few different GitHub Actions workflows and Read
   - https://github.com/jupyterlite/jupyterlite
   - https://github.com/jupyterlite/pyodide-kernel
 
+## what does it not build?
+
+A few more things that _could_ be built, and might be interesting to evaluate
+a PR stack. However, each of these would come at the expense of a lower chance
+of a usable JupyterLite site at the end of each PR build. These include:
+
+- test reports
+- examples
+- per-project documentation
+- lint reports
+- anything that doesn't work in the browser
+- anything that requires a compiler
+
 [issues]: https://github.com/deathbeds/jupyak/issues
 [pulls]: https://github.com/deathbeds/jupyak/pulls
