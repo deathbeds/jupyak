@@ -1,0 +1,13 @@
+[lite]
+gist = "7232671f04a5de8f1ce4b810f5ea8a3a"
+
+[repos.jupyterlab.github]
+merge_strategy = "ours"
+merge_with = [
+    "pull/14575",
+    "pull/14597",
+    "pull/14766",
+    "pull/14854",
+    "pull/15222",
+    "pull/15347"
+]
