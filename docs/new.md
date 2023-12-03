@@ -1,6 +1,8 @@
 # request a preview site
 
-> make selections below, then use the sidebar to start a new Pull Request
+> Make selections below for the most common configuration options, then use the 
+> _start pull request_ form to be redirected to GitHub.
+> A large number of other configuration options are _possible_, but are not yet fully described.
 
 <style>
 
@@ -88,7 +90,15 @@ display: none;
 </style>
 <form id="new">
 
-<h2>repos</h2>
+<fieldset>
+<legend><h2>customize GitHub checkout</h2></legend>
+
+<blockquote>
+All of the repositories below will be checked out at the current <code>main</code> branch as a <em>baseline</em>. 
+Check one or more repos to provide use a differnt branch, PR, or tag, or provide one or more PRs to 
+<i>merge with</i> it, and/or customize the <a href="https://git-scm.com/docs/merge-strategies" target="blank">merge strategy and options</a> to work around merge conflicts.
+</blockquote>
+
 
 <input type="checkbox" name="show-repo-traitlets" id="show-repo-traitlets"/>
 <label class="show-repo-label" for="show-repo-traitlets">traitlets</label>
@@ -1361,4 +1371,107 @@ title="add space-delimted -X options for the merge strategy"
 
 </tbody>
 </table>
+
+<fieldset>
+<legend>customize JupyterLite</legend>
+
+<blockquote>
+If given, an optional <a target="_blank" href="https://gist.github.com/">gist</a> will be cloned 
+to provide the content of the JupyterLite site.
+If the gist contains <code>jupyter_lite_config.json</code> and/or <code>jupyter-lite.json</code>,
+this will be merged into the generated 
+<a target="_blank" href="https://jupyterlite.readthedocs.io/en/latest/howto/configure/config_files.html">configuration</a>
+of <code>jupyter lite build</code> and the runtime application.
+</blockquote>
+
+<input id="lite-gist" 
+type="text"
+name="lite|gist" 
+pattern="^$|^[a-z\d]{20,}$"
+placeholder="gist ID"
+/>
+<label for="lite-gist">the gist ID must be empty, or contain 20+ letters and numbers</label>
+</fieldset>
 </form>
+<style>
+.bd-main .bd-content .bd-article-container .bd-article {
+padding: 0;
+}
+.bd-sidebar-primary {
+padding-bottom: 0;
+}
+</style>
+
+<div class="work-sidebar">
+<div class="work-sidebar-header">
+<i class="fas fa-code-pull-request"></i>
+start pull request
+</div>
+<div class="work-sidebar-content">
+<form id="propose" method="get" action="https://github.com/deathbeds/jupyak/new/main" target="_blank">
+<label for="toml-preview"><code>jupyak_config.toml</code> contents</label>
+<textarea
+required="true"
+id="toml-preview"
+name="value"
+spellcheck="false"
+placeholder="# make choices in the form"
+></textarea>
+<input type="hidden" name="filename" value="jupyak_config.toml"/>
+<br/>
+<button class="btn btn-success" form="propose">
+<i class="fas fa-code-pull-request"></i> New Pull Request
+</button>
+</form>
+</div>
+</div>
+<script type="importmap">
+{
+"imports": {
+"json2toml": "https://cdn.skypack.dev/pin/json2toml@v6.0.0-d8Y8va9lNUE85BZ5GSQ2/mode=imports,min/optimized/json2toml.js"
+}
+}
+</script>
+<script type="module">
+document.addEventListener('DOMContentLoaded', async function(){
+const form = document.querySelector('form#new');
+const preview = document.querySelector('#toml-preview');
+const selector = 'form#new input[type="text"], form#new select';
+const inputs = [...document.querySelectorAll(selector)];
+const split_fields = ['merge_with', 'merge_options'];
+async function update() {
+const json2toml = (await import('json2toml')).default;
+const config = find_config();
+preview.value = json2toml(config);
+}
+function find_config() {
+const config = {};
+const data = new FormData(form);
+for (const [name, value] of data.entries()) {
+if(document.querySelector(`input[name="${name}"]:invalid`)) {
+continue
+}
+let bits = name.split("|");
+if(value.trim() === "" || bits.length == 1){
+continue;
+}
+let current = config;
+for(const bit of bits.slice(0, -1)) {
+if(!current[bit]) {
+current[bit] = {};
+}
+current = current[bit];
+}
+let last_bit = bits[bits.length - 1];
+current[last_bit] = (
+split_fields.includes(last_bit) ?
+value.split(/[\s\n]+/):
+value
+);
+}
+return config;
+}
+inputs.map((input) => input.addEventListener('input', update))
+})
+
+</script>

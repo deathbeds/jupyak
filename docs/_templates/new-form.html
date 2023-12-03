@@ -1,23 +1,16 @@
 <style>
-  .bd-footer,
-  .header-article-items {
-    display: none;
-  }
   .bd-main .bd-content .bd-article-container .bd-article {
     padding: 0;
   }
   .bd-sidebar-primary {
     padding-bottom: 0;
   }
-  footer {
-    display: none;
-  }
 </style>
 
 <div class="work-sidebar">
   <div class="work-sidebar-header">
     <i class="fas fa-code-pull-request"></i>
-    Request Preview Site
+    start pull request
   </div>
   <div class="work-sidebar-content">
     <form id="propose" method="get" action="https://github.com/deathbeds/jupyak/new/main" target="_blank">
@@ -45,7 +38,7 @@
 }
 </script>
 <script type="module">
-  document.addEventListener('DOMContentLoaded', async () => {
+  document.addEventListener('DOMContentLoaded', async function(){
     const form = document.querySelector('form#new');
     const preview = document.querySelector('#toml-preview');
     const selector = 'form#new input[type="text"], form#new select';
