@@ -24,4 +24,5 @@ dependencies:
   - sphinx-copybutton
   - sphinxcontrib-mermaid
   - sphinxext-rediraffe
+  - tomli-w
   ### docs/environment.yml ###

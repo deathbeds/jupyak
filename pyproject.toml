@@ -22,6 +22,11 @@ dependencies = [
     "tomli ; python_version<\"3.11\"",
     "traitlets",
 ]
+[project.optional-dependencies]
+demo = [
+  "tomli-w",
+  "ipywidgets",
+]
 [project.urls]
 "Bug Tracker" = "https://github.com/deathbeds/jupyak/issues"
 "Changelog" = "https://github.com/deathbeds/jupyak/blob/main/CHANGELOG.md"
