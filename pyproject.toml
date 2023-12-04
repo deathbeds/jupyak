@@ -18,6 +18,8 @@ dependencies = [
     "doit[toml] >=0.36.0",
     "importnb",
     "jinja2",
+    "pyyaml",
+    "tomli ; python_version<\"3.11\"",
     "traitlets",
 ]
 [project.urls]
