@@ -18,6 +18,7 @@ dependencies:
   - imagemagick
   # demo
   - jupyterlab-deck >=0.2.0a0
+  - ipylab
   ### .github/environment.yml ###
   # fix
   - ruff
