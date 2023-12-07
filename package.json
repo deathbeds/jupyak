@@ -1,8 +1,21 @@
 {
-  "name": "@deathbeds/jupyak",
+  "name": "@deathbeds/jupyak-top",
   "version": "0.0.0",
   "private": true,
-  "dependencies": {
-    "prettier": "^3.0.3"
+  "workspaces": {
+    "packages": [
+      "./js"
+    ]
+  },
+  "scripts": {
+    "build": "cd js && yarn build",
+    "watch": "cd js && yarn watch"
+  },
+  "devDependencies": {
+    "prettier": "^3.1.0"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "printWidth": 88
   }
 }

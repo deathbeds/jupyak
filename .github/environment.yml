@@ -5,6 +5,9 @@ platforms:
   - linux-64
 dependencies:
   ### .github/environment.yml ###
+  # more runtimes
+  - nodejs >=20,<21
+  - yarn ==3.6.4
   # fix
   - ruff
   - nbstripout

@@ -8,8 +8,6 @@ channels:
 platforms:
   - linux-64
 dependencies:
-  # more runtimes
-  - nodejs >=20,<21
   # jupyter
   - ipywidgets >=8.1.1,<9.0.0
   - jupyterlab >=4.1.0a3,<5.0.0
@@ -18,8 +16,10 @@ dependencies:
   - imagemagick
   # demo
   - jupyterlab-deck >=0.2.0a0
-  - ipylab
   ### .github/environment.yml ###
+  # more runtimes
+  - nodejs >=20,<21
+  - yarn ==3.6.4
   # fix
   - ruff
   - nbstripout

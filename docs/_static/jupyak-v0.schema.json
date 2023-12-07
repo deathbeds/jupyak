@@ -1,0 +1,248 @@
+{
+  "$defs": {
+    "CondaEnv": {
+      "description": "A definition of the packages that make up a conda env, and their sources.",
+      "properties": {
+        "channels": {
+          "description": "the priority-ordered set of conda URLs of channels to get packages",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "dependencies": {
+          "description": "the names of conda packages (or a `pip:` object) to install",
+          "items": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "$ref": "#/$defs/PipDeps"
+              }
+            ]
+          },
+          "type": "array"
+        },
+        "pypi_to_conda": {
+          "description": "names of PyPI distributions to replace with their conda-forge counterparts",
+          "type": "object"
+        },
+        "variables": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "environment variables to set when the work environment is activated",
+          "type": "object"
+        }
+      },
+      "title": "CondaEnv"
+    },
+    "GitHub": {
+      "description": "Information for how to clone the baseline and PRs for this repo\n\n",
+      "properties": {
+        "baseline": {
+          "description": "the URL of the baseline HEAD",
+          "pattern": "^(tree/[^s]+|pull/\\d+|releases/tag/[^s]+)$",
+          "type": "string"
+        },
+        "merge_options": {
+          "description": "extra options for (and requiring) the ``merge_strategy``",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "merge_strategy": {
+          "description": "a custom `--strategy` to use during `git merge`",
+          "type": "string"
+        },
+        "merge_with": {
+          "description": "an optional, ordered list of branches to merge into the `baseline`",
+          "items": {
+            "pattern": "^(tree/[^s]+|pull/\\d+|releases/tag/[^s]+)$",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "url": {
+          "description": "the URL of the repo",
+          "pattern": "https://github\\.com/.*",
+          "type": "string"
+        }
+      },
+      "title": "GitHub"
+    },
+    "JSOptions": {
+      "description": "JavaScript-related provisioning, building, and linking.\n\n",
+      "properties": {
+        "dependencies": {
+          "description": "the names of other members of `repos` that need to built and linked into this repo in the JS environment",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "dist_exclude_patterns": {
+          "description": "regular expressions for the paths in this repo that should _not_ be built and linked in other repos",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "install_exclude_resolutions": {
+          "description": "regular expressions for the npm `@org/pkg` names that should _not_ be installed, ever, in this repo",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "link_exclude_patterns": {
+          "description": "regular expressions for the npm `@org/pkg` names that should _not_ be linked into this repo",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "tasks": {
+          "description": "task templates required to fulfill various js needs",
+          "type": "object"
+        }
+      },
+      "title": "JSOptions"
+    },
+    "LiteOptions": {
+      "description": "options for the final jupyterlite build\n\n",
+      "properties": {
+        "gist": {
+          "description": "a gist ID on GitHub to use as JupyterLite contents and config",
+          "type": "string"
+        }
+      },
+      "title": "LiteOptions"
+    },
+    "PipDeps": {
+      "description": "Eject to the `pip` ecosystem.\n\n",
+      "properties": {
+        "pip": {
+          "description": "a PEP 508 description of a pip dependency",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "title": "PipDeps"
+    },
+    "PythonOptions": {
+      "description": "Python-related provisioning, building, and linking.\n\n",
+      "properties": {
+        "dependencies": {
+          "description": "the names of other members of `repos` that need to built and linked into this repo in the Python environment",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "file_dep": {
+          "description": "files needed (usually created by js tasks) before and editable python install",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "lab_extensions": {
+          "description": "paths with extra file depenendencies needed to build an extension in this repo",
+          "type": "object"
+        },
+        "modules": {
+          "description": "the importable python names provided by this repo",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "pyproject_tomls": {
+          "description": "pyproject toml files for installable packages",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "title": "PythonOptions"
+    },
+    "Repo": {
+      "description": "A description of a repo.\n\n",
+      "properties": {
+        "github": {
+          "$ref": "#/$defs/GitHub"
+        },
+        "js": {
+          "$ref": "#/$defs/JSOptions"
+        },
+        "lite": {
+          "$ref": "#/$defs/RepoLiteOptions"
+        },
+        "name": {
+          "description": "the duplicated name from the parent ``repos`` dictionary used for dependencies",
+          "type": "string"
+        },
+        "py": {
+          "$ref": "#/$defs/PythonOptions"
+        },
+        "variables": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "environment variables to set when the work environment is activated",
+          "type": "object"
+        }
+      },
+      "title": "Repo"
+    },
+    "RepoLiteOptions": {
+      "properties": {
+        "needs_pth": {
+          "description": "names of packages this repo provides that need to be installed before a lite site build",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "skip_wheel_patterns": {
+          "description": "paths to skip building wheels",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "wheel": {
+          "description": "whether to build and ship a noarch wheel for pyodide",
+          "type": "boolean"
+        },
+        "wheel_file_dep": {
+          "description": "extra files needed to build a given wheel",
+          "type": "object"
+        }
+      },
+      "title": "RepoLiteOptions"
+    }
+  },
+  "description": "A description of a `jupyak` Pull request\n\n",
+  "properties": {
+    "env": {
+      "$ref": "#/$defs/CondaEnv"
+    },
+    "lite": {
+      "$ref": "#/$defs/LiteOptions"
+    },
+    "repos": {
+      "additionalProperties": {
+        "$ref": "#/$defs/Repo"
+      },
+      "type": "object"
+    }
+  },
+  "title": "Yak"
+}
