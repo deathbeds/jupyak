@@ -9,12 +9,10 @@ module.exports = {
   mode: 'production',
   devtool: 'source-map',
   entry: './lib/index.js',
-  experiments: {
-    outputModule: true,
-  },
+  experiments: { outputModule: true },
   output: {
-    path: path.resolve(__dirname, './dist'),
-    filename: 'index.js',
+    path: path.resolve(__dirname, './dist/prjsf'),
+    filename: 'prjsf.js',
     library: { type: 'module' },
     clean: true,
   },
@@ -26,9 +24,17 @@ module.exports = {
     rules: [{ test: /\.js$/, loader: 'source-map-loader', enforce: 'pre' }],
   },
   plugins: [
-    new HtmlWebpackPlugin({ template: 'src/index.html' }),
+    new HtmlWebpackPlugin({ filename: 'demo.html', template: 'src/demo.html' }),
     new webpack.ids.HashedModuleIdsPlugin(),
   ],
+  resolve: {
+    alias: {
+      react: 'preact/compat',
+      'react-dom/test-utils': 'preact/test-utils',
+      'react-dom': 'preact/compat', // Must be below test-utils
+      'react/jsx-runtime': 'preact/jsx-runtime',
+    },
+  },
   optimization: {
     splitChunks: {
       chunks: 'async',

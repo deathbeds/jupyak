@@ -5,7 +5,8 @@
     "declaration": true,
     "esModuleInterop": true,
     "incremental": true,
-    "jsx": "react",
+    "jsx": "react-jsx",
+    "jsxImportSource": "preact",
     "module": "esnext",
     "moduleResolution": "node",
     "noEmitOnError": true,
@@ -19,6 +20,12 @@
     "types": ["node"],
     "rootDir": "./src/",
     "outDir": "./lib/",
+    "skipLibCheck": true,
+    "baseUrl": "./",
+    "paths": {
+      "react": ["../node_modules/preact/compat/"],
+      "react-dom": ["../node_modules/preact/compat/"]
+    }
   },
   "ts-node": {
     "compilerOptions": {

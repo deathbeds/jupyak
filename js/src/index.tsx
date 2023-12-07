@@ -1,4 +1,3 @@
-import React from 'react';
 import type { RJSFSchema } from '@rjsf/utils';
 import type { FormProps, IChangeEvent } from '@rjsf/core';
 import * as toml from 'smol-toml';
@@ -40,7 +39,7 @@ async function renderForm(schema: RJSFSchema, formData: Record<string, any>) {
     onChange,
   };
 
-  render(<Form {...formProps} />, document.getElementById('form'));
+  render(<Form {...formProps} />, document.getElementById('form') as any);
 }
 
 async function getSchema(path: string): Promise<RJSFSchema> {
