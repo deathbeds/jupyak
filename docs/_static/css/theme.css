@@ -4,7 +4,7 @@
   --jpyk-color-jupyter-orange: #f37726;
 }
 
-html[data-theme="dark"] {
+html[data-theme='dark'] {
   --pst-color-border: #444;
 }
 
@@ -17,13 +17,13 @@ html[data-theme="dark"] {
   max-width: 100%;
 }
 
-html[data-theme=dark] .bd-content div.cell_output .text_html,
-html[data-theme=dark] .bd-content div.cell_output img {
+html[data-theme='dark'] .bd-content div.cell_output .text_html,
+html[data-theme='dark'] .bd-content div.cell_output img {
   background: unset !important;
   color: unset !important;
 }
 
-div.cell_output table  {
+div.cell_output table {
   color: unset !important;
 }
 
@@ -43,7 +43,6 @@ div.cell_output tbody tr:nth-child(odd) {
   padding-top: 0 !important;
   padding-bottom: 1rem;
 }
-
 
 /* mermaid */
 .jp-Mermaid > .mermaid,
@@ -108,10 +107,22 @@ table.jsonschema h2 {
   width: 800px;
 }
 
-input[id*="svg-zoom-1"]:checked ~ svg { width: 100%; transition: width 0.5s;}
-input[id*="svg-zoom-2"]:checked ~ svg { width: 200%; transition: width 0.5s;}
-input[id*="svg-zoom-4"]:checked ~ svg { width: 400%; transition: width 0.5s;}
-input[id*="svg-zoom-8"]:checked ~ svg { width: 800%; transition: width 0.5s;}
+input[id*='svg-zoom-1']:checked ~ svg {
+  width: 100%;
+  transition: width 0.5s;
+}
+input[id*='svg-zoom-2']:checked ~ svg {
+  width: 200%;
+  transition: width 0.5s;
+}
+input[id*='svg-zoom-4']:checked ~ svg {
+  width: 400%;
+  transition: width 0.5s;
+}
+input[id*='svg-zoom-8']:checked ~ svg {
+  width: 800%;
+  transition: width 0.5s;
+}
 
 /* form sidebar*/
 
@@ -131,7 +142,7 @@ form#propose textarea:placeholder-shown ~ button {
   padding-right: 1rem;
 }
 
-form#new input[type="text"] {
+form#new input[type='text'] {
   width: 100%;
 }
 
@@ -144,7 +155,7 @@ form#new code {
   text-wrap: nowrap;
 }
 
-form#new input[id*="merge_with"] {
+form#new input[id*='merge_with'] {
   word-wrap: break-word;
   word-break: break-all;
 }
