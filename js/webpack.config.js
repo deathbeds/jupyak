@@ -9,9 +9,18 @@ module.exports = {
   mode: 'production',
   devtool: 'source-map',
   entry: './lib/index.js',
+  experiments: {
+    outputModule: true,
+  },
   output: {
     path: path.resolve(__dirname, './dist'),
     filename: 'index.js',
+    library: { type: 'module' },
+    clean: true,
+  },
+  cache: {
+    type: 'filesystem',
+    cacheDirectory: path.resolve(__dirname, '../build/.cache/webpack'),
   },
   module: {
     rules: [{ test: /\.js$/, loader: 'source-map-loader', enforce: 'pre' }],
@@ -26,10 +35,6 @@ module.exports = {
       minChunks: 3,
     },
     minimize: true,
-    minimizer: [
-      new TerserPlugin({
-        extractComments: 'all',
-      }),
-    ],
+    minimizer: [new TerserPlugin({ extractComments: 'all' })],
   },
 };

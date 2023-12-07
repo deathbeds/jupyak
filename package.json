@@ -8,6 +8,8 @@
     ]
   },
   "scripts": {
+    "build:dist": "cd js && yarn build:dist",
+    "build:lib": "cd js && yarn build:lib",
     "build": "cd js && yarn build",
     "watch": "cd js && yarn watch"
   },
