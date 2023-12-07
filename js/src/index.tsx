@@ -6,8 +6,6 @@ import validator from '@rjsf/validator-ajv8';
 import { render } from 'react-dom';
 import Form from '@rjsf/bootstrap-4';
 
-
-
 async function main() {
   const params = new URLSearchParams(window.location.search);
   const schema = await getSchema(`${params.get('schema')}`);

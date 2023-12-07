@@ -17,7 +17,7 @@
     "@rjsf/utils": "^5.15.0",
     "@rjsf/validator-ajv8": "^5.15.0",
     "react": "~18.2.0",
-    "react-bootstrap": "^2.9.1",
+    "react-bootstrap": "^1.6.5",
     "react-dom": "~18.2.0",
     "smol-toml": "^1.1.3"
   },
