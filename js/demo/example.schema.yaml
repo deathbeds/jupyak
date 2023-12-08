@@ -1,0 +1,28 @@
+$defs:
+  Task:
+    properties:
+      complete:
+        default: false
+        description: Is it done?
+        type: boolean
+      deadline:
+        description: When does it need to be done?
+        format: date-time
+        type: string
+      task:
+        description: What needs to be done?
+        type: string
+    type: object
+$id: https://deathbeds.github.io/_static/prjsf/example.schema.json
+$schema: http://json-schema.org/draft-07/schema#
+description: a demo of prjsf
+properties:
+  name:
+    description: What is this list about?
+    type: string
+  tasks:
+    description: What are the tasks?
+    items:
+      $ref: '#/$defs/Task'
+    type: array
+title: Todo

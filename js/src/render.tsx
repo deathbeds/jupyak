@@ -1,9 +1,10 @@
-import type { FormProps, IChangeEvent } from '@rjsf/core';
+import type { FormProps } from '@rjsf/core';
 import validator from '@rjsf/validator-ajv8';
-import { render } from 'react-dom';
+import { Fragment, render } from 'react-dom';
+import { useState } from 'react';
 import Form from '@rjsf/bootstrap-4';
 
-import { TDataSet, ALL_KEYS, TUrlKey } from './tokens';
+import { TDataSet, ALL_KEYS, TUrlKey, DEFAULTS } from './tokens';
 
 export async function makeOneForm(container: HTMLElement): Promise<void> {
   const dataset = getDataSet(container);
@@ -14,53 +15,111 @@ export async function makeOneForm(container: HTMLElement): Promise<void> {
     fetchData(dataset, 'prjsfData'),
   ]);
 
-  await renderForm(container, dataset, { schema, formData, uiSchema });
+  const form = formComponent(dataset, { schema, formData, uiSchema });
+  render(form, container);
 }
 
 export function getDataSet(el: HTMLElement): TDataSet {
   const dataset: TDataSet = {};
   for (const k of [...ALL_KEYS]) {
-    dataset[k] = el.dataset[k];
+    dataset[k] = el.dataset[k] || DEFAULTS[k];
   }
   return dataset;
 }
 
-export async function renderForm(
-  container: HTMLElement,
-  dataset: TDataSet,
-  props: Partial<FormProps>,
-) {
-  const formProps: FormProps = {
-    schema: {},
-    validator,
-    liveValidate: true,
-    onChange: makeOnChange(dataset),
-    ...props,
+export function formComponent(dataset: TDataSet, props: Partial<FormProps>) {
+  const PRJSF = () => {
+    const [value, setValue] = useState('');
+    const [url, setUrl] = useState('#');
+    const [formData, setFormData] = useState(props.formData);
+    const [fileName, setFileName] = useState(dataset.prjsfFileName || '');
+
+    const updateUrl = () => {
+      let url = new URL(dataset.prjsfGithubUrl || '#', window.location.href);
+      url.searchParams.set('value', value);
+      url.searchParams.set('fileName', fileName);
+      setUrl(url.toString());
+    };
+
+    const updateFormData = async (formData: any) => {
+      let value = await getFileContent(dataset, formData);
+      setValue(value);
+      setFormData(formData);
+      updateUrl();
+    };
+
+    if (!value) {
+      void updateFormData(formData);
+    }
+
+    const formProps: FormProps = {
+      schema: {},
+      validator,
+      liveValidate: true,
+      onChange: async ({ formData }) => await updateFormData(formData),
+      ...props,
+    };
+
+    return (
+      <div class="card">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <Form {...formProps} formData={formData}>
+              <Fragment />
+            </Form>
+          </li>
+          <li class="list-group-item">
+            <label class="form-label">Preview</label>
+            <textarea className="form-control" value={value} rows={10}></textarea>
+          </li>
+          <li class="list-group-item">
+            <label class="form-label">
+              {dataset.prjsfDataFormat?.toUpperCase()} file name
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              placeholder={fileName}
+              onChange={(change) => {
+                setFileName(change.currentTarget.value);
+                updateUrl();
+              }}
+            />
+          </li>
+          <li class="list-group-item">
+            <a
+              href={url}
+              class="form-control btn btn-primary btn-lg"
+              role="button"
+              target="_blank"
+            >
+              Start Pull Request with <code>{fileName}</code>
+            </a>
+          </li>
+        </ul>
+      </div>
+    );
   };
 
-  render(<Form {...formProps} />, container);
+  return <PRJSF />;
 }
 
-function makeOnChange(dataset: TDataSet) {
-  async function onChange(data: IChangeEvent) {
-    let toml = await import('smol-toml');
-    const tomlText = toml.stringify(data.formData);
-    const url = new URL('https://github.com/deathbeds/jupyak/new/main');
-    url.searchParams.set('filename', tomlText);
-
-    const preview: HTMLTextAreaElement | null =
-      document.querySelector('#submit textarea');
-
-    if (preview) {
-      preview.value = tomlText;
-    }
-
-    const link: HTMLAnchorElement | null = document.querySelector('#submit a');
-    if (link) {
-      link.setAttribute('href', url.toString());
-    }
+export async function getFileContent(
+  dataset: TDataSet,
+  formData: any,
+): Promise<string> {
+  const format = dataset.prjsfDataFormat;
+  switch (format) {
+    case 'json':
+      return JSON.stringify(formData, null, 2);
+    case 'toml':
+      let toml = await import('smol-toml');
+      return toml.stringify(formData);
+    case 'yaml':
+      let yaml = await import('yaml');
+      return yaml.stringify(formData);
   }
-  return onChange;
+  return '';
 }
 
 async function fetchData(dataset: TDataSet, key: TUrlKey): Promise<any> {
@@ -70,9 +129,10 @@ async function fetchData(dataset: TDataSet, key: TUrlKey): Promise<any> {
     return {};
   }
 
-  let response = await fetch(url);
+  const response = await fetch(url);
   let data: any = null;
   const format = dataset[`${key}Format`] || 'json';
+
   if (response.ok) {
     switch (format) {
       case 'json':
@@ -88,19 +148,6 @@ async function fetchData(dataset: TDataSet, key: TUrlKey): Promise<any> {
         break;
     }
   }
-  console.warn('data', data);
+
   return data;
 }
-
-// async function getConfig(path: string): Promise<Record<string, any>> {
-//   const configText = await (await fetch(path)).text();
-
-//   let formData = {};
-
-//   if (path.endsWith('.toml')) {
-//     const toml = await import('smol-toml');
-//     formData = toml.parse(configText);
-//   }
-
-//   return formData;
-// }

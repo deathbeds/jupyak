@@ -26,7 +26,7 @@ module.exports = {
   },
   plugins: [
     new CopyPlugin({
-      patterns: [{ from: 'demo/*.{json,toml,ya?ml}' }],
+      patterns: [{ from: 'demo/*.{json,toml,yaml}' }],
     }),
     new HtmlWebpackPlugin({
       filename: 'demo/index.html',

@@ -1,5 +1,4 @@
 {
-  "$schema": "./example.schema.json",
   "tasks": [
     {
       "complete": false,

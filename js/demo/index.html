@@ -11,33 +11,33 @@
     />
   </head>
   <body>
-    <h1>examples</h1>
-    <h2>JSON</h2>
-    <div id="json-example"
-      data-prjsf-github-url="https://github.com/deathbeds/jupyak/new/not-a-branch?filename=todo.toml"
-      data-prjsf-schema="./example.schema.json"
-      data-prjsf-ui-schema="./example.uischema.json"
-      data-prjsf-data="./example.data.json"
-    ></div>
-    <h2>TOML</h2>
-    <div id="toml-example"
-      data-prjsf-github-url="https://github.com/deathbeds/jupyak/new/not-a-branch?filename=todo.toml"
-      data-prjsf-schema="./example.schema.toml"
-      data-prjsf-ui-schema="./example.uischema.toml"
-      data-prjsf-data="./example.data.toml"
-      data-prjsf-ui-schema-format="toml"
-      data-prjsf-schema-format="toml"
-      data-prjsf-data-format="toml"
-    ></div>
-    <h2>YAML</h2>
-    <div id="toml-example"
-      data-prjsf-github-url="https://github.com/deathbeds/jupyak/new/not-a-branch?filename=todo.yaml"
-      data-prjsf-schema="./example.schema.yaml"
-      data-prjsf-ui-schema="./example.uischema.yaml"
-      data-prjsf-data="./example.data.yaml"
-      data-prjsf-ui-schema-format="yaml"
-      data-prjsf-schema-format="yaml"
-      data-prjsf-data-format="yaml"
-    ></div>
+    <div class="col-lg-8 mx-auto p-3 py-md-5">
+      <header>
+        <h1><code>prjsf</code> examples</h1>
+      </header>
+      <main class="bs-main">
+        <div class="bs-content">
+          <div class="bs-article-container">
+            <% _.forEach(['json', 'toml', 'yaml'], function(format) { %>
+            <section>
+              <h2 id="example-<%= format %>"><%= format.toUpperCase() %></h2>
+              <div
+                data-prjsf-github-url="https://github.com/deathbeds/jupyak/new/not-a-branch"
+                data-prjsf-file-name="new_file.<%= format %>"
+                data-prjsf-schema="./example.schema.<%= format %>"
+                data-prjsf-ui-schema="./example.uischema.<%= format %>"
+                data-prjsf-data="./example.data.<%= format %>"
+                <% if(format !== 'json'){ %>
+                data-prjsf-ui-schema-format="<%= format %>"
+                data-prjsf-schema-format="<%= format %>"
+                data-prjsf-data-format="<%= format %>"
+                <% } %>
+              ></div>
+            </section>
+            <% }) %>
+          </div>
+        </div>
+      </main>
+    </div>
   </body>
 </html>
