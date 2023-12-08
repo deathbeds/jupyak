@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://deathbeds.github.io/_static/prjsf/example.schema.json",
+  "title": "Todo",
+  "description": "> A demo of prjsf",
+  "properties": {
+    "tasks": {
+      "description": "tasks to do",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/a-task"
+      }
+    }
+  },
+  "$defs": {
+    "a-task": {
+      "type": "object",
+      "properties": {
+        "task": {
+          "type": "string",
+          "description": "when should be done?"
+        },
+        "deadline": {
+          "type": "string",
+          "format": "date-time",
+          "description": "when should this be completed?"
+        },
+        "complete": {
+          "type": "boolean",
+          "default": false
+        }
+      }
+    }
+  }
+}

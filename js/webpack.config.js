@@ -1,5 +1,6 @@
 // @ts-check
 const webpack = require('webpack');
+const CopyPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const path = require('path');
@@ -24,7 +25,14 @@ module.exports = {
     rules: [{ test: /\.js$/, loader: 'source-map-loader', enforce: 'pre' }],
   },
   plugins: [
-    new HtmlWebpackPlugin({ filename: 'demo.html', template: 'src/demo.html' }),
+    new CopyPlugin({
+      patterns: [{ from: 'demo/*.{json,toml,ya?ml}' }],
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'demo/index.html',
+      template: 'demo/index.html',
+      scriptLoading: 'module',
+    }),
     new webpack.ids.HashedModuleIdsPlugin(),
   ],
   resolve: {
