@@ -212,8 +212,3 @@ form#new td {
 .work-sidebar .btn {
   padding: 1rem;
 }
-
-/* shaver */
-.list-group-item {
-  --bs-list-group-color: var(--pst-color-text-base) !important;
-}

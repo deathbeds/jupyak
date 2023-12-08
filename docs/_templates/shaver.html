@@ -3,3 +3,54 @@
     await import(`./{{ pathto("_static/prjsf/prjsf.js", 1) }}`);
   });
 </script>
+<style>
+  /* shaver */
+  div[data-prjsf-github-url] .list-group-item {
+    --bs-list-group-color: var(--pst-color-text-base) !important;
+  }
+
+  div[data-prjsf-github-url] .heading-style,
+  div[data-prjsf-github-url] h1,
+  div[data-prjsf-github-url] h2,
+  div[data-prjsf-github-url] h3,
+  div[data-prjsf-github-url] h4,
+  div[data-prjsf-github-url] h5,
+  div[data-prjsf-github-url] h6 {
+    margin: 0;
+  }
+
+  div[data-prjsf-github-url] .field-object.row > .col-5:nth-child(2) {
+    min-width: 40vw;
+  }
+
+  div[data-prjsf-github-url] a > code  {
+    color: unset;
+  }
+
+  @media (min-width: 960px) {
+    div[data-prjsf-github-url] .field-object.row {
+      position: relative;
+    }
+
+    div[data-prjsf-github-url] .field-object.row > .col-5:nth-child(1) {
+      position: absolute;
+      top: 0;
+      left: 0;
+      max-width: 19em;
+    }
+
+    div[data-prjsf-github-url] .field-object.row > .col-5:nth-child(2) {
+      padding: 0 0 0 20em;
+      width: unset;
+      flex: 1;
+      border-bottom: solid 1px var(--pst-color-border);
+    }
+
+    div[data-prjsf-github-url] .field-object.row > .col-2:nth-child(3) {
+      width: 2em;
+      position: absolute;
+      right: 1em;
+      top: 0;
+    }
+  }
+</style>

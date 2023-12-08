@@ -87,7 +87,7 @@ html_theme_options = {
             "type": "local",
         },
     ],
-    "footer_end": ["mermaid10"],
+    "footer_end": ["mermaid10", "shaver"],
     "secondary_sidebar_items": [],
 }
 
@@ -97,7 +97,7 @@ rediraffe_redirects = {}
 html_sidebars = {
     "*": ["page-toc", "edit-this-page", "sourcelink"],
     "graph": [],
-    "shaver": ["shaver"],
+    "shaver": [],
 }
 
 if REPO_INFO is not None:
