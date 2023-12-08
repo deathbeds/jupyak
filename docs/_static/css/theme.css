@@ -6,6 +6,8 @@
 
 html[data-theme='dark'] {
   --pst-color-border: #444;
+  --bs-body-bg: var(--pst-color-on-background) !important;
+  --bs-border-color: var(--pst-color-border);
 }
 
 /* pydata-sphinx-them */
@@ -209,4 +211,9 @@ form#new td {
 
 .work-sidebar .btn {
   padding: 1rem;
+}
+
+/* shaver */
+.list-group-item {
+  --bs-list-group-color: var(--pst-color-text-base) !important;
 }

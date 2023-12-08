@@ -63,7 +63,7 @@ suppress_warnings = ["autosectionlabel.*"]
 
 # theme
 templates_path = ["_templates"]
-html_static_path = ["_static"]
+html_static_path = ["_static", "../js/dist"]
 html_theme = "pydata_sphinx_theme"
 html_logo = "_static/img/logo.svg"
 html_favicon = "_static/img/logo.svg"
@@ -97,6 +97,7 @@ rediraffe_redirects = {}
 html_sidebars = {
     "*": ["page-toc", "edit-this-page", "sourcelink"],
     "graph": [],
+    "shaver": ["shaver"],
 }
 
 if REPO_INFO is not None:
