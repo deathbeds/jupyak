@@ -69,7 +69,7 @@ https://conda.anaconda.org/conda-forge/linux-64/zlib-1.2.13-hd590300_5.conda#68c
 https://conda.anaconda.org/conda-forge/linux-64/zstd-1.5.5-hfc55251_0.conda#04b88013080254850d6c01ed54810589
 https://conda.anaconda.org/conda-forge/linux-64/fftw-3.3.10-nompi_hc118613_108.conda#6fa90698000b05dfe8ce6515794fe71a
 https://conda.anaconda.org/conda-forge/linux-64/freetype-2.12.1-h267a509_2.conda#9ae35c3d96db2c94ce0cef86efdfa2cb
-https://conda.anaconda.org/conda-forge/linux-64/libglib-2.78.2-h783c2da_0.conda#a69b70cf435577750468d02cbd596094
+https://conda.anaconda.org/conda-forge/linux-64/libglib-2.78.3-h783c2da_0.conda#9bd06b12bbfa6fd1740fd23af4b0f0c7
 https://conda.anaconda.org/conda-forge/linux-64/libtiff-4.6.0-ha9c0a0a_2.conda#55ed21669b2015f77c180feb1dd41930
 https://conda.anaconda.org/conda-forge/linux-64/nodejs-20.9.0-hb753e55_0.conda#ddfcb003b0a6804fabe7dfbf1be16651
 https://conda.anaconda.org/conda-forge/linux-64/pandoc-3.1.3-h32600fe_0.conda#8287aeb8462e2d4b235eff788e75919d
@@ -88,7 +88,7 @@ https://conda.anaconda.org/conda-forge/noarch/colorama-0.4.6-pyhd8ed1ab_0.tar.bz
 https://conda.anaconda.org/conda-forge/linux-64/debugpy-1.8.0-py311hb755f60_1.conda#2c241533b8eafe8028442d46ef41eb13
 https://conda.anaconda.org/conda-forge/noarch/decorator-5.1.1-pyhd8ed1ab_0.tar.bz2#43afe5ab04e35e17ba28649471dd7364
 https://conda.anaconda.org/conda-forge/noarch/defusedxml-0.7.1-pyhd8ed1ab_0.tar.bz2#961b3a227b437d82ad7054484cfa71b2
-https://conda.anaconda.org/conda-forge/linux-64/docutils-0.20.1-py311h38be061_2.conda#33f8066e53679dd4be2355fec849bf01
+https://conda.anaconda.org/conda-forge/linux-64/docutils-0.20.1-py311h38be061_3.conda#1c33f55e5cdcc2a2b973c432b5225bfe
 https://conda.anaconda.org/conda-forge/noarch/entrypoints-0.4-pyhd8ed1ab_0.tar.bz2#3cf04868fee0a029769bd41f4b2fbf2d
 https://conda.anaconda.org/conda-forge/noarch/exceptiongroup-1.2.0-pyhd8ed1ab_0.conda#f6c211fee3c98229652b60a9a42ef363
 https://conda.anaconda.org/conda-forge/noarch/executing-2.0.1-pyhd8ed1ab_0.conda#e16be50e378d8a4533b989035b196ab8
@@ -191,7 +191,7 @@ https://conda.anaconda.org/conda-forge/noarch/prompt-toolkit-3.0.41-pyha770c72_0
 https://conda.anaconda.org/conda-forge/noarch/pyproject_hooks-1.0.0-pyhd8ed1ab_0.conda#21de50391d584eb7f4441b9de1ad773f
 https://conda.anaconda.org/conda-forge/noarch/pytest-7.4.3-pyhd8ed1ab_0.conda#5bdca0aca30b0ee62bb84854e027eae0
 https://conda.anaconda.org/conda-forge/noarch/python-dateutil-2.8.2-pyhd8ed1ab_0.tar.bz2#dd999d1cc9f79e67dbb855c8924c7984
-https://conda.anaconda.org/conda-forge/noarch/referencing-0.31.1-pyhd8ed1ab_0.conda#ae08039cf63eb82637b867aea3f04758
+https://conda.anaconda.org/conda-forge/noarch/referencing-0.32.0-pyhd8ed1ab_0.conda#a7b5a535cd614e384594530aee7e6061
 https://conda.anaconda.org/conda-forge/noarch/rfc3339-validator-0.1.4-pyhd8ed1ab_0.tar.bz2#fed45fc5ea0813240707998abe49f520
 https://conda.anaconda.org/conda-forge/noarch/scour-0.38.2-pyhd8ed1ab_0.tar.bz2#59d6742bdfe7b3d54c01c0d999e939f0
 https://conda.anaconda.org/conda-forge/noarch/terminado-0.18.0-pyh0d859eb_0.conda#e463f348b8b0eb62c9f7c6fbc780286c
@@ -237,7 +237,7 @@ https://conda.anaconda.org/conda-forge/noarch/nbstripout-0.6.1-pyhd8ed1ab_0.tar.
 https://conda.anaconda.org/conda-forge/linux-64/imagemagick-7.1.1_22-pl5321h3fa1221_0.conda#191ab65d14865220e410d7685f7baa4b
 https://conda.anaconda.org/conda-forge/noarch/jupyter-cache-1.0.0-pyhd8ed1ab_0.conda#b667cf7b57baa559f628d374f017fa32
 https://conda.anaconda.org/conda-forge/noarch/nbconvert-core-7.12.0-pyhd8ed1ab_0.conda#4d67c68fd0d130091ada039bc2d81b33
-https://conda.anaconda.org/conda-forge/noarch/jupyter_server-2.12.0-pyhd8ed1ab_0.conda#51e6ce3714ec4e90f631b600e165c5c2
+https://conda.anaconda.org/conda-forge/noarch/jupyter_server-2.12.1-pyhd8ed1ab_0.conda#e9781be1e6c93b5df2c180a9f9242420
 https://conda.anaconda.org/conda-forge/noarch/nbconvert-pandoc-7.12.0-pyhd8ed1ab_0.conda#460d7cac50322a39b61a833885a6a8d5
 https://conda.anaconda.org/conda-forge/noarch/jupyter-lsp-2.2.1-pyhd8ed1ab_0.conda#d1a5efc65bfabc3bfebf4d3a204da897
 https://conda.anaconda.org/conda-forge/noarch/jupyterlab_server-2.25.2-pyhd8ed1ab_0.conda#f45557d5551b54dc2a74133a310bc1ba

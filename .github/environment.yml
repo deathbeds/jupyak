@@ -5,9 +5,6 @@ platforms:
   - linux-64
 dependencies:
   ### .github/environment.yml ###
-  # more runtimes
-  - nodejs >=20,<21
-  - yarn ==3.6.4
   # fix
   - ruff
   - nbstripout
@@ -19,6 +16,7 @@ dependencies:
   ### docs/environment.yml ###
   # runtimes
   - python >=3.11,<3.12
+  - nodejs >=20,<21
   # run
   - doit-with-toml
   - importnb
@@ -28,6 +26,7 @@ dependencies:
   - flit-core >=3.9.0,<4
   - pip
   - python-build
+  - yarn ==3.6.4
   # docs
   - docutils >=0.19
   - myst-nb
