@@ -1,7 +1,7 @@
 {
   "$defs": {
     "CondaEnv": {
-      "description": "A definition of the packages that make up a conda env, and their sources.",
+      "description": "A description of the conda environment for doing work.",
       "properties": {
         "channels": {
           "description": "the priority-ordered set of conda URLs of channels to get packages",
@@ -39,7 +39,7 @@
       "title": "CondaEnv"
     },
     "GitHub": {
-      "description": "Information for how to clone the baseline and PRs for this repo\n\n",
+      "description": "Information for how to clone the baseline and PRs for this repo",
       "properties": {
         "baseline": {
           "description": "the URL of the baseline HEAD",
@@ -74,7 +74,7 @@
       "title": "GitHub"
     },
     "JSOptions": {
-      "description": "JavaScript-related provisioning, building, and linking.\n\n",
+      "description": "JavaScript-related provisioning, building, and linking.",
       "properties": {
         "dependencies": {
           "description": "the names of other members of `repos` that need to built and linked into this repo in the JS environment",
@@ -112,7 +112,7 @@
       "title": "JSOptions"
     },
     "LiteOptions": {
-      "description": "options for the final jupyterlite build\n\n",
+      "description": "options for the final jupyterlite build",
       "properties": {
         "gist": {
           "description": "a gist ID on GitHub to use as JupyterLite contents and config",
@@ -122,7 +122,7 @@
       "title": "LiteOptions"
     },
     "PipDeps": {
-      "description": "Eject to the `pip` ecosystem.\n\n",
+      "description": "Eject to the `pip` ecosystem.",
       "properties": {
         "pip": {
           "description": "a PEP 508 description of a pip dependency",
@@ -135,7 +135,7 @@
       "title": "PipDeps"
     },
     "PythonOptions": {
-      "description": "Python-related provisioning, building, and linking.\n\n",
+      "description": "Python-related provisioning, building, and linking.",
       "properties": {
         "dependencies": {
           "description": "the names of other members of `repos` that need to built and linked into this repo in the Python environment",
@@ -173,7 +173,7 @@
       "title": "PythonOptions"
     },
     "Repo": {
-      "description": "A description of a repo.\n\n",
+      "description": "A description of a repo.",
       "properties": {
         "github": {
           "$ref": "#/$defs/GitHub"
@@ -230,10 +230,32 @@
     }
   },
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "description": "A description of a `jupyak` Pull request\n\n",
+  "description": "A description of a jupyak pull request",
   "properties": {
     "env": {
-      "$ref": "#/$defs/CondaEnv"
+      "$ref": "#/$defs/CondaEnv",
+      "default": {
+        "channels": ["conda-forge", "nodefaults"],
+        "dependencies": [
+          "python ==3.11.*",
+          "nodejs ==20.*",
+          "yarn ==3.6.*",
+          "pip",
+          "hatch",
+          "hatch-jupyter-builder",
+          "jupyter-packaging",
+          "python-build",
+          "python-libarchive-c"
+        ],
+        "pypi_to_conda": {
+          "build": "python-build",
+          "fastjsonschema": "python-fastjsonschema",
+          "jupyterlab-pygments": "jupyterlab_pygments",
+          "prometheus-client": "prometheus_client",
+          "stack-data": "stack_data"
+        },
+        "variables": {}
+      }
     },
     "lite": {
       "$ref": "#/$defs/LiteOptions"
@@ -264,6 +286,9 @@
             "default": {
               "github": {
                 "baseline": "tree/main",
+                "merge_options": [],
+                "merge_strategy": "",
+                "merge_with": [],
                 "url": "https://github.com/ipython/comm"
               },
               "name": "comm"
@@ -288,6 +313,9 @@
             "default": {
               "github": {
                 "baseline": "tree/main",
+                "merge_options": [],
+                "merge_strategy": "",
+                "merge_with": [],
                 "url": "https://github.com/ipython/ipykernel"
               },
               "name": "ipykernel"
@@ -312,6 +340,9 @@
             "default": {
               "github": {
                 "baseline": "tree/main",
+                "merge_options": [],
+                "merge_strategy": "",
+                "merge_with": [],
                 "url": "https://github.com/ipython/ipython"
               },
               "name": "ipython"
@@ -336,6 +367,9 @@
             "default": {
               "github": {
                 "baseline": "tree/main",
+                "merge_options": [],
+                "merge_strategy": "",
+                "merge_with": [],
                 "url": "https://github.com/jupyter-widgets/ipywidgets"
               },
               "name": "ipywidgets"
@@ -360,6 +394,9 @@
             "default": {
               "github": {
                 "baseline": "tree/main",
+                "merge_options": [],
+                "merge_strategy": "",
+                "merge_with": [],
                 "url": "https://github.com/jupyter/jupyter_client"
               },
               "name": "jupyter_client"
@@ -384,6 +421,9 @@
             "default": {
               "github": {
                 "baseline": "tree/main",
+                "merge_options": [],
+                "merge_strategy": "",
+                "merge_with": [],
                 "url": "https://github.com/jupyter/jupyter_core"
               },
               "name": "jupyter_core"
@@ -408,6 +448,9 @@
             "default": {
               "github": {
                 "baseline": "tree/main",
+                "merge_options": [],
+                "merge_strategy": "",
+                "merge_with": [],
                 "url": "https://github.com/jupyter/jupyter_events"
               },
               "name": "jupyter_events"
@@ -432,6 +475,9 @@
             "default": {
               "github": {
                 "baseline": "tree/main",
+                "merge_options": [],
+                "merge_strategy": "",
+                "merge_with": [],
                 "url": "https://github.com/jupyter-server/jupyter_server"
               },
               "name": "jupyter_server"
@@ -456,6 +502,9 @@
             "default": {
               "github": {
                 "baseline": "tree/main",
+                "merge_options": [],
+                "merge_strategy": "",
+                "merge_with": [],
                 "url": "https://github.com/jupyter-server/jupyter_server_terminals"
               },
               "name": "jupyter_server_terminals"
@@ -480,6 +529,9 @@
             "default": {
               "github": {
                 "baseline": "tree/main",
+                "merge_options": [],
+                "merge_strategy": "",
+                "merge_with": [],
                 "url": "https://github.com/jupyterlab/jupyterlab"
               },
               "name": "jupyterlab"
@@ -504,6 +556,9 @@
             "default": {
               "github": {
                 "baseline": "tree/main",
+                "merge_options": [],
+                "merge_strategy": "",
+                "merge_with": [],
                 "url": "https://github.com/jupyterlab/jupyterlab_server"
               },
               "name": "jupyterlab_server"
@@ -528,6 +583,9 @@
             "default": {
               "github": {
                 "baseline": "tree/main",
+                "merge_options": [],
+                "merge_strategy": "",
+                "merge_with": [],
                 "url": "https://github.com/jupyterlite/jupyterlite"
               },
               "name": "jupyterlite"
@@ -552,6 +610,9 @@
             "default": {
               "github": {
                 "baseline": "tree/main",
+                "merge_options": [],
+                "merge_strategy": "",
+                "merge_with": [],
                 "url": "https://github.com/jupyterlite/pyodide-kernel"
               },
               "name": "jupyterlite_pyodide_kernel"
@@ -576,6 +637,9 @@
             "default": {
               "github": {
                 "baseline": "tree/main",
+                "merge_options": [],
+                "merge_strategy": "",
+                "merge_with": [],
                 "url": "https://github.com/jupyterlab/lumino"
               },
               "name": "lumino"
@@ -600,6 +664,9 @@
             "default": {
               "github": {
                 "baseline": "tree/main",
+                "merge_options": [],
+                "merge_strategy": "",
+                "merge_with": [],
                 "url": "https://github.com/jupyter/nbclient"
               },
               "name": "nbclient"
@@ -624,6 +691,9 @@
             "default": {
               "github": {
                 "baseline": "tree/main",
+                "merge_options": [],
+                "merge_strategy": "",
+                "merge_with": [],
                 "url": "https://github.com/jupyter/nbconvert"
               },
               "name": "nbconvert"
@@ -648,6 +718,9 @@
             "default": {
               "github": {
                 "baseline": "tree/main",
+                "merge_options": [],
+                "merge_strategy": "",
+                "merge_with": [],
                 "url": "https://github.com/jupyter/nbformat"
               },
               "name": "nbformat"
@@ -672,6 +745,9 @@
             "default": {
               "github": {
                 "baseline": "tree/main",
+                "merge_options": [],
+                "merge_strategy": "",
+                "merge_with": [],
                 "url": "https://github.com/jupyter/notebook"
               },
               "name": "notebook"
@@ -696,6 +772,9 @@
             "default": {
               "github": {
                 "baseline": "tree/main",
+                "merge_options": [],
+                "merge_strategy": "",
+                "merge_with": [],
                 "url": "https://github.com/jupyter/notebook_shim"
               },
               "name": "notebook_shim"
@@ -720,6 +799,9 @@
             "default": {
               "github": {
                 "baseline": "tree/main",
+                "merge_options": [],
+                "merge_strategy": "",
+                "merge_with": [],
                 "url": "https://github.com/ipython/traitlets"
               },
               "name": "traitlets"

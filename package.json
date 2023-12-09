@@ -8,17 +8,25 @@
     ]
   },
   "scripts": {
+    "build": "cd js && yarn build",
     "build:dist": "cd js && yarn build:dist",
     "build:lib": "cd js && yarn build:lib",
-    "build": "cd js && yarn build",
     "watch": "cd js && yarn watch"
   },
-  "devDependencies": {
-    "prettier": "^3.1.0"
-  },
   "prettier": {
-    "singleQuote": true,
+    "plugins": [
+      "prettier-plugin-packagejson",
+      "prettier-plugin-sort-json",
+      "prettier-plugin-toml"
+    ],
     "printWidth": 88,
-    "proseWrap": "always"
+    "proseWrap": "always",
+    "singleQuote": true
+  },
+  "devDependencies": {
+    "prettier": "^3.1.0",
+    "prettier-plugin-packagejson": "^2.4.7",
+    "prettier-plugin-sort-json": "^3.1.0",
+    "prettier-plugin-toml": "^2.0.1"
   }
 }

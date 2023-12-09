@@ -1,18 +1,7 @@
-"$schema" = "http://json-schema.org/draft-07/schema#"
 "$id" = "https://deathbeds.github.io/_static/prjsf/example.schema.json"
-title = "Todo"
+"$schema" = "http://json-schema.org/draft-07/schema#"
 description = "a demo of prjsf"
-
-[properties.name]
-type = "string"
-description = "What is this list about?"
-
-[properties.tasks]
-description = "What are the tasks?"
-type = "array"
-
-[properties.tasks.items]
-"$ref" = "#/$defs/Task"
+title = "Todo"
 
 ["$defs".Task]
 type = "object"
@@ -30,3 +19,14 @@ description = "When does it need to be done?"
 type = "boolean"
 default = false
 description = "Is it done?"
+
+[properties.name]
+type = "string"
+description = "What is this list about?"
+
+[properties.tasks]
+description = "What are the tasks?"
+type = "array"
+
+[properties.tasks.items]
+"$ref" = "#/$defs/Task"

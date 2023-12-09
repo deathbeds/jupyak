@@ -7,7 +7,7 @@ name = "jupyak"
 version = "0.1.0"
 description = "A tool for building JupyterLite preview sites from Jupyter PRs"
 readme = "README.md"
-authors = [{name = "jupyak contributors", email = "deathbeds@googlegroups.com"}]
+authors = [{ name = "jupyak contributors", email = "deathbeds@googlegroups.com" }]
 requires-python = ">=3.9"
 classifiers = [
   "License :: OSI Approved :: BSD License",
@@ -15,18 +15,15 @@ classifiers = [
   "Programming Language :: Python :: 3",
 ]
 dependencies = [
-    "doit[toml] >=0.36.0",
-    "importnb",
-    "jinja2",
-    "pyyaml",
-    "tomli ; python_version<\"3.11\"",
-    "traitlets",
+  "doit[toml] >=0.36.0",
+  "importnb",
+  "jinja2",
+  "pyyaml",
+  "tomli ; python_version<\"3.11\"",
+  "traitlets",
 ]
 [project.optional-dependencies]
-demo = [
-  "tomli-w",
-  "ipywidgets",
-]
+demo = ["tomli-w", "ipywidgets"]
 [project.urls]
 "Bug Tracker" = "https://github.com/deathbeds/jupyak/issues"
 "Changelog" = "https://github.com/deathbeds/jupyak/blob/main/CHANGELOG.md"
@@ -47,12 +44,7 @@ subtasks = true
 cache-dir = "build/.cache/ruff"
 extend-include = ["*.ipynb"]
 extend-exclude = [".ipynb_checkpoints"]
-ignore = [
-  "D211",
-  "D213",
-  "COM812",
-  "ISC001",
-]
+ignore = ["D211", "D213", "COM812", "ISC001"]
 select = [
   "A",
   # "ANN",
@@ -124,9 +116,7 @@ addopts = [
   "--ff",
   "--tb=long",
 ]
-filterwarnings = [
-  "error",
-]
+filterwarnings = ["error"]
 
 [tool.coverage.html]
 show_contexts = true
