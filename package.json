@@ -21,7 +21,26 @@
     ],
     "printWidth": 88,
     "proseWrap": "always",
-    "singleQuote": true
+    "singleQuote": true,
+    "overrides": [
+      {
+        "files": [
+          "*.json"
+        ],
+        "options": {
+          "jsonRecursiveSort": true,
+          "jsonSortOrder": "{\"/^\\\\$id$/\": null, \"/^\\\\$schema$/\": null, \"/^\\\\$ref$/\": null, \"type\": null, \"title\": null, \"description\": null, \"/(properties|items)/\": null, \"/additional(Properties|Items)/\": null, \"/patternProperties/\": null, \"/^\\\\$defs$/\": \"lexical\"}"
+        }
+      },
+      {
+        "files": [
+          "*.toml"
+        ],
+        "options": {
+          "arrayAutoCollapse": false
+        }
+      }
+    ]
   },
   "devDependencies": {
     "prettier": "^3.1.0",
