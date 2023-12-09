@@ -229,6 +229,7 @@
       "title": "RepoLiteOptions"
     }
   },
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "description": "A description of a `jupyak` Pull request\n\n",
   "properties": {
     "env": {
@@ -239,7 +240,493 @@
     },
     "repos": {
       "additionalProperties": {
-        "$ref": "#/$defs/Repo"
+        "anyOf": [
+          {
+            "$ref": "#/$defs/Repo",
+            "title": "custom repo",
+            "type": "object"
+          },
+          {
+            "allOf": [
+              {
+                "properties": {
+                  "name": {
+                    "const": "comm",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              {
+                "$ref": "#/$defs/Repo"
+              }
+            ],
+            "default": {
+              "github": {
+                "baseline": "tree/main",
+                "url": "https://github.com/ipython/comm"
+              },
+              "name": "comm"
+            },
+            "title": "comm"
+          },
+          {
+            "allOf": [
+              {
+                "properties": {
+                  "name": {
+                    "const": "ipykernel",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              {
+                "$ref": "#/$defs/Repo"
+              }
+            ],
+            "default": {
+              "github": {
+                "baseline": "tree/main",
+                "url": "https://github.com/ipython/ipykernel"
+              },
+              "name": "ipykernel"
+            },
+            "title": "ipykernel"
+          },
+          {
+            "allOf": [
+              {
+                "properties": {
+                  "name": {
+                    "const": "ipython",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              {
+                "$ref": "#/$defs/Repo"
+              }
+            ],
+            "default": {
+              "github": {
+                "baseline": "tree/main",
+                "url": "https://github.com/ipython/ipython"
+              },
+              "name": "ipython"
+            },
+            "title": "ipython"
+          },
+          {
+            "allOf": [
+              {
+                "properties": {
+                  "name": {
+                    "const": "ipywidgets",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              {
+                "$ref": "#/$defs/Repo"
+              }
+            ],
+            "default": {
+              "github": {
+                "baseline": "tree/main",
+                "url": "https://github.com/jupyter-widgets/ipywidgets"
+              },
+              "name": "ipywidgets"
+            },
+            "title": "ipywidgets"
+          },
+          {
+            "allOf": [
+              {
+                "properties": {
+                  "name": {
+                    "const": "jupyter_client",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              {
+                "$ref": "#/$defs/Repo"
+              }
+            ],
+            "default": {
+              "github": {
+                "baseline": "tree/main",
+                "url": "https://github.com/jupyter/jupyter_client"
+              },
+              "name": "jupyter_client"
+            },
+            "title": "jupyter_client"
+          },
+          {
+            "allOf": [
+              {
+                "properties": {
+                  "name": {
+                    "const": "jupyter_core",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              {
+                "$ref": "#/$defs/Repo"
+              }
+            ],
+            "default": {
+              "github": {
+                "baseline": "tree/main",
+                "url": "https://github.com/jupyter/jupyter_core"
+              },
+              "name": "jupyter_core"
+            },
+            "title": "jupyter_core"
+          },
+          {
+            "allOf": [
+              {
+                "properties": {
+                  "name": {
+                    "const": "jupyter_events",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              {
+                "$ref": "#/$defs/Repo"
+              }
+            ],
+            "default": {
+              "github": {
+                "baseline": "tree/main",
+                "url": "https://github.com/jupyter/jupyter_events"
+              },
+              "name": "jupyter_events"
+            },
+            "title": "jupyter_events"
+          },
+          {
+            "allOf": [
+              {
+                "properties": {
+                  "name": {
+                    "const": "jupyter_server",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              {
+                "$ref": "#/$defs/Repo"
+              }
+            ],
+            "default": {
+              "github": {
+                "baseline": "tree/main",
+                "url": "https://github.com/jupyter-server/jupyter_server"
+              },
+              "name": "jupyter_server"
+            },
+            "title": "jupyter_server"
+          },
+          {
+            "allOf": [
+              {
+                "properties": {
+                  "name": {
+                    "const": "jupyter_server_terminals",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              {
+                "$ref": "#/$defs/Repo"
+              }
+            ],
+            "default": {
+              "github": {
+                "baseline": "tree/main",
+                "url": "https://github.com/jupyter-server/jupyter_server_terminals"
+              },
+              "name": "jupyter_server_terminals"
+            },
+            "title": "jupyter_server_terminals"
+          },
+          {
+            "allOf": [
+              {
+                "properties": {
+                  "name": {
+                    "const": "jupyterlab",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              {
+                "$ref": "#/$defs/Repo"
+              }
+            ],
+            "default": {
+              "github": {
+                "baseline": "tree/main",
+                "url": "https://github.com/jupyterlab/jupyterlab"
+              },
+              "name": "jupyterlab"
+            },
+            "title": "jupyterlab"
+          },
+          {
+            "allOf": [
+              {
+                "properties": {
+                  "name": {
+                    "const": "jupyterlab_server",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              {
+                "$ref": "#/$defs/Repo"
+              }
+            ],
+            "default": {
+              "github": {
+                "baseline": "tree/main",
+                "url": "https://github.com/jupyterlab/jupyterlab_server"
+              },
+              "name": "jupyterlab_server"
+            },
+            "title": "jupyterlab_server"
+          },
+          {
+            "allOf": [
+              {
+                "properties": {
+                  "name": {
+                    "const": "jupyterlite",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              {
+                "$ref": "#/$defs/Repo"
+              }
+            ],
+            "default": {
+              "github": {
+                "baseline": "tree/main",
+                "url": "https://github.com/jupyterlite/jupyterlite"
+              },
+              "name": "jupyterlite"
+            },
+            "title": "jupyterlite"
+          },
+          {
+            "allOf": [
+              {
+                "properties": {
+                  "name": {
+                    "const": "jupyterlite_pyodide_kernel",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              {
+                "$ref": "#/$defs/Repo"
+              }
+            ],
+            "default": {
+              "github": {
+                "baseline": "tree/main",
+                "url": "https://github.com/jupyterlite/pyodide-kernel"
+              },
+              "name": "jupyterlite_pyodide_kernel"
+            },
+            "title": "jupyterlite_pyodide_kernel"
+          },
+          {
+            "allOf": [
+              {
+                "properties": {
+                  "name": {
+                    "const": "lumino",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              {
+                "$ref": "#/$defs/Repo"
+              }
+            ],
+            "default": {
+              "github": {
+                "baseline": "tree/main",
+                "url": "https://github.com/jupyterlab/lumino"
+              },
+              "name": "lumino"
+            },
+            "title": "lumino"
+          },
+          {
+            "allOf": [
+              {
+                "properties": {
+                  "name": {
+                    "const": "nbclient",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              {
+                "$ref": "#/$defs/Repo"
+              }
+            ],
+            "default": {
+              "github": {
+                "baseline": "tree/main",
+                "url": "https://github.com/jupyter/nbclient"
+              },
+              "name": "nbclient"
+            },
+            "title": "nbclient"
+          },
+          {
+            "allOf": [
+              {
+                "properties": {
+                  "name": {
+                    "const": "nbconvert",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              {
+                "$ref": "#/$defs/Repo"
+              }
+            ],
+            "default": {
+              "github": {
+                "baseline": "tree/main",
+                "url": "https://github.com/jupyter/nbconvert"
+              },
+              "name": "nbconvert"
+            },
+            "title": "nbconvert"
+          },
+          {
+            "allOf": [
+              {
+                "properties": {
+                  "name": {
+                    "const": "nbformat",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              {
+                "$ref": "#/$defs/Repo"
+              }
+            ],
+            "default": {
+              "github": {
+                "baseline": "tree/main",
+                "url": "https://github.com/jupyter/nbformat"
+              },
+              "name": "nbformat"
+            },
+            "title": "nbformat"
+          },
+          {
+            "allOf": [
+              {
+                "properties": {
+                  "name": {
+                    "const": "notebook",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              {
+                "$ref": "#/$defs/Repo"
+              }
+            ],
+            "default": {
+              "github": {
+                "baseline": "tree/main",
+                "url": "https://github.com/jupyter/notebook"
+              },
+              "name": "notebook"
+            },
+            "title": "notebook"
+          },
+          {
+            "allOf": [
+              {
+                "properties": {
+                  "name": {
+                    "const": "notebook_shim",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              {
+                "$ref": "#/$defs/Repo"
+              }
+            ],
+            "default": {
+              "github": {
+                "baseline": "tree/main",
+                "url": "https://github.com/jupyter/notebook_shim"
+              },
+              "name": "notebook_shim"
+            },
+            "title": "notebook_shim"
+          },
+          {
+            "allOf": [
+              {
+                "properties": {
+                  "name": {
+                    "const": "traitlets",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              {
+                "$ref": "#/$defs/Repo"
+              }
+            ],
+            "default": {
+              "github": {
+                "baseline": "tree/main",
+                "url": "https://github.com/ipython/traitlets"
+              },
+              "name": "traitlets"
+            },
+            "title": "traitlets"
+          }
+        ]
       },
       "type": "object"
     }

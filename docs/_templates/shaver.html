@@ -9,6 +9,10 @@
     --bs-list-group-color: var(--pst-color-text-base) !important;
   }
 
+  select[id*="_repos_"][id$="__anyof_select"]:has(option:checked:not([value="0"])) {
+    display: none;
+  }
+
   div[data-prjsf-github-url] .heading-style,
   div[data-prjsf-github-url] h1,
   div[data-prjsf-github-url] h2,
