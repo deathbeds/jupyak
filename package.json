@@ -25,7 +25,7 @@
     "overrides": [
       {
         "files": [
-          "*.json"
+          "*.schema.json"
         ],
         "options": {
           "jsonRecursiveSort": true,
