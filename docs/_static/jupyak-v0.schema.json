@@ -5,12 +5,10 @@
   "properties": {
     "env": {
       "$ref": "#/$defs/CondaEnv",
+      "description": "the conda environment to manage during the build process",
       "default": {
-        "channels": ["conda-forge", "nodefaults"],
-        "dependencies": [
-          "python ==3.11.*",
-          "nodejs ==20.*",
-          "yarn ==3.6.*",
+        "conda_channels": ["conda-forge", "nodefaults"],
+        "conda_dependencies": [
           "pip",
           "hatch",
           "hatch-jupyter-builder",
@@ -18,6 +16,8 @@
           "python-build",
           "python-libarchive-c"
         ],
+        "nodejs_version": "20",
+        "pypi_deps": [],
         "pypi_to_conda": {
           "build": "python-build",
           "fastjsonschema": "python-fastjsonschema",
@@ -25,14 +25,18 @@
           "prometheus-client": "prometheus_client",
           "stack-data": "stack_data"
         },
-        "variables": {}
+        "python_version": "3.11",
+        "variables": {},
+        "yarn_version": "3.6"
       }
     },
     "lite": {
-      "$ref": "#/$defs/LiteOptions"
+      "$ref": "#/$defs/LiteOptions",
+      "description": "JupyterLite-specific configuration for contents, building, and running"
     },
     "repos": {
       "type": "object",
+      "description": "git-hosted projects to clone, build, and use to deploy a JupyterLite site",
       "additionalProperties": {
         "anyOf": [
           {
@@ -589,30 +593,40 @@
       "title": "CondaEnv",
       "description": "A description of the conda environment for doing work.",
       "properties": {
-        "channels": {
+        "conda_channels": {
           "type": "array",
           "description": "the priority-ordered set of conda URLs of channels to get packages",
           "items": {
             "type": "string"
           }
         },
-        "dependencies": {
+        "conda_dependencies": {
           "type": "array",
-          "description": "the names of conda packages (or a `pip:` object) to install",
+          "description": "the conda-forge-compatible specs for additional packages to install",
           "items": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "$ref": "#/$defs/PipDeps"
-              }
-            ]
+            "type": "string"
+          }
+        },
+        "nodejs_version": {
+          "type": "string",
+          "description": "the major version of nodejs to install",
+          "pattern": "^(20)$"
+        },
+        "pypi_deps": {
+          "type": "array",
+          "description": "the pypi-compatible specs for additional packages to install",
+          "items": {
+            "type": "string"
           }
         },
         "pypi_to_conda": {
           "type": "object",
           "description": "names of PyPI distributions to replace with their conda-forge counterparts"
+        },
+        "python_version": {
+          "type": "string",
+          "description": "the major version of python 3 to install",
+          "pattern": "^3\\.(8|9|11|10|11|12)$"
         },
         "variables": {
           "type": "object",
@@ -620,6 +634,11 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "yarn_version": {
+          "type": "string",
+          "description": "the major version of yarn to install",
+          "pattern": "^3\\.\\d+"
         }
       }
     },
@@ -703,19 +722,6 @@
         "gist": {
           "type": "string",
           "description": "a gist ID on GitHub to use as JupyterLite contents and config"
-        }
-      }
-    },
-    "PipDeps": {
-      "title": "PipDeps",
-      "description": "Eject to the `pip` ecosystem.",
-      "properties": {
-        "pip": {
-          "type": "array",
-          "description": "a PEP 508 description of a pip dependency",
-          "items": {
-            "type": "string"
-          }
         }
       }
     },

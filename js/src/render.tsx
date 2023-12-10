@@ -61,7 +61,7 @@ export function formComponent(dataset: TDataSet, props: Partial<FormProps>) {
     };
 
     return (
-      <div class="card">
+      <div class="card prjsf">
         <ul class="list-group list-group-flush">
           <li class="list-group-item">
             <Form {...formProps} formData={formData}>

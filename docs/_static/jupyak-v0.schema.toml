@@ -4,16 +4,14 @@ description = "A description of a jupyak pull request"
 
 [properties.env]
 "$ref" = "#/$defs/CondaEnv"
+description = "the conda environment to manage during the build process"
 
 [properties.env.default]
-channels = [
+conda_channels = [
   "conda-forge",
   "nodefaults",
 ]
-dependencies = [
-  "python ==3.11.*",
-  "nodejs ==20.*",
-  "yarn ==3.6.*",
+conda_dependencies = [
   "pip",
   "hatch",
   "hatch-jupyter-builder",
@@ -21,6 +19,10 @@ dependencies = [
   "python-build",
   "python-libarchive-c",
 ]
+nodejs_version = "20"
+pypi_deps = []
+python_version = "3.11"
+yarn_version = "3.6"
 
 [properties.env.default.pypi_to_conda]
 build = "python-build"
@@ -33,9 +35,11 @@ stack-data = "stack_data"
 
 [properties.lite]
 "$ref" = "#/$defs/LiteOptions"
+description = "JupyterLite-specific configuration for contents, building, and running"
 
 [properties.repos]
 type = "object"
+description = "git-hosted projects to clone, build, and use to deploy a JupyterLite site"
 
 [[properties.repos.additionalProperties.anyOf]]
 "$ref" = "#/$defs/Repo"
@@ -398,26 +402,40 @@ url = "https://github.com/ipython/traitlets"
 title = "CondaEnv"
 description = "A description of the conda environment for doing work."
 
-["$defs".CondaEnv.properties.channels]
+["$defs".CondaEnv.properties.conda_channels]
 type = "array"
 description = "the priority-ordered set of conda URLs of channels to get packages"
 
-["$defs".CondaEnv.properties.channels.items]
+["$defs".CondaEnv.properties.conda_channels.items]
 type = "string"
 
-["$defs".CondaEnv.properties.dependencies]
+["$defs".CondaEnv.properties.conda_dependencies]
 type = "array"
-description = "the names of conda packages (or a `pip:` object) to install"
+description = "the conda-forge-compatible specs for additional packages to install"
 
-["$defs".CondaEnv.properties.dependencies.items]
-anyOf = [
-  { type = "string" },
-  { "$ref" = "#/$defs/PipDeps" },
-]
+["$defs".CondaEnv.properties.conda_dependencies.items]
+type = "string"
+
+["$defs".CondaEnv.properties.nodejs_version]
+type = "string"
+description = "the major version of nodejs to install"
+pattern = "^(20)$"
+
+["$defs".CondaEnv.properties.pypi_deps]
+type = "array"
+description = "the pypi-compatible specs for additional packages to install"
+
+["$defs".CondaEnv.properties.pypi_deps.items]
+type = "string"
 
 ["$defs".CondaEnv.properties.pypi_to_conda]
 type = "object"
 description = "names of PyPI distributions to replace with their conda-forge counterparts"
+
+["$defs".CondaEnv.properties.python_version]
+type = "string"
+description = "the major version of python 3 to install"
+pattern = "^3\\.(8|9|11|10|11|12)$"
 
 ["$defs".CondaEnv.properties.variables]
 type = "object"
@@ -425,6 +443,11 @@ description = "environment variables to set when the work environment is activat
 
 ["$defs".CondaEnv.properties.variables.additionalProperties]
 type = "string"
+
+["$defs".CondaEnv.properties.yarn_version]
+type = "string"
+description = "the major version of yarn to install"
+pattern = "^3\\.\\d+"
 
 ["$defs".GitHub]
 title = "GitHub"
@@ -502,17 +525,6 @@ description = "options for the final jupyterlite build"
 ["$defs".LiteOptions.properties.gist]
 type = "string"
 description = "a gist ID on GitHub to use as JupyterLite contents and config"
-
-["$defs".PipDeps]
-title = "PipDeps"
-description = "Eject to the `pip` ecosystem."
-
-["$defs".PipDeps.properties.pip]
-type = "array"
-description = "a PEP 508 description of a pip dependency"
-
-["$defs".PipDeps.properties.pip.items]
-type = "string"
 
 ["$defs".PythonOptions]
 title = "PythonOptions"
