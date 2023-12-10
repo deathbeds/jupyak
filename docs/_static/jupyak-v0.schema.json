@@ -17,7 +17,6 @@
           "python-libarchive-c"
         ],
         "nodejs_version": "20",
-        "pypi_deps": [],
         "pypi_to_conda": {
           "build": "python-build",
           "fastjsonschema": "python-fastjsonschema",
@@ -26,7 +25,6 @@
           "stack-data": "stack_data"
         },
         "python_version": "3.11",
-        "variables": {},
         "yarn_version": "3.6"
       }
     },
@@ -63,12 +61,15 @@
             "default": {
               "github": {
                 "baseline": "tree/main",
-                "merge_options": [],
-                "merge_strategy": "",
-                "merge_with": [],
                 "url": "https://github.com/ipython/comm"
               },
-              "name": "comm"
+              "lite": {
+                "wheel": true
+              },
+              "name": "comm",
+              "py": {
+                "pyproject_tomls": ["pyproject.toml"]
+              }
             }
           },
           {
@@ -90,12 +91,19 @@
             "default": {
               "github": {
                 "baseline": "tree/main",
-                "merge_options": [],
-                "merge_strategy": "",
-                "merge_with": [],
                 "url": "https://github.com/ipython/ipykernel"
               },
-              "name": "ipykernel"
+              "name": "ipykernel",
+              "py": {
+                "dependencies": [
+                  "comm",
+                  "jupyter_client",
+                  "ipython",
+                  "jupyter_core",
+                  "traitlets"
+                ],
+                "pyproject_tomls": ["pyproject.toml"]
+              }
             }
           },
           {
@@ -117,12 +125,16 @@
             "default": {
               "github": {
                 "baseline": "tree/main",
-                "merge_options": [],
-                "merge_strategy": "",
-                "merge_with": [],
                 "url": "https://github.com/ipython/ipython"
               },
-              "name": "ipython"
+              "lite": {
+                "wheel": true
+              },
+              "name": "ipython",
+              "py": {
+                "dependencies": ["traitlets"],
+                "pyproject_tomls": ["pyproject.toml"]
+              }
             }
           },
           {
@@ -144,12 +156,122 @@
             "default": {
               "github": {
                 "baseline": "tree/main",
-                "merge_options": [],
-                "merge_strategy": "",
-                "merge_with": [],
                 "url": "https://github.com/jupyter-widgets/ipywidgets"
               },
-              "name": "ipywidgets"
+              "js": {
+                "dependencies": ["lumino", "jupyterlab"],
+                "dist_exclude_patterns": ["/jupyterlab_widgets", "/example"],
+                "tasks": {
+                  "./packages/base": [
+                    {
+                      "actions": [["yarn", "build:src"]],
+                      "file_dep": ["./packages/base/src/**/*.ts"],
+                      "name": "build",
+                      "targets": ["./packages/base/tsconfig.tsbuildinfo"]
+                    }
+                  ],
+                  "./packages/base-manager": [
+                    {
+                      "actions": [["yarn", "build:src"]],
+                      "file_dep": [
+                        "./packages/base-manager/src/**/*.ts",
+                        "./packages/controls/tsconfig.tsbuildinfo"
+                      ],
+                      "name": "build",
+                      "targets": ["./packages/base-manager/tsconfig.tsbuildinfo"]
+                    }
+                  ],
+                  "./packages/controls": [
+                    {
+                      "actions": [
+                        ["yarn", "build:src"],
+                        ["yarn", "build:css"]
+                      ],
+                      "file_dep": [
+                        "./packages/controls/src/**/*.ts",
+                        "./packages/base/tsconfig.tsbuildinfo",
+                        "./packages/controls/css/**/*.less"
+                      ],
+                      "name": "build",
+                      "targets": [
+                        "./packages/controls/tsconfig.tsbuildinfo",
+                        {
+                          "glob_neighbor": [
+                            "packages/controls/css/*.less",
+                            "../{stem}.css"
+                          ]
+                        }
+                      ]
+                    }
+                  ],
+                  "./packages/html-manager": [
+                    {
+                      "actions": [["yarn", "build:src"]],
+                      "file_dep": [
+                        "./packages/html-manager/src/**/*.ts",
+                        "./packages/base-manager/tsconfig.tsbuildinfo"
+                      ],
+                      "name": "build",
+                      "targets": ["./packages/html-manager/tsconfig.tsbuildinfo"]
+                    }
+                  ],
+                  "./packages/output": [
+                    {
+                      "actions": [["yarn", "build:src"]],
+                      "file_dep": [
+                        "./packages/output/src/**/*.ts",
+                        "./packages/html-manager/tsconfig.tsbuildinfo"
+                      ],
+                      "name": "build",
+                      "targets": ["./packages/output/tsconfig.tsbuildinfo"]
+                    }
+                  ],
+                  "./python/jupyterlab_widgets": [
+                    {
+                      "actions": [["yarn", "build:lib"]],
+                      "file_dep": [
+                        "./packages/base/tsconfig.tsbuildinfo",
+                        "./packages/controls/tsconfig.tsbuildinfo",
+                        "./packages/base-manager/tsconfig.tsbuildinfo",
+                        "./packages/html-manager/tsconfig.tsbuildinfo",
+                        "./packages/output/tsconfig.tsbuildinfo"
+                      ],
+                      "name": "build",
+                      "targets": [
+                        "python/jupyterlab_widgets/tsconfig.tsbuildinfo",
+                        "python/jupyterlab_widgets/lib/index.js"
+                      ]
+                    }
+                  ]
+                }
+              },
+              "lite": {
+                "skip_wheel_patterns": ["widgetsnbextension"],
+                "wheel": true,
+                "wheel_file_dep": {
+                  "jupyterlab_widgets": [
+                    "python/jupyterlab_widgets/labextension/package.json"
+                  ]
+                }
+              },
+              "name": "ipywidgets",
+              "py": {
+                "dependencies": ["jupyterlab", "ipython", "comm", "traitlets"],
+                "lab_extensions": {
+                  "./python/jupyterlab_widgets/": {
+                    "file_dep": [
+                      "packages/*/tsconfig.tsbuildinfo",
+                      "python/jupyterlab_widgets/lib/index.js"
+                    ],
+                    "targets": ["python/jupyterlab_widgets/labextension/package.json"]
+                  }
+                },
+                "pyproject_tomls": [
+                  "python/ipywidgets/pyproject.toml",
+                  "python/jupyterlab_widgets/pyproject.toml",
+                  "python/widgetsnbextension/pyproject.toml"
+                ]
+              }
             }
           },
           {
@@ -171,12 +293,13 @@
             "default": {
               "github": {
                 "baseline": "tree/main",
-                "merge_options": [],
-                "merge_strategy": "",
-                "merge_with": [],
                 "url": "https://github.com/jupyter/jupyter_client"
               },
-              "name": "jupyter_client"
+              "name": "jupyter_client",
+              "py": {
+                "dependencies": ["jupyter_core"],
+                "pyproject_tomls": ["pyproject.toml"]
+              }
             }
           },
           {
@@ -198,12 +321,16 @@
             "default": {
               "github": {
                 "baseline": "tree/main",
-                "merge_options": [],
-                "merge_strategy": "",
-                "merge_with": [],
                 "url": "https://github.com/jupyter/jupyter_core"
               },
-              "name": "jupyter_core"
+              "lite": {
+                "wheel": true
+              },
+              "name": "jupyter_core",
+              "py": {
+                "dependencies": ["traitlets"],
+                "pyproject_tomls": ["pyproject.toml"]
+              }
             }
           },
           {
@@ -225,12 +352,13 @@
             "default": {
               "github": {
                 "baseline": "tree/main",
-                "merge_options": [],
-                "merge_strategy": "",
-                "merge_with": [],
                 "url": "https://github.com/jupyter/jupyter_events"
               },
-              "name": "jupyter_events"
+              "name": "jupyter_events",
+              "py": {
+                "dependencies": ["traitlets"],
+                "pyproject_tomls": ["pyproject.toml"]
+              }
             }
           },
           {
@@ -252,12 +380,20 @@
             "default": {
               "github": {
                 "baseline": "tree/main",
-                "merge_options": [],
-                "merge_strategy": "",
-                "merge_with": [],
                 "url": "https://github.com/jupyter-server/jupyter_server"
               },
-              "name": "jupyter_server"
+              "name": "jupyter_server",
+              "py": {
+                "dependencies": [
+                  "nbconvert",
+                  "traitlets",
+                  "jupyter_core",
+                  "jupyter_client",
+                  "jupyter_events",
+                  "jupyter_server_terminals"
+                ],
+                "pyproject_tomls": ["pyproject.toml"]
+              }
             }
           },
           {
@@ -279,12 +415,12 @@
             "default": {
               "github": {
                 "baseline": "tree/main",
-                "merge_options": [],
-                "merge_strategy": "",
-                "merge_with": [],
                 "url": "https://github.com/jupyter-server/jupyter_server_terminals"
               },
-              "name": "jupyter_server_terminals"
+              "name": "jupyter_server_terminals",
+              "py": {
+                "pyproject_tomls": ["pyproject.toml"]
+              }
             }
           },
           {
@@ -306,12 +442,71 @@
             "default": {
               "github": {
                 "baseline": "tree/main",
-                "merge_options": [],
-                "merge_strategy": "",
-                "merge_with": [],
                 "url": "https://github.com/jupyterlab/jupyterlab"
               },
-              "name": "jupyterlab"
+              "js": {
+                "dependencies": ["lumino"],
+                "dist_exclude_patterns": [
+                  "/galata",
+                  "/examples",
+                  "/dev_mode",
+                  "/metapackage",
+                  "/mock"
+                ],
+                "tasks": {
+                  "./": [
+                    {
+                      "actions": [["yarn", "build:utils"]],
+                      "file_dep": ["buildutils/src/**/*.ts", "buildutils/package.json"],
+                      "name": "buildutils",
+                      "targets": ["buildutils/tsconfig.tsbuildinfo"]
+                    },
+                    {
+                      "actions": [["yarn", "build:builder"]],
+                      "file_dep": ["builder/src/**/*.ts", "builder/package.json"],
+                      "name": "builder",
+                      "targets": [
+                        "builder/tsconfig.tsbuildinfo",
+                        "builder/lib/build-labextension.js"
+                      ]
+                    }
+                  ],
+                  "./dev_mode/": [
+                    {
+                      "actions": [["yarn", "build:prod"]],
+                      "file_dep": [
+                        "builder/tsconfig.tsbuildinfo",
+                        "buildutils/tsconfig.tsbuildinfo",
+                        "packages/metapackage/tsconfig.tsbuildinfo",
+                        "packages/*/schema/*.json",
+                        "packages/*/style/**/*.css",
+                        "packages/*/style/**/*.svg",
+                        "packages/*/style/**/*.js"
+                      ],
+                      "name": "build:prod",
+                      "targets": ["dev_mode/static/package.json"]
+                    }
+                  ],
+                  "./packages/metapackage/": [
+                    {
+                      "actions": [["yarn", "build"]],
+                      "file_dep": [
+                        "../lumino/packages/*/tsconfig.tsbuildinfo",
+                        "packages/*/src/**/*.ts",
+                        "packages/*/src/**/*.tsx"
+                      ],
+                      "name": "build",
+                      "targets": ["packages/metapackage/tsconfig.tsbuildinfo"]
+                    }
+                  ]
+                }
+              },
+              "name": "jupyterlab",
+              "py": {
+                "dependencies": ["jupyterlab_server", "ipykernel", "notebook_shim"],
+                "file_dep": ["dev_mode/static/package.json"],
+                "pyproject_tomls": ["pyproject.toml"]
+              }
             }
           },
           {
@@ -333,12 +528,13 @@
             "default": {
               "github": {
                 "baseline": "tree/main",
-                "merge_options": [],
-                "merge_strategy": "",
-                "merge_with": [],
                 "url": "https://github.com/jupyterlab/jupyterlab_server"
               },
-              "name": "jupyterlab_server"
+              "name": "jupyterlab_server",
+              "py": {
+                "dependencies": ["jupyter_server"],
+                "pyproject_tomls": ["pyproject.toml"]
+              }
             }
           },
           {
@@ -360,12 +556,58 @@
             "default": {
               "github": {
                 "baseline": "tree/main",
-                "merge_options": [],
-                "merge_strategy": "",
-                "merge_with": [],
                 "url": "https://github.com/jupyterlite/jupyterlite"
               },
-              "name": "jupyterlite"
+              "js": {
+                "dependencies": ["jupyterlab", "notebook", "lumino"],
+                "dist_exclude_patterns": ["/app"],
+                "link_exclude_patterns": [
+                  "^@jupyterlab/(celltags-extension|debugger(-extension)?|extensionmanager(-extension)?|hub-extension|mermaid-extension|nbconvert-css|pluginmanager-extension|terminal(-extension)?|template)$",
+                  "^@jupyter-notebook/(documentsearch-extension|lab-extension|terminal-extension)$"
+                ],
+                "tasks": {
+                  "./": [
+                    {
+                      "actions": [["doit", "build:py:jupyterlite-core:pre:app"]],
+                      "file_dep": [],
+                      "name": "build",
+                      "targets": [
+                        "./py/jupyterlite-javascript-kernel/tsconfig.tsbuildinfo",
+                        "app/build/third-party-licenses.json"
+                      ]
+                    }
+                  ]
+                }
+              },
+              "lite": {
+                "needs_pth": ["jupyterlite_core"],
+                "wheel": false
+              },
+              "name": "jupyterlite",
+              "py": {
+                "dependencies": [
+                  "jupyterlab",
+                  "notebook",
+                  "jupyter_server",
+                  "jupyter_core",
+                  "traitlets"
+                ],
+                "lab_extensions": {
+                  "././py/jupyterlite-javascript-kernel": {
+                    "file_dep": [
+                      "./py/jupyterlite-javascript-kernel/tsconfig.tsbuildinfo"
+                    ],
+                    "targets": [
+                      "./py/jupyterlite-javascript-kernel/jupyterlite_javascript_kernel/labextension/package.json"
+                    ]
+                  }
+                },
+                "pyproject_tomls": [
+                  "./py/jupyterlite/pyproject.toml",
+                  "./py/jupyterlite-core/pyproject.toml",
+                  "./py/jupyterlite-javascript-kernel/pyproject.toml"
+                ]
+              }
             }
           },
           {
@@ -387,12 +629,65 @@
             "default": {
               "github": {
                 "baseline": "tree/main",
-                "merge_options": [],
-                "merge_strategy": "",
-                "merge_with": [],
                 "url": "https://github.com/jupyterlite/pyodide-kernel"
               },
-              "name": "jupyterlite_pyodide_kernel"
+              "js": {
+                "dependencies": ["lumino", "jupyterlab", "jupyterlite"],
+                "tasks": {
+                  "./packages/pyodide-kernel-extension/": [
+                    {
+                      "actions": [["yarn", "build:lib"]],
+                      "file_dep": [
+                        "packages/pyodide-kernel-extension/src/**/*.ts",
+                        "packages/pyodide-kernel/tsconfig.tsbuildinfo"
+                      ],
+                      "name": "build:lib",
+                      "targets": [
+                        "packages/pyodide-kernel-extension/tsconfig.tsbuildinfo"
+                      ]
+                    }
+                  ],
+                  "./packages/pyodide-kernel/": [
+                    {
+                      "actions": [["yarn", "build:py"]],
+                      "file_dep": [
+                        "packages/pyodide-kernel/py/**/pyproject.toml",
+                        "packages/pyodide-kernel/py/**/*.py"
+                      ],
+                      "name": "build:py:wheels",
+                      "needs_pth": ["jupyterlite_core", "jupyterlite_pyodide_kernel"],
+                      "targets": ["packages/pyodide-kernel/pypi/all.json"]
+                    },
+                    {
+                      "actions": [["yarn", "build:prod"]],
+                      "file_dep": [
+                        "packages/pyodide-kernel/pypi/all.json",
+                        "packages/pyodide-kernel/src/**/*.ts"
+                      ],
+                      "name": "build:js",
+                      "targets": ["packages/pyodide-kernel/tsconfig.tsbuildinfo"]
+                    }
+                  ]
+                }
+              },
+              "lite": {
+                "needs_pth": ["jupyterlite_pyodide_kernel"],
+                "wheel": false
+              },
+              "name": "jupyterlite_pyodide_kernel",
+              "py": {
+                "dependencies": ["jupyterlab", "jupyterlite"],
+                "lab_extensions": {
+                  "./packages/pyodide-kernel-extension/": {
+                    "file_dep": [
+                      "packages/pyodide-kernel/pypi/all.json",
+                      "packages/pyodide-kernel-extension/tsconfig.tsbuildinfo"
+                    ],
+                    "targets": ["jupyterlite_pyodide_kernel/labextension/package.json"]
+                  }
+                },
+                "pyproject_tomls": ["pyproject.toml"]
+              }
             }
           },
           {
@@ -414,10 +709,31 @@
             "default": {
               "github": {
                 "baseline": "tree/main",
-                "merge_options": [],
-                "merge_strategy": "",
-                "merge_with": [],
                 "url": "https://github.com/jupyterlab/lumino"
+              },
+              "js": {
+                "dist_exclude_patterns": ["/buildutils", "/default-theme", "/example"],
+                "install_exclude_resolutions": ["@jupyterlab/buildutils"],
+                "tasks": {
+                  "./": [
+                    {
+                      "actions": [["yarn", "build"]],
+                      "file_dep": [
+                        "packages/*/src/**/*.ts",
+                        "packages/*/tsconfig.json"
+                      ],
+                      "name": "build",
+                      "targets": [
+                        {
+                          "glob_neighbor": [
+                            "packages/*/tsconfig.json",
+                            "../tsconfig.tsbuildinfo"
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
               },
               "name": "lumino"
             }
@@ -441,12 +757,18 @@
             "default": {
               "github": {
                 "baseline": "tree/main",
-                "merge_options": [],
-                "merge_strategy": "",
-                "merge_with": [],
                 "url": "https://github.com/jupyter/nbclient"
               },
-              "name": "nbclient"
+              "name": "nbclient",
+              "py": {
+                "dependencies": [
+                  "jupyter_core",
+                  "jupyter_client",
+                  "nbformat",
+                  "traitlets"
+                ],
+                "pyproject_tomls": ["pyproject.toml"]
+              }
             }
           },
           {
@@ -468,12 +790,13 @@
             "default": {
               "github": {
                 "baseline": "tree/main",
-                "merge_options": [],
-                "merge_strategy": "",
-                "merge_with": [],
                 "url": "https://github.com/jupyter/nbconvert"
               },
-              "name": "nbconvert"
+              "name": "nbconvert",
+              "py": {
+                "dependencies": ["jupyter_core", "nbformat", "nbclient"],
+                "pyproject_tomls": ["pyproject.toml"]
+              }
             }
           },
           {
@@ -495,12 +818,13 @@
             "default": {
               "github": {
                 "baseline": "tree/main",
-                "merge_options": [],
-                "merge_strategy": "",
-                "merge_with": [],
                 "url": "https://github.com/jupyter/nbformat"
               },
-              "name": "nbformat"
+              "name": "nbformat",
+              "py": {
+                "dependencies": ["jupyter_core", "traitlets"],
+                "pyproject_tomls": ["pyproject.toml"]
+              }
             }
           },
           {
@@ -522,12 +846,65 @@
             "default": {
               "github": {
                 "baseline": "tree/main",
-                "merge_options": [],
-                "merge_strategy": "",
-                "merge_with": [],
                 "url": "https://github.com/jupyter/notebook"
               },
-              "name": "notebook"
+              "js": {
+                "dependencies": ["lumino", "jupyterlab"],
+                "dist_exclude_patterns": ["/_metapackage", "/app", "/buildutils"],
+                "link_exclude_patterns": [
+                  "^@jupyterlab/(help-extension|inspector-extension|launcher-extension|logconsole-extension|nbconvert-css|pluginmanager-extension|rendermime-extension|statusbar-extension|template)$"
+                ],
+                "tasks": {
+                  "./app/": [
+                    {
+                      "actions": [["yarn", "build:prod"]],
+                      "file_dep": [
+                        "packages/_metapackage/tsconfig.tsbuildinfo",
+                        "packages/*/schema/*.json",
+                        "packages/*/style/**/*.css",
+                        "packages/*/style/**/*.svg",
+                        "packages/*/style/**/*.js"
+                      ],
+                      "name": "app:build:prod",
+                      "targets": ["notebook/static/bundle.js"]
+                    }
+                  ],
+                  "./packages/_metapackage/": [
+                    {
+                      "actions": [["yarn", "build"]],
+                      "file_dep": [
+                        "../lumino/packages/*/tsconfig.tsbuildinfo",
+                        "../jupyterlab/packages/*/tsconfig.tsbuildinfo",
+                        "packages/*/src/**/*.ts",
+                        "packages/*/src/**/*.tsx"
+                      ],
+                      "name": "meta:build",
+                      "targets": [
+                        "packages/_metapackage/tsconfig.tsbuildinfo",
+                        "packages/lab-extension/tsconfig.tsbuildinfo"
+                      ]
+                    }
+                  ]
+                }
+              },
+              "name": "notebook",
+              "py": {
+                "dependencies": ["jupyterlab"],
+                "file_dep": [
+                  "notebook/static/bundle.js",
+                  "notebook/labextension/static/style.js"
+                ],
+                "lab_extensions": {
+                  "./packages/lab-extension/": {
+                    "file_dep": ["packages/lab-extension/tsconfig.tsbuildinfo"],
+                    "targets": [
+                      "notebook/labextension/package.json",
+                      "notebook/labextension/static/style.js"
+                    ]
+                  }
+                },
+                "pyproject_tomls": ["pyproject.toml"]
+              }
             }
           },
           {
@@ -549,12 +926,13 @@
             "default": {
               "github": {
                 "baseline": "tree/main",
-                "merge_options": [],
-                "merge_strategy": "",
-                "merge_with": [],
                 "url": "https://github.com/jupyter/notebook_shim"
               },
-              "name": "notebook_shim"
+              "name": "notebook_shim",
+              "py": {
+                "dependencies": ["jupyter_server"],
+                "pyproject_tomls": ["pyproject.toml"]
+              }
             }
           },
           {
@@ -576,12 +954,15 @@
             "default": {
               "github": {
                 "baseline": "tree/main",
-                "merge_options": [],
-                "merge_strategy": "",
-                "merge_with": [],
                 "url": "https://github.com/ipython/traitlets"
               },
-              "name": "traitlets"
+              "lite": {
+                "wheel": true
+              },
+              "name": "traitlets",
+              "py": {
+                "pyproject_tomls": ["pyproject.toml"]
+              }
             }
           }
         ]

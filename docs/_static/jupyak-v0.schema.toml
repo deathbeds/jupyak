@@ -20,7 +20,6 @@ conda_dependencies = [
   "python-libarchive-c",
 ]
 nodejs_version = "20"
-pypi_deps = []
 python_version = "3.11"
 yarn_version = "3.6"
 
@@ -30,8 +29,6 @@ fastjsonschema = "python-fastjsonschema"
 jupyterlab-pygments = "jupyterlab_pygments"
 prometheus-client = "prometheus_client"
 stack-data = "stack_data"
-
-[properties.env.default.variables]
 
 [properties.lite]
 "$ref" = "#/$defs/LiteOptions"
@@ -58,10 +55,15 @@ name = "comm"
 
 [properties.repos.additionalProperties.anyOf.default.github]
 baseline = "tree/main"
-merge_options = []
-merge_strategy = ""
-merge_with = []
 url = "https://github.com/ipython/comm"
+
+[properties.repos.additionalProperties.anyOf.default.lite]
+wheel = true
+
+[properties.repos.additionalProperties.anyOf.default.py]
+pyproject_tomls = [
+  "pyproject.toml",
+]
 
 [[properties.repos.additionalProperties.anyOf]]
 title = "ipykernel"
@@ -75,10 +77,19 @@ name = "ipykernel"
 
 [properties.repos.additionalProperties.anyOf.default.github]
 baseline = "tree/main"
-merge_options = []
-merge_strategy = ""
-merge_with = []
 url = "https://github.com/ipython/ipykernel"
+
+[properties.repos.additionalProperties.anyOf.default.py]
+dependencies = [
+  "comm",
+  "jupyter_client",
+  "ipython",
+  "jupyter_core",
+  "traitlets",
+]
+pyproject_tomls = [
+  "pyproject.toml",
+]
 
 [[properties.repos.additionalProperties.anyOf]]
 title = "ipython"
@@ -92,10 +103,18 @@ name = "ipython"
 
 [properties.repos.additionalProperties.anyOf.default.github]
 baseline = "tree/main"
-merge_options = []
-merge_strategy = ""
-merge_with = []
 url = "https://github.com/ipython/ipython"
+
+[properties.repos.additionalProperties.anyOf.default.lite]
+wheel = true
+
+[properties.repos.additionalProperties.anyOf.default.py]
+dependencies = [
+  "traitlets",
+]
+pyproject_tomls = [
+  "pyproject.toml",
+]
 
 [[properties.repos.additionalProperties.anyOf]]
 title = "ipywidgets"
@@ -109,10 +128,158 @@ name = "ipywidgets"
 
 [properties.repos.additionalProperties.anyOf.default.github]
 baseline = "tree/main"
-merge_options = []
-merge_strategy = ""
-merge_with = []
 url = "https://github.com/jupyter-widgets/ipywidgets"
+
+[properties.repos.additionalProperties.anyOf.default.js]
+dependencies = [
+  "lumino",
+  "jupyterlab",
+]
+dist_exclude_patterns = [
+  "/jupyterlab_widgets",
+  "/example",
+]
+
+[[properties.repos.additionalProperties.anyOf.default.js.tasks."./packages/base"]]
+actions = [
+  [
+    "yarn",
+    "build:src",
+  ],
+]
+file_dep = [
+  "./packages/base/src/**/*.ts",
+]
+name = "build"
+targets = [
+  "./packages/base/tsconfig.tsbuildinfo",
+]
+
+[[properties.repos.additionalProperties.anyOf.default.js.tasks."./packages/base-manager"]]
+actions = [
+  [
+    "yarn",
+    "build:src",
+  ],
+]
+file_dep = [
+  "./packages/base-manager/src/**/*.ts",
+  "./packages/controls/tsconfig.tsbuildinfo",
+]
+name = "build"
+targets = [
+  "./packages/base-manager/tsconfig.tsbuildinfo",
+]
+
+[[properties.repos.additionalProperties.anyOf.default.js.tasks."./packages/controls"]]
+actions = [
+  [
+    "yarn",
+    "build:src",
+  ],
+  [
+    "yarn",
+    "build:css",
+  ],
+]
+file_dep = [
+  "./packages/controls/src/**/*.ts",
+  "./packages/base/tsconfig.tsbuildinfo",
+  "./packages/controls/css/**/*.less",
+]
+name = "build"
+targets = [
+  "./packages/controls/tsconfig.tsbuildinfo",
+  { glob_neighbor = [
+    "packages/controls/css/*.less",
+    "../{stem}.css",
+  ] },
+]
+
+[[properties.repos.additionalProperties.anyOf.default.js.tasks."./packages/html-manager"]]
+actions = [
+  [
+    "yarn",
+    "build:src",
+  ],
+]
+file_dep = [
+  "./packages/html-manager/src/**/*.ts",
+  "./packages/base-manager/tsconfig.tsbuildinfo",
+]
+name = "build"
+targets = [
+  "./packages/html-manager/tsconfig.tsbuildinfo",
+]
+
+[[properties.repos.additionalProperties.anyOf.default.js.tasks."./packages/output"]]
+actions = [
+  [
+    "yarn",
+    "build:src",
+  ],
+]
+file_dep = [
+  "./packages/output/src/**/*.ts",
+  "./packages/html-manager/tsconfig.tsbuildinfo",
+]
+name = "build"
+targets = [
+  "./packages/output/tsconfig.tsbuildinfo",
+]
+
+[[properties.repos.additionalProperties.anyOf.default.js.tasks."./python/jupyterlab_widgets"]]
+actions = [
+  [
+    "yarn",
+    "build:lib",
+  ],
+]
+file_dep = [
+  "./packages/base/tsconfig.tsbuildinfo",
+  "./packages/controls/tsconfig.tsbuildinfo",
+  "./packages/base-manager/tsconfig.tsbuildinfo",
+  "./packages/html-manager/tsconfig.tsbuildinfo",
+  "./packages/output/tsconfig.tsbuildinfo",
+]
+name = "build"
+targets = [
+  "python/jupyterlab_widgets/tsconfig.tsbuildinfo",
+  "python/jupyterlab_widgets/lib/index.js",
+]
+
+[properties.repos.additionalProperties.anyOf.default.lite]
+skip_wheel_patterns = [
+  "widgetsnbextension",
+]
+wheel = true
+
+[properties.repos.additionalProperties.anyOf.default.lite.wheel_file_dep]
+jupyterlab_widgets = [
+  "python/jupyterlab_widgets/labextension/package.json",
+]
+
+[properties.repos.additionalProperties.anyOf.default.py]
+dependencies = [
+  "jupyterlab",
+  "ipython",
+  "comm",
+  "traitlets",
+]
+pyproject_tomls = [
+  "python/ipywidgets/pyproject.toml",
+  "python/jupyterlab_widgets/pyproject.toml",
+  "python/widgetsnbextension/pyproject.toml",
+]
+
+[properties.repos.additionalProperties.anyOf.default.py.lab_extensions."./python/jupyterlab_widgets/"]
+file_dep = [
+  "packages/*/tsconfig.tsbuildinfo",
+  "python/jupyterlab_widgets/lib/index.js",
+]
+targets = [
+  "python/jupyterlab_widgets/labextension/package.json",
+]
 
 [[properties.repos.additionalProperties.anyOf]]
 title = "jupyter_client"
@@ -126,10 +293,15 @@ name = "jupyter_client"
 
 [properties.repos.additionalProperties.anyOf.default.github]
 baseline = "tree/main"
-merge_options = []
-merge_strategy = ""
-merge_with = []
 url = "https://github.com/jupyter/jupyter_client"
+
+[properties.repos.additionalProperties.anyOf.default.py]
+dependencies = [
+  "jupyter_core",
+]
+pyproject_tomls = [
+  "pyproject.toml",
+]
 
 [[properties.repos.additionalProperties.anyOf]]
 title = "jupyter_core"
@@ -143,10 +315,18 @@ name = "jupyter_core"
 
 [properties.repos.additionalProperties.anyOf.default.github]
 baseline = "tree/main"
-merge_options = []
-merge_strategy = ""
-merge_with = []
 url = "https://github.com/jupyter/jupyter_core"
+
+[properties.repos.additionalProperties.anyOf.default.lite]
+wheel = true
+
+[properties.repos.additionalProperties.anyOf.default.py]
+dependencies = [
+  "traitlets",
+]
+pyproject_tomls = [
+  "pyproject.toml",
+]
 
 [[properties.repos.additionalProperties.anyOf]]
 title = "jupyter_events"
@@ -160,10 +340,15 @@ name = "jupyter_events"
 
 [properties.repos.additionalProperties.anyOf.default.github]
 baseline = "tree/main"
-merge_options = []
-merge_strategy = ""
-merge_with = []
 url = "https://github.com/jupyter/jupyter_events"
+
+[properties.repos.additionalProperties.anyOf.default.py]
+dependencies = [
+  "traitlets",
+]
+pyproject_tomls = [
+  "pyproject.toml",
+]
 
 [[properties.repos.additionalProperties.anyOf]]
 title = "jupyter_server"
@@ -177,10 +362,20 @@ name = "jupyter_server"
 
 [properties.repos.additionalProperties.anyOf.default.github]
 baseline = "tree/main"
-merge_options = []
-merge_strategy = ""
-merge_with = []
 url = "https://github.com/jupyter-server/jupyter_server"
+
+[properties.repos.additionalProperties.anyOf.default.py]
+dependencies = [
+  "nbconvert",
+  "traitlets",
+  "jupyter_core",
+  "jupyter_client",
+  "jupyter_events",
+  "jupyter_server_terminals",
+]
+pyproject_tomls = [
+  "pyproject.toml",
+]
 
 [[properties.repos.additionalProperties.anyOf]]
 title = "jupyter_server_terminals"
@@ -200,10 +395,12 @@ name = "jupyter_server_terminals"
 
 [properties.repos.additionalProperties.anyOf.default.github]
 baseline = "tree/main"
-merge_options = []
-merge_strategy = ""
-merge_with = []
 url = "https://github.com/jupyter-server/jupyter_server_terminals"
+
+[properties.repos.additionalProperties.anyOf.default.py]
+pyproject_tomls = [
+  "pyproject.toml",
+]
 
 [[properties.repos.additionalProperties.anyOf]]
 title = "jupyterlab"
@@ -217,10 +414,103 @@ name = "jupyterlab"
 
 [properties.repos.additionalProperties.anyOf.default.github]
 baseline = "tree/main"
-merge_options = []
-merge_strategy = ""
-merge_with = []
 url = "https://github.com/jupyterlab/jupyterlab"
+
+[properties.repos.additionalProperties.anyOf.default.js]
+dependencies = [
+  "lumino",
+]
+dist_exclude_patterns = [
+  "/galata",
+  "/examples",
+  "/dev_mode",
+  "/metapackage",
+  "/mock",
+]
+
+[[properties.repos.additionalProperties.anyOf.default.js.tasks."./"]]
+actions = [
+  [
+    "yarn",
+    "build:utils",
+  ],
+]
+file_dep = [
+  "buildutils/src/**/*.ts",
+  "buildutils/package.json",
+]
+name = "buildutils"
+targets = [
+  "buildutils/tsconfig.tsbuildinfo",
+]
+
+[[properties.repos.additionalProperties.anyOf.default.js.tasks."./"]]
+actions = [
+  [
+    "yarn",
+    "build:builder",
+  ],
+]
+file_dep = [
+  "builder/src/**/*.ts",
+  "builder/package.json",
+]
+name = "builder"
+targets = [
+  "builder/tsconfig.tsbuildinfo",
+  "builder/lib/build-labextension.js",
+]
+
+[[properties.repos.additionalProperties.anyOf.default.js.tasks."./dev_mode/"]]
+actions = [
+  [
+    "yarn",
+    "build:prod",
+  ],
+]
+file_dep = [
+  "builder/tsconfig.tsbuildinfo",
+  "buildutils/tsconfig.tsbuildinfo",
+  "packages/metapackage/tsconfig.tsbuildinfo",
+  "packages/*/schema/*.json",
+  "packages/*/style/**/*.css",
+  "packages/*/style/**/*.svg",
+  "packages/*/style/**/*.js",
+]
+name = "build:prod"
+targets = [
+  "dev_mode/static/package.json",
+]
+
+[[properties.repos.additionalProperties.anyOf.default.js.tasks."./packages/metapackage/"]]
+actions = [
+  [
+    "yarn",
+    "build",
+  ],
+]
+file_dep = [
+  "../lumino/packages/*/tsconfig.tsbuildinfo",
+  "packages/*/src/**/*.ts",
+  "packages/*/src/**/*.tsx",
+]
+name = "build"
+targets = [
+  "packages/metapackage/tsconfig.tsbuildinfo",
+]
+
+[properties.repos.additionalProperties.anyOf.default.py]
+dependencies = [
+  "jupyterlab_server",
+  "ipykernel",
+  "notebook_shim",
+]
+file_dep = [
+  "dev_mode/static/package.json",
+]
+pyproject_tomls = [
+  "pyproject.toml",
+]
 
 [[properties.repos.additionalProperties.anyOf]]
 title = "jupyterlab_server"
@@ -234,10 +524,15 @@ name = "jupyterlab_server"
 
 [properties.repos.additionalProperties.anyOf.default.github]
 baseline = "tree/main"
-merge_options = []
-merge_strategy = ""
-merge_with = []
 url = "https://github.com/jupyterlab/jupyterlab_server"
+
+[properties.repos.additionalProperties.anyOf.default.py]
+dependencies = [
+  "jupyter_server",
+]
+pyproject_tomls = [
+  "pyproject.toml",
+]
 
 [[properties.repos.additionalProperties.anyOf]]
 title = "jupyterlite"
@@ -251,10 +546,63 @@ name = "jupyterlite"
 
 [properties.repos.additionalProperties.anyOf.default.github]
 baseline = "tree/main"
-merge_options = []
-merge_strategy = ""
-merge_with = []
 url = "https://github.com/jupyterlite/jupyterlite"
+
+[properties.repos.additionalProperties.anyOf.default.js]
+dependencies = [
+  "jupyterlab",
+  "notebook",
+  "lumino",
+]
+dist_exclude_patterns = [
+  "/app",
+]
+link_exclude_patterns = [
+  "^@jupyterlab/(celltags-extension|debugger(-extension)?|extensionmanager(-extension)?|hub-extension|mermaid-extension|nbconvert-css|pluginmanager-extension|terminal(-extension)?|template)$",
+  "^@jupyter-notebook/(documentsearch-extension|lab-extension|terminal-extension)$",
+]
+
+[[properties.repos.additionalProperties.anyOf.default.js.tasks."./"]]
+actions = [
+  [
+    "doit",
+    "build:py:jupyterlite-core:pre:app",
+  ],
+]
+file_dep = []
+name = "build"
+targets = [
+  "./py/jupyterlite-javascript-kernel/tsconfig.tsbuildinfo",
+  "app/build/third-party-licenses.json",
+]
+
+[properties.repos.additionalProperties.anyOf.default.lite]
+needs_pth = [
+  "jupyterlite_core",
+]
+wheel = false
+
+[properties.repos.additionalProperties.anyOf.default.py]
+dependencies = [
+  "jupyterlab",
+  "notebook",
+  "jupyter_server",
+  "jupyter_core",
+  "traitlets",
+]
+pyproject_tomls = [
+  "./py/jupyterlite/pyproject.toml",
+  "./py/jupyterlite-core/pyproject.toml",
+  "./py/jupyterlite-javascript-kernel/pyproject.toml",
+]
+
+[properties.repos.additionalProperties.anyOf.default.py.lab_extensions."././py/jupyterlite-javascript-kernel"]
+file_dep = [
+  "./py/jupyterlite-javascript-kernel/tsconfig.tsbuildinfo",
+]
+targets = [
+  "./py/jupyterlite-javascript-kernel/jupyterlite_javascript_kernel/labextension/package.json",
+]
 
 [[properties.repos.additionalProperties.anyOf]]
 title = "jupyterlite_pyodide_kernel"
@@ -274,10 +622,90 @@ name = "jupyterlite_pyodide_kernel"
 
 [properties.repos.additionalProperties.anyOf.default.github]
 baseline = "tree/main"
-merge_options = []
-merge_strategy = ""
-merge_with = []
 url = "https://github.com/jupyterlite/pyodide-kernel"
+
+[properties.repos.additionalProperties.anyOf.default.js]
+dependencies = [
+  "lumino",
+  "jupyterlab",
+  "jupyterlite",
+]
+
+[[properties.repos.additionalProperties.anyOf.default.js.tasks."./packages/pyodide-kernel-extension/"]]
+actions = [
+  [
+    "yarn",
+    "build:lib",
+  ],
+]
+file_dep = [
+  "packages/pyodide-kernel-extension/src/**/*.ts",
+  "packages/pyodide-kernel/tsconfig.tsbuildinfo",
+]
+name = "build:lib"
+targets = [
+  "packages/pyodide-kernel-extension/tsconfig.tsbuildinfo",
+]
+
+[[properties.repos.additionalProperties.anyOf.default.js.tasks."./packages/pyodide-kernel/"]]
+actions = [
+  [
+    "yarn",
+    "build:py",
+  ],
+]
+file_dep = [
+  "packages/pyodide-kernel/py/**/pyproject.toml",
+  "packages/pyodide-kernel/py/**/*.py",
+]
+name = "build:py:wheels"
+needs_pth = [
+  "jupyterlite_core",
+  "jupyterlite_pyodide_kernel",
+]
+targets = [
+  "packages/pyodide-kernel/pypi/all.json",
+]
+
+[[properties.repos.additionalProperties.anyOf.default.js.tasks."./packages/pyodide-kernel/"]]
+actions = [
+  [
+    "yarn",
+    "build:prod",
+  ],
+]
+file_dep = [
+  "packages/pyodide-kernel/pypi/all.json",
+  "packages/pyodide-kernel/src/**/*.ts",
+]
+name = "build:js"
+targets = [
+  "packages/pyodide-kernel/tsconfig.tsbuildinfo",
+]
+
+[properties.repos.additionalProperties.anyOf.default.lite]
+needs_pth = [
+  "jupyterlite_pyodide_kernel",
+]
+wheel = false
+
+[properties.repos.additionalProperties.anyOf.default.py]
+dependencies = [
+  "jupyterlab",
+  "jupyterlite",
+]
+pyproject_tomls = [
+  "pyproject.toml",
+]
+
+[properties.repos.additionalProperties.anyOf.default.py.lab_extensions."./packages/pyodide-kernel-extension/"]
+file_dep = [
+  "packages/pyodide-kernel/pypi/all.json",
+  "packages/pyodide-kernel-extension/tsconfig.tsbuildinfo",
+]
+targets = [
+  "jupyterlite_pyodide_kernel/labextension/package.json",
+]
 
 [[properties.repos.additionalProperties.anyOf]]
 title = "lumino"
@@ -291,10 +719,36 @@ name = "lumino"
 
 [properties.repos.additionalProperties.anyOf.default.github]
 baseline = "tree/main"
-merge_options = []
-merge_strategy = ""
-merge_with = []
 url = "https://github.com/jupyterlab/lumino"
+
+[properties.repos.additionalProperties.anyOf.default.js]
+dist_exclude_patterns = [
+  "/buildutils",
+  "/default-theme",
+  "/example",
+]
+install_exclude_resolutions = [
+  "@jupyterlab/buildutils",
+]
+
+[[properties.repos.additionalProperties.anyOf.default.js.tasks."./"]]
+actions = [
+  [
+    "yarn",
+    "build",
+  ],
+]
+file_dep = [
+  "packages/*/src/**/*.ts",
+  "packages/*/tsconfig.json",
+]
+name = "build"
+
+[[properties.repos.additionalProperties.anyOf.default.js.tasks."./".targets]]
+glob_neighbor = [
+  "packages/*/tsconfig.json",
+  "../tsconfig.tsbuildinfo",
+]
 
 [[properties.repos.additionalProperties.anyOf]]
 title = "nbclient"
@@ -308,10 +762,18 @@ name = "nbclient"
 
 [properties.repos.additionalProperties.anyOf.default.github]
 baseline = "tree/main"
-merge_options = []
-merge_strategy = ""
-merge_with = []
 url = "https://github.com/jupyter/nbclient"
+
+[properties.repos.additionalProperties.anyOf.default.py]
+dependencies = [
+  "jupyter_core",
+  "jupyter_client",
+  "nbformat",
+  "traitlets",
+]
+pyproject_tomls = [
+  "pyproject.toml",
+]
 
 [[properties.repos.additionalProperties.anyOf]]
 title = "nbconvert"
@@ -325,10 +787,17 @@ name = "nbconvert"
 
 [properties.repos.additionalProperties.anyOf.default.github]
 baseline = "tree/main"
-merge_options = []
-merge_strategy = ""
-merge_with = []
 url = "https://github.com/jupyter/nbconvert"
+
+[properties.repos.additionalProperties.anyOf.default.py]
+dependencies = [
+  "jupyter_core",
+  "nbformat",
+  "nbclient",
+]
+pyproject_tomls = [
+  "pyproject.toml",
+]
 
 [[properties.repos.additionalProperties.anyOf]]
 title = "nbformat"
@@ -342,10 +811,16 @@ name = "nbformat"
 
 [properties.repos.additionalProperties.anyOf.default.github]
 baseline = "tree/main"
-merge_options = []
-merge_strategy = ""
-merge_with = []
 url = "https://github.com/jupyter/nbformat"
+
+[properties.repos.additionalProperties.anyOf.default.py]
+dependencies = [
+  "jupyter_core",
+  "traitlets",
+]
+pyproject_tomls = [
+  "pyproject.toml",
+]
 
 [[properties.repos.additionalProperties.anyOf]]
 title = "notebook"
@@ -359,10 +834,80 @@ name = "notebook"
 
 [properties.repos.additionalProperties.anyOf.default.github]
 baseline = "tree/main"
-merge_options = []
-merge_strategy = ""
-merge_with = []
 url = "https://github.com/jupyter/notebook"
+
+[properties.repos.additionalProperties.anyOf.default.js]
+dependencies = [
+  "lumino",
+  "jupyterlab",
+]
+dist_exclude_patterns = [
+  "/_metapackage",
+  "/app",
+  "/buildutils",
+]
+link_exclude_patterns = [
+  "^@jupyterlab/(help-extension|inspector-extension|launcher-extension|logconsole-extension|nbconvert-css|pluginmanager-extension|rendermime-extension|statusbar-extension|template)$",
+]
+
+[[properties.repos.additionalProperties.anyOf.default.js.tasks."./app/"]]
+actions = [
+  [
+    "yarn",
+    "build:prod",
+  ],
+]
+file_dep = [
+  "packages/_metapackage/tsconfig.tsbuildinfo",
+  "packages/*/schema/*.json",
+  "packages/*/style/**/*.css",
+  "packages/*/style/**/*.svg",
+  "packages/*/style/**/*.js",
+]
+name = "app:build:prod"
+targets = [
+  "notebook/static/bundle.js",
+]
+
+[[properties.repos.additionalProperties.anyOf.default.js.tasks."./packages/_metapackage/"]]
+actions = [
+  [
+    "yarn",
+    "build",
+  ],
+]
+file_dep = [
+  "../lumino/packages/*/tsconfig.tsbuildinfo",
+  "../jupyterlab/packages/*/tsconfig.tsbuildinfo",
+  "packages/*/src/**/*.ts",
+  "packages/*/src/**/*.tsx",
+]
+name = "meta:build"
+targets = [
+  "packages/_metapackage/tsconfig.tsbuildinfo",
+  "packages/lab-extension/tsconfig.tsbuildinfo",
+]
+
+[properties.repos.additionalProperties.anyOf.default.py]
+dependencies = [
+  "jupyterlab",
+]
+file_dep = [
+  "notebook/static/bundle.js",
+  "notebook/labextension/static/style.js",
+]
+pyproject_tomls = [
+  "pyproject.toml",
+]
+
+[properties.repos.additionalProperties.anyOf.default.py.lab_extensions."./packages/lab-extension/"]
+file_dep = [
+  "packages/lab-extension/tsconfig.tsbuildinfo",
+]
+targets = [
+  "notebook/labextension/package.json",
+  "notebook/labextension/static/style.js",
+]
 
 [[properties.repos.additionalProperties.anyOf]]
 title = "notebook_shim"
@@ -376,10 +921,15 @@ name = "notebook_shim"
 
 [properties.repos.additionalProperties.anyOf.default.github]
 baseline = "tree/main"
-merge_options = []
-merge_strategy = ""
-merge_with = []
 url = "https://github.com/jupyter/notebook_shim"
+
+[properties.repos.additionalProperties.anyOf.default.py]
+dependencies = [
+  "jupyter_server",
+]
+pyproject_tomls = [
+  "pyproject.toml",
+]
 
 [[properties.repos.additionalProperties.anyOf]]
 title = "traitlets"
@@ -393,10 +943,15 @@ name = "traitlets"
 
 [properties.repos.additionalProperties.anyOf.default.github]
 baseline = "tree/main"
-merge_options = []
-merge_strategy = ""
-merge_with = []
 url = "https://github.com/ipython/traitlets"
+
+[properties.repos.additionalProperties.anyOf.default.lite]
+wheel = true
+
+[properties.repos.additionalProperties.anyOf.default.py]
+pyproject_tomls = [
+  "pyproject.toml",
+]
 
 ["$defs".CondaEnv]
 title = "CondaEnv"
