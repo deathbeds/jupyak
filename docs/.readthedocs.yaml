@@ -20,7 +20,6 @@ build:
       - JPYK_LOG_NAME=shave2      doit shave                              || echo 'ok'
       - doit self:docs:deploy:work                                        || echo 'ok'
       - JPYK_ALLOW_NO_CONFIG=1    doit self:docs:graph                    || echo 'ok'
-      - JPYK_ALLOW_NO_CONFIG=1    doit self:js:*                          || echo 'ok'
 
 sphinx:
   builder: html
