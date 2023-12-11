@@ -6,7 +6,7 @@ on:
       - main
   pull_request:
     branches:
-      - "*"
+      - '*'
   workflow_dispatch:
 
 concurrency:
@@ -31,6 +31,8 @@ jobs:
           miniforge-variant: Mambaforge
           use-mamba: true
       - run: doit bootstrap
+      - run: doit self:js:*
+      - run: doit self:schema:*
       - run: doit self:build:*
       - run: doit self:test:*
       - run: doit self:docs:*

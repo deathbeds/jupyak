@@ -1,0 +1,215 @@
+<!--
+  {% if not prjsf_url %}
+  {% set prjsf_url = pathto("_static/prjsf/prjsf.js", 1) %}
+  {% endif %}
+-->
+<script type="module">
+  document.addEventListener('DOMContentLoaded', async () => {
+    await import(`{{ prjsf_url }}`);
+  });
+</script>
+<style>
+  :root {
+    /* set to non-0 number of e.g. px to see more debug */
+    --prjsf-width-debug: 0;
+    --prjsf-width-one: 0.75rem;
+    --prjsf-width-label: calc(16 * var(--prjsf-width-one));
+    --prjsf-width-sidebar: calc(2 * var(--prjsf-width-label));
+    --bs-secondary-color: var(--pst-color-text-base) !important;
+  }
+  /* shaver */
+  .prjsf .list-group-item {
+    --bs-list-group-color: var(--pst-color-text-base) !important;
+  }
+
+  /* filename in button link */
+  .prjsf a > code {
+    color: unset;
+  }
+
+  /* schema-specific hacks */
+  select[id*='_repos_'][id$='__anyof_select']:has(option:checked:not([value='0'])) {
+    display: none;
+  }
+
+  /* copied from bootstrap(?) sr-only */
+  .prjsf label[for*='_dependencies_'],
+  .prjsf label[for*='_env_conda_channels_'],
+  .prjsf label[for*='_newKey-key'],
+  .prjsf label[for*='_patterns'] {
+    clip: rect(0, 0, 0, 0);
+    border-width: 0;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    white-space: nowrap;
+  }
+</style>
+<style>
+  /* best effort layout on a reasonable landscape screen */
+  @media (min-width: 960px) {
+    /* reclaim whitespace to consume below */
+    .prjsf .heading-style,
+    .prjsf h1,
+    .prjsf h2,
+    .prjsf h3,
+    .prjsf h4,
+    .prjsf h5,
+    .prjsf h6 {
+      margin: 0;
+      font-weight: bold;
+      font-size: var(--pst-font-size-h5);
+    }
+
+    /* general */
+    .prjsf {
+      margin-right: calc(4 * var(--prjsf-width-one));
+    }
+    .prjsf .row {
+      position: relative;
+    }
+
+    /* list doodads */
+    .prjsf div.py-4.col-lg-3.col-3 {
+      padding: 0 !important;
+    }
+
+    /* string */
+    .prjsf .form-group.field-string > .form-group {
+      display: flex;
+      align-items: baseline;
+      flex-wrap: wrap;
+    }
+
+    /* string title */
+    .prjsf .form-group.field-string > .form-group > label {
+      width: var(--prjsf-width-label);
+      min-width: var(--prjsf-width-label);
+      font-weight: bold;
+    }
+    /* string input */
+    .prjsf .form-group.field-string > .form-group > input {
+      flex: 1;
+    }
+    /* string help */
+    .prjsf .form-group.field-string > .form-group > small {
+      padding-left: var(--prjsf-width-one);
+      margin-left: var(--prjsf-width-label);
+      width: 100%;
+    }
+
+    /* expando objects */
+    /* title */
+    .prjsf .field-object > .col-5:nth-child(1) {
+      position: absolute;
+      border: solid var(--prjsf-width-debug) yellow;
+      left: var(--prjsf-width-sidebar);
+      right: 0;
+    }
+    .prjsf .field-object > .col-5:nth-child(1),
+    .prjsf .field-array > .col-5:nth-child(1) {
+      max-width: var(--prjsf-width-label);
+    }
+
+    .prjsf .field-object > .col-5:nth-child(2),
+    .prjsf .field-array > .col-5:nth-child(2) {
+      flex: 1;
+    }
+
+    /* title key */
+    .prjsf .field-object > .col-5:nth-child(1) > .form-group {
+      display: flex;
+      flex-direction: row;
+    }
+
+    /* title key */
+    .prjsf .field-object > .col-5:nth-child(1) > .form-group {
+      display: flex;
+      flex-direction: row;
+    }
+
+    /* remove */
+    .prjsf .field-object > .py-4.col-2,
+    .prjsf .field-array > .py-4.col-2 {
+      padding: 0;
+      border: solid var(--prjsf-width-debug) salmon;
+      position: absolute;
+      right: calc(-4 * var(--prjsf-width-one));
+      text-align: right;
+      top: 0;
+      bottom: 0;
+      border-left: solid var(--prjsf-width-one) transparent;
+      width: calc(4 * var(--prjsf-width-one));
+    }
+
+    .prjsf .field-object > .py-4.col-2:has(:hover),
+    .prjsf .field-array > .py-4.col-2:has(:hover) {
+      border-left: solid var(--prjsf-width-one) red;
+    }
+
+    /* description */
+    .prjsf .field-object > .col-5:nth-child(2),
+    .prjsf .field-array > .form-group > div > .row > .col > div:nth-child(2) {
+      border: solid var(--prjsf-width-debug) purple;
+      flex-grow: 1;
+      padding: var(--prjsf-width-one);
+    }
+
+    .prjsf
+      div.form-group.field.field-object
+      div.form-group.field.field-object
+      > .form-group,
+    .prjsf .field-array > .form-group > div > .row > .col {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: baseline;
+    }
+
+    .prjsf
+      div.form-group.field.field-object
+      div.form-group.field.field-object
+      > .form-group
+      > div[id$='_title'],
+    .prjsf .field-array > .form-group > div > .row > .col > div:nth-child(1) {
+      border: solid var(--prjsf-width-debug) red;
+    }
+
+    .prjsf
+      div.form-group.field.field-object
+      div.form-group.field.field-object
+      > .form-group
+      > div[id$='_title']
+      hr,
+    .prjsf .field-array > .form-group > div > .row > .col > div:nth-child(1) hr {
+      display: none;
+    }
+
+    .prjsf
+      div.form-group.field.field-object
+      div.form-group.field.field-object
+      > .form-group
+      > div:not([id]):not(.container-fluid.p-0) {
+      border: solid var(--prjsf-width-left) green;
+      padding: 0 var(--prjsf-width-one);
+      flex-grow: 1;
+    }
+    .prjsf
+      div.form-group.field.field-object
+      div.form-group.field.field-object
+      > .form-group
+      > div.container-fluid.p-0,
+    .prjsf .field-array > .form-group > div > .row > .col > div:nth-child(3) {
+      border: solid var(--prjsf-width-debug) blue;
+      width: 100%;
+      padding-left: var(--prjsf-width-one) !important;
+      flex-grow: 1;
+    }
+
+    .prjsf ul[id$='__error'] li:not(:first-child) {
+      display: none;
+    }
+  }
+</style>

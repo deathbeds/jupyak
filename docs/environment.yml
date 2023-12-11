@@ -16,6 +16,7 @@ dependencies:
   - flit-core >=3.9.0,<4
   - pip
   - python-build
+  - yarn ==3.6.4
   # docs
   - docutils >=0.19
   - myst-nb
@@ -24,4 +25,5 @@ dependencies:
   - sphinx-copybutton
   - sphinxcontrib-mermaid
   - sphinxext-rediraffe
+  - tomli-w
   ### docs/environment.yml ###

@@ -94,8 +94,8 @@ display: none;
 <legend><h2>customize GitHub checkout</h2></legend>
 
 <blockquote>
-All of the repositories below will be checked out at the current <code>main</code> branch as a <em>baseline</em>. 
-Check one or more repos to provide use a differnt branch, PR, or tag, or provide one or more PRs to 
+All of the repositories below will be checked out at the current <code>main</code> branch as a <em>baseline</em>.
+Check one or more repos to provide use a differnt branch, PR, or tag, or provide one or more PRs to
 <i>merge with</i> it, and/or customize the <a href="https://git-scm.com/docs/merge-strategies" target="blank">merge strategy and options</a> to work around merge conflicts.
 </blockquote>
 
@@ -1376,17 +1376,17 @@ title="add space-delimted -X options for the merge strategy"
 <legend>customize JupyterLite</legend>
 
 <blockquote>
-If given, an optional <a target="_blank" href="https://gist.github.com/">gist</a> will be cloned 
+If given, an optional <a target="_blank" href="https://gist.github.com/">gist</a> will be cloned
 to provide the content of the JupyterLite site.
 If the gist contains <code>jupyter_lite_config.json</code> and/or <code>jupyter-lite.json</code>,
-this will be merged into the generated 
+this will be merged into the generated
 <a target="_blank" href="https://jupyterlite.readthedocs.io/en/latest/howto/configure/config_files.html">configuration</a>
 of <code>jupyter lite build</code> and the runtime application.
 </blockquote>
 
-<input id="lite-gist" 
+<input id="lite-gist"
 type="text"
-name="lite|gist" 
+name="lite|gist"
 pattern="^$|^[a-z\d]{20,}$"
 placeholder="gist ID"
 />
@@ -1420,7 +1420,7 @@ placeholder="# make choices in the form"
 <input type="hidden" name="filename" value="jupyak_config.toml"/>
 <br/>
 <button class="btn btn-success" form="propose">
-<i class="fas fa-code-pull-request"></i> New Pull Request
+<i class="fas fa-github-alt"></i> new pull request...
 </button>
 </form>
 </div>

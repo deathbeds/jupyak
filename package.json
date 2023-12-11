@@ -1,8 +1,51 @@
 {
-  "name": "@deathbeds/jupyak",
+  "name": "@deathbeds/jupyak-top",
   "version": "0.0.0",
   "private": true,
-  "dependencies": {
-    "prettier": "^3.0.3"
+  "workspaces": {
+    "packages": [
+      "./js"
+    ]
+  },
+  "scripts": {
+    "build": "cd js && yarn build",
+    "build:dist": "cd js && yarn build:dist",
+    "build:lib": "cd js && yarn build:lib",
+    "watch": "cd js && yarn watch"
+  },
+  "prettier": {
+    "plugins": [
+      "prettier-plugin-packagejson",
+      "prettier-plugin-sort-json",
+      "prettier-plugin-toml"
+    ],
+    "printWidth": 88,
+    "proseWrap": "always",
+    "singleQuote": true,
+    "overrides": [
+      {
+        "files": [
+          "*.schema.json"
+        ],
+        "options": {
+          "jsonRecursiveSort": true,
+          "jsonSortOrder": "{\"/^\\\\$id$/\": null, \"/^\\\\$schema$/\": null, \"/^\\\\$ref$/\": null, \"type\": null, \"title\": null, \"description\": null, \"/(properties|items)/\": null, \"/additional(Properties|Items)/\": null, \"/patternProperties/\": null, \"/^\\\\$defs$/\": \"lexical\"}"
+        }
+      },
+      {
+        "files": [
+          "*.toml"
+        ],
+        "options": {
+          "arrayAutoCollapse": false
+        }
+      }
+    ]
+  },
+  "devDependencies": {
+    "prettier": "^3.1.0",
+    "prettier-plugin-packagejson": "^2.4.7",
+    "prettier-plugin-sort-json": "^3.1.0",
+    "prettier-plugin-toml": "^2.0.1"
   }
 }

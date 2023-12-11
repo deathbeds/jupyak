@@ -7,6 +7,7 @@ from pathlib import Path
 
 import tomli
 
+RTD = json.loads(os.environ.get("READTHEDOCS", "False").lower())
 CONF_PY = Path(__file__)
 HERE = CONF_PY.parent
 ROOT = HERE.parent
@@ -63,7 +64,7 @@ suppress_warnings = ["autosectionlabel.*"]
 
 # theme
 templates_path = ["_templates"]
-html_static_path = ["_static"]
+html_static_path = ["_static", "../js/dist"]
 html_theme = "pydata_sphinx_theme"
 html_logo = "_static/img/logo.svg"
 html_favicon = "_static/img/logo.svg"
@@ -80,14 +81,8 @@ html_theme_options = {
             "url": PROJ_DATA["project"]["urls"]["PyPI"],
             "icon": "fa-brands fa-python",
         },
-        {
-            "name": "conda-forge",
-            "url": "https://github.com/conda-forge/jupyak",
-            "icon": "_static/img/anvil.svg",
-            "type": "local",
-        },
     ],
-    "footer_end": ["mermaid10"],
+    "footer_end": ["mermaid10", "shaver"],
     "secondary_sidebar_items": [],
 }
 
@@ -97,10 +92,15 @@ rediraffe_redirects = {}
 html_sidebars = {
     "*": ["page-toc", "edit-this-page", "sourcelink"],
     "graph": [],
+    "shaver": [],
 }
 
 if REPO_INFO is not None:
-    html_context = {**REPO_INFO.groupdict(), "doc_path": "docs"}
+    html_context.update(**REPO_INFO.groupdict(), doc_path="docs")
+
+if RTD:
+    gh_pages = "https://deathbeds.github.io/jupyak"
+    html_context["prjsf_url"] = f"{gh_pages}/_static/prjsf/prjsf.js"
 
 if ALLOW_NO_CONFIG or JUPYAK_CONF_CANDIDATES:
     html_sidebars["*"] = [

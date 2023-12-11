@@ -8,8 +8,6 @@ channels:
 platforms:
   - linux-64
 dependencies:
-  # more runtimes
-  - nodejs >=20,<21
   # jupyter
   - ipywidgets >=8.1.1,<9.0.0
   - jupyterlab >=4.1.0a3,<5.0.0
@@ -19,6 +17,8 @@ dependencies:
   # demo
   - jupyterlab-deck >=0.2.0a0
   ### .github/environment.yml ###
+  # more runtimes
+  - nodejs >=20,<21
   # fix
   - ruff
   - nbstripout
@@ -39,6 +39,7 @@ dependencies:
   - flit-core >=3.9.0,<4
   - pip
   - python-build
+  - yarn ==3.6.4
   # docs
   - docutils >=0.19
   - myst-nb
@@ -47,5 +48,6 @@ dependencies:
   - sphinx-copybutton
   - sphinxcontrib-mermaid
   - sphinxext-rediraffe
+  - tomli-w
   ### docs/environment.yml ###
   ### .github/environment.yml ###
