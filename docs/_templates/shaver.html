@@ -54,9 +54,13 @@
     .prjsf h6 {
       margin: 0;
       font-weight: bold;
+      font-size: var(--pst-font-size-h5);
     }
 
     /* general */
+    .prjsf {
+      margin-right: calc(4 * var(--prjsf-width-one));
+    }
     .prjsf .row {
       position: relative;
     }
@@ -70,24 +74,24 @@
     .prjsf .form-group.field-string > .form-group {
       display: flex;
       align-items: baseline;
+      flex-wrap: wrap;
     }
 
     /* string title */
     .prjsf .form-group.field-string > .form-group > label {
       width: var(--prjsf-width-label);
       min-width: var(--prjsf-width-label);
-      order: 1;
       font-weight: bold;
-    }
-    /* string help */
-    .prjsf .form-group.field-string > .form-group > small {
-      width: var(--prjsf-width-sidebar);
-      order: 2;
-      padding-left: var(--prjsf-width-one);
     }
     /* string input */
     .prjsf .form-group.field-string > .form-group > input {
-      order: 3;
+      flex: 1;
+    }
+    /* string help */
+    .prjsf .form-group.field-string > .form-group > small {
+      padding-left: var(--prjsf-width-one);
+      margin-left: var(--prjsf-width-label);
+      width: 100%;
     }
 
     /* expando objects */
@@ -98,11 +102,45 @@
       left: var(--prjsf-width-sidebar);
       right: 0;
     }
+    .prjsf .field-object > .col-5:nth-child(1),
+    .prjsf .field-array > .col-5:nth-child(1) {
+      max-width: var(--prjsf-width-label);
+    }
+
+    .prjsf .field-object > .col-5:nth-child(2),
+    .prjsf .field-array > .col-5:nth-child(2) {
+      flex: 1;
+    }
 
     /* title key */
     .prjsf .field-object > .col-5:nth-child(1) > .form-group {
       display: flex;
       flex-direction: row;
+    }
+
+    /* title key */
+    .prjsf .field-object > .col-5:nth-child(1) > .form-group {
+      display: flex;
+      flex-direction: row;
+    }
+
+    /* remove */
+    .prjsf .field-object > .py-4.col-2,
+    .prjsf .field-array > .py-4.col-2 {
+      padding: 0;
+      border: solid var(--prjsf-width-debug) salmon;
+      position: absolute;
+      right: calc(-4 * var(--prjsf-width-one));
+      text-align: right;
+      top: 0;
+      bottom: 0;
+      border-left: solid var(--prjsf-width-one) transparent;
+      width: calc(4 * var(--prjsf-width-one));
+    }
+
+    .prjsf .field-object > .py-4.col-2:has(:hover),
+    .prjsf .field-array > .py-4.col-2:has(:hover) {
+      border-left: solid var(--prjsf-width-one) red;
     }
 
     /* description */
@@ -164,7 +202,7 @@
       flex-grow: 1;
     }
 
-    .prjsf ul[id$="__error"] li:not(:first-child) {
+    .prjsf ul[id$='__error'] li:not(:first-child) {
       display: none;
     }
   }

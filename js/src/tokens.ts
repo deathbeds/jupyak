@@ -1,5 +1,5 @@
+export const META_KEYS = ['prjsfFileName', 'prjsfPruneEmpty'] as const;
 export const PROVIDER_KEYS = ['prjsfGithubUrl'] as const;
-export const META_KEYS = ['prjsfFileName'] as const;
 export const URL_KEYS = ['prjsfData', 'prjsfSchema', 'prjsfUiSchema'] as const;
 export const FORMAT_KEYS = [
   'prjsfSchemaFormat',
@@ -22,4 +22,5 @@ export const DEFAULTS: TDataSet = {
   prjsfSchemaFormat: 'json',
   prjsfUiSchemaFormat: 'json',
   prjsfDataFormat: 'json',
+  prjsfPruneEmpty: 'true',
 };
