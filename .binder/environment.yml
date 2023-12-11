@@ -17,6 +17,8 @@ dependencies:
   # demo
   - jupyterlab-deck >=0.2.0a0
   ### .github/environment.yml ###
+  # more runtimes
+  - nodejs >=20,<21
   # fix
   - ruff
   - nbstripout
@@ -28,7 +30,6 @@ dependencies:
   ### docs/environment.yml ###
   # runtimes
   - python >=3.11,<3.12
-  - nodejs >=20,<21
   # run
   - doit-with-toml
   - importnb
