@@ -55,10 +55,12 @@ shave:git:lite:gist:fetch:main --> shave:git:lite:gist:checkout
 shave:git:traitlets:fetch:main --> shave:git:traitlets:checkout
 shave:git:comm:fetch:main --> shave:git:comm:checkout
 shave:git:lumino:fetch:main --> shave:git:lumino:checkout
+shave:git:lumino:fetch:pr-655 --> shave:git:lumino:checkout
 shave:git:jupyter_server_terminals:fetch:main --> shave:git:jupyter_server_terminals:checkout
 shave:git:jupyter_core:fetch:main --> shave:git:jupyter_core:checkout
 shave:git:jupyter_events:fetch:main --> shave:git:jupyter_events:checkout
 shave:git:ipython:fetch:main --> shave:git:ipython:checkout
+shave:git:jupyterlab_pygments:fetch:main --> shave:git:jupyterlab_pygments:checkout
 shave:git:jupyter_client:fetch:main --> shave:git:jupyter_client:checkout
 shave:git:nbformat:fetch:main --> shave:git:nbformat:checkout
 shave:git:nbconvert:fetch:main --> shave:git:nbconvert:checkout
@@ -69,6 +71,13 @@ shave:git:notebook_shim:fetch:main --> shave:git:notebook_shim:checkout
 shave:git:jupyterlab_server:fetch:main --> shave:git:jupyterlab_server:checkout
 shave:git:jupyterlab_lsp:fetch:main --> shave:git:jupyterlab_lsp:checkout
 shave:git:jupyterlab:fetch:main --> shave:git:jupyterlab:checkout
+shave:git:jupyterlab:fetch:pr-14575 --> shave:git:jupyterlab:checkout
+shave:git:jupyterlab:fetch:pr-14597 --> shave:git:jupyterlab:checkout
+shave:git:jupyterlab:fetch:pr-14766 --> shave:git:jupyterlab:checkout
+shave:git:jupyterlab:fetch:pr-14854 --> shave:git:jupyterlab:checkout
+shave:git:jupyterlab:fetch:pr-15222 --> shave:git:jupyterlab:checkout
+shave:git:jupyterlab:fetch:pr-15347 --> shave:git:jupyterlab:checkout
+shave:git:jupyterlab:fetch:pr-15048 --> shave:git:jupyterlab:checkout
 shave:git:notebook:fetch:main --> shave:git:notebook:checkout
 shave:git:ipywidgets:fetch:main --> shave:git:ipywidgets:checkout
 shave:git:jupyterlite:fetch:main --> shave:git:jupyterlite:checkout
@@ -78,6 +87,15 @@ shave:js:yarnrc --> shave:js:lumino:yarn:install
 shave:js:lumino:yarn:install --> shave:js:lumino:yarn:build:.
 shave:git:lumino:checkout --> shave:js:lumino:dist
 shave:js:lumino:yarn:build:. --> shave:js:lumino:dist
+shave:git:jupyterlab_pygments:checkout --> shave:js:jupyterlab_pygments:yarn:install
+shave:js:yarnrc --> shave:js:jupyterlab_pygments:yarn:install
+shave:js:lumino:dist --> shave:js:jupyterlab_pygments:yarn:install
+shave:js:jupyterlab:dist --> shave:js:jupyterlab_pygments:yarn:install
+shave:js:jupyterlab_pygments:yarn:install --> shave:js:jupyterlab_pygments:yarn:build:css:.
+shave:js:jupyterlab_pygments:yarn:install --> shave:js:jupyterlab_pygments:yarn:build:lib:.
+shave:git:jupyterlab_pygments:checkout --> shave:js:jupyterlab_pygments:dist
+shave:js:jupyterlab_pygments:yarn:build:css:. --> shave:js:jupyterlab_pygments:dist
+shave:js:jupyterlab_pygments:yarn:build:lib:. --> shave:js:jupyterlab_pygments:dist
 shave:git:jupyterlab:checkout --> shave:js:jupyterlab:yarn:install
 shave:js:yarnrc --> shave:js:jupyterlab:yarn:install
 shave:js:lumino:dist --> shave:js:jupyterlab:yarn:install
@@ -168,6 +186,11 @@ shave:git:ipython:checkout --> shave:py:ipython:pip:ipython
 shave:py:traitlets:pip:traitlets --> shave:py:ipython:pip:ipython
 shave:git:ipython:checkout --> shave:py:ipython:wheel:ipython
 shave:py:traitlets:pip:traitlets --> shave:py:ipython:wheel:ipython
+shave:git:jupyterlab_pygments:checkout --> shave:py:jupyterlab_pygments:pip:jupyterlab_pygments
+jupyterlab:sweep:labextension --> shave:py:jupyterlab_pygments:labext:jupyterlab_pygments
+shave:js:jupyterlab_pygments:yarn:build:css:. --> shave:py:jupyterlab_pygments:labext:jupyterlab_pygments
+shave:js:jupyterlab_pygments:yarn:build:lib:. --> shave:py:jupyterlab_pygments:labext:jupyterlab_pygments
+shave:py:jupyterlab:pip:jupyterlab --> shave:py:jupyterlab_pygments:labext:jupyterlab_pygments
 shave:git:jupyter_client:checkout --> shave:py:jupyter_client:pip:jupyter_client
 shave:py:jupyter_core:pip:jupyter_core --> shave:py:jupyter_client:pip:jupyter_client
 shave:git:nbformat:checkout --> shave:py:nbformat:pip:nbformat
@@ -203,6 +226,7 @@ shave:git:jupyterlab_lsp:checkout --> shave:py:jupyterlab_lsp:pip:jupyter_lsp
 shave:py:jupyter_server:pip:jupyter_server --> shave:py:jupyterlab_lsp:pip:jupyter_lsp
 shave:git:jupyterlab:checkout --> shave:py:jupyterlab:pip:jupyterlab
 shave:js:jupyterlab:yarn:build:prod:dev_mode --> shave:py:jupyterlab:pip:jupyterlab
+shave:py:jupyterlab_pygments:pip:jupyterlab_pygments --> shave:py:jupyterlab:pip:jupyterlab
 shave:py:ipykernel:pip:ipykernel --> shave:py:jupyterlab:pip:jupyterlab
 shave:py:notebook_shim:pip:notebook_shim --> shave:py:jupyterlab:pip:jupyterlab
 shave:py:jupyterlab_server:pip:jupyterlab_server --> shave:py:jupyterlab:pip:jupyterlab
@@ -304,7 +328,14 @@ subgraph jupyterlab
   jupyterlab:sweep:assets(("`✅ **assets**`")):::hack
   jupyterlab:sweep:labextension(("`✅ **labextension**`")):::hack
   shave:git:jupyterlab:fetch:main[("`✅ **fetch main**`")]:::git
-  shave:git:jupyterlab:checkout[("`💭 **checkout**`")]:::git
+  shave:git:jupyterlab:fetch:pr-14575[("`✅ **fetch pr-14575**`")]:::git
+  shave:git:jupyterlab:fetch:pr-14597[("`✅ **fetch pr-14597**`")]:::git
+  shave:git:jupyterlab:fetch:pr-14766[("`✅ **fetch pr-14766**`")]:::git
+  shave:git:jupyterlab:fetch:pr-14854[("`✅ **fetch pr-14854**`")]:::git
+  shave:git:jupyterlab:fetch:pr-15222[("`✅ **fetch pr-15222**`")]:::git
+  shave:git:jupyterlab:fetch:pr-15347[("`✅ **fetch pr-15347**`")]:::git
+  shave:git:jupyterlab:fetch:pr-15048[("`✅ **fetch pr-15048**`")]:::git
+  shave:git:jupyterlab:checkout[("`✅ **checkout**`")]:::git
   shave:js:jupyterlab:yarn:install{{"`✅ **yarn install**`"}}:::js
   shave:js:jupyterlab:yarn:buildutils:.{{"`✅ **yarn buildutils .**`"}}:::js
   shave:js:jupyterlab:yarn:builder:.{{"`✅ **yarn builder .**`"}}:::js
@@ -333,7 +364,8 @@ subgraph comm
 end
 subgraph lumino
   shave:git:lumino:fetch:main[("`✅ **fetch main**`")]:::git
-  shave:git:lumino:checkout[("`💭 **checkout**`")]:::git
+  shave:git:lumino:fetch:pr-655[("`✅ **fetch pr-655**`")]:::git
+  shave:git:lumino:checkout[("`✅ **checkout**`")]:::git
   shave:js:lumino:yarn:install{{"`✅ **yarn install**`"}}:::js
   shave:js:lumino:yarn:build:.{{"`✅ **yarn build .**`"}}:::js
   shave:js:lumino:dist{{"`✅ **dist**`"}}:::js
@@ -359,6 +391,16 @@ subgraph ipython
   shave:git:ipython:checkout[("`✅ **checkout**`")]:::git
   shave:py:ipython:pip:ipython["`✅ **pip ipython**`"]:::py
   shave:py:ipython:wheel:ipython["`✅ **wheel ipython**`"]:::py
+end
+subgraph jupyterlab_pygments
+  shave:git:jupyterlab_pygments:fetch:main[("`✅ **fetch main**`")]:::git
+  shave:git:jupyterlab_pygments:checkout[("`✅ **checkout**`")]:::git
+  shave:js:jupyterlab_pygments:yarn:install{{"`✅ **yarn install**`"}}:::js
+  shave:js:jupyterlab_pygments:yarn:build:css:.{{"`✅ **yarn build css .**`"}}:::js
+  shave:js:jupyterlab_pygments:yarn:build:lib:.{{"`✅ **yarn build lib .**`"}}:::js
+  shave:js:jupyterlab_pygments:dist{{"`✅ **dist**`"}}:::js
+  shave:py:jupyterlab_pygments:pip:jupyterlab_pygments["`✅ **pip jupyterlab_pygments**`"]:::py
+  shave:py:jupyterlab_pygments:labext:jupyterlab_pygments(["`✅ **labext jupyterlab_pygments**`"]):::jupyter
 end
 subgraph jupyter_client
   shave:git:jupyter_client:fetch:main[("`✅ **fetch main**`")]:::git

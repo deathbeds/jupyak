@@ -35,6 +35,10 @@ display: none;
 display: none;
 }
 
+#show-repo-jupyterlab_pygments:not(:checked) ~ table tbody #repo-jupyterlab_pygments {
+display: none;
+}
+
 #show-repo-jupyter_client:not(:checked) ~ table tbody #repo-jupyter_client {
 display: none;
 }
@@ -124,6 +128,9 @@ Check one or more repos to provide use a differnt branch, PR, or tag, or provide
 
 <input type="checkbox" name="show-repo-ipython" id="show-repo-ipython"/>
 <label class="show-repo-label" for="show-repo-ipython">ipython</label>
+
+<input type="checkbox" name="show-repo-jupyterlab_pygments" id="show-repo-jupyterlab_pygments"/>
+<label class="show-repo-label" for="show-repo-jupyterlab_pygments">jupyterlab_pygments</label>
 
 <input type="checkbox" name="show-repo-jupyter_client" id="show-repo-jupyter_client"/>
 <label class="show-repo-label" for="show-repo-jupyter_client">jupyter_client</label>
@@ -603,6 +610,65 @@ title="choose a different git merge strategy"
 <td>
 <input
 name="repos|ipython|github|merge_options"
+type="text"
+title="add space-delimted -X options for the merge strategy"
+/>
+</td>
+</tr>
+
+
+
+
+
+<tr class="repo" id="repo-jupyterlab_pygments">
+<th><code>https://github.com/jupyterlab/jupyterlab_pygments/</code></th>
+<td>
+<input id="repos-jupyterlab_pygments-github-baseline"
+name="repos|jupyterlab_pygments|github|baseline"
+type="text"
+title="the baseline GitHub URL for jupyterlab_pygments"
+spellcheck="false"
+placeholder="tree/main"
+pattern="^$|^(tree/[^s]+|pull/\d+|releases/tag/[^s]+)"
+/>
+<label for="repos-jupyterlab_pygments-github-baseline">
+must be empty, or one of:<br/>
+<code>pull/{:number}</code><br/>
+<code>tree/{:branch}</code><br/>
+<code>releases/tag/{:tag}</code>
+</label>
+</td>
+<td>
+<input id="repos-jupyterlab_pygments-github-merge_with"
+name="repos|jupyterlab_pygments|github|merge_with"
+title="one or more space-delimited GitHub URLs to merge into the jupyterlab_pygments baseline"
+type="text"
+spellcheck="false"
+placeholder="pull/{:number} tree/{:branch} releases/tag/{:tag}"
+pattern="^$|^(tree/[^s]+|pull/\d+|releases/tag/[^s]+)(\s+(tree/[^s]+|pull/\d+|releases/tag/[^s]+))*"
+/>
+<label for="repos-jupyterlab_pygments-github-merge_with">
+must be empty, or one or more (separated by space) of:<br/>
+<code>pull/{:number}</code><br/>
+<code>tree/{:branch}</code><br/>
+<code>releases/tag/{:tag}</code>
+</label>
+</td>
+<td>
+<select
+name="repos|jupyterlab_pygments|github|merge_strategy"
+title="choose a different git merge strategy"
+>
+<option value="">ort (default)</option>
+<option>resolve</option>
+<option>octopus</option>
+<option>ours</option>
+<option>subtree</option>
+</select>
+</td>
+<td>
+<input
+name="repos|jupyterlab_pygments|github|merge_options"
 type="text"
 title="add space-delimted -X options for the merge strategy"
 />

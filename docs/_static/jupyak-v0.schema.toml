@@ -484,6 +484,7 @@ dependencies = [
   "ipykernel",
   "notebook_shim",
   "jupyter_lsp",
+  "jupyterlab_pygments",
 ]
 file_dep = [
   "dev_mode/static/package.json",
@@ -512,6 +513,71 @@ dependencies = [
 ]
 setup_cfgs = [
   "python_packages/jupyter_lsp/setup.cfg",
+]
+
+[[properties.repos.additionalProperties.anyOf]]
+title = "jupyterlab_pygments"
+allOf = [
+  { type = "object", properties = { name = { type = "string", const = "jupyterlab_pygments" } } },
+  { "$ref" = "#/$defs/Repo" },
+]
+
+[properties.repos.additionalProperties.anyOf.default]
+name = "jupyterlab_pygments"
+
+[properties.repos.additionalProperties.anyOf.default.github]
+baseline = "tree/main"
+url = "https://github.com/jupyterlab/jupyterlab_pygments"
+
+[properties.repos.additionalProperties.anyOf.default.js]
+dependencies = [
+  "lumino",
+  "jupyterlab",
+]
+
+[[properties.repos.additionalProperties.anyOf.default.js.tasks."."]]
+actions = [
+  [
+    "yarn",
+    "build:css",
+  ],
+]
+file_dep = [
+  "jupyterlab_pygments/style.py",
+]
+name = "build:css"
+targets = [
+  "style/base.css",
+]
+
+[[properties.repos.additionalProperties.anyOf.default.js.tasks."."]]
+actions = [
+  [
+    "yarn",
+    "build:lib",
+    "--skipLibCheck",
+  ],
+]
+file_dep = [
+  "src/**/*.ts",
+]
+name = "build:lib"
+targets = [
+  "tsconfig.tsbuildinfo",
+]
+
+[properties.repos.additionalProperties.anyOf.default.py]
+pyproject_tomls = [
+  "pyproject.toml",
+]
+
+[properties.repos.additionalProperties.anyOf.default.py.lab_extensions."."]
+file_dep = [
+  "tsconfig.tsbuildinfo",
+  "style/base.css",
+]
+targets = [
+  "jupyterlab_pygments/labextension/package.json",
 ]
 
 [[properties.repos.additionalProperties.anyOf]]

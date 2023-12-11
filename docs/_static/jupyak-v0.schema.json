@@ -489,7 +489,8 @@
                   "jupyterlab_server",
                   "ipykernel",
                   "notebook_shim",
-                  "jupyter_lsp"
+                  "jupyter_lsp",
+                  "jupyterlab_pygments"
                 ],
                 "file_dep": ["dev_mode/static/package.json"],
                 "pyproject_tomls": ["pyproject.toml"]
@@ -521,6 +522,58 @@
               "py": {
                 "dependencies": ["jupyter_server"],
                 "setup_cfgs": ["python_packages/jupyter_lsp/setup.cfg"]
+              }
+            }
+          },
+          {
+            "title": "jupyterlab_pygments",
+            "allOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "const": "jupyterlab_pygments"
+                  }
+                }
+              },
+              {
+                "$ref": "#/$defs/Repo"
+              }
+            ],
+            "default": {
+              "github": {
+                "baseline": "tree/main",
+                "url": "https://github.com/jupyterlab/jupyterlab_pygments"
+              },
+              "js": {
+                "dependencies": ["lumino", "jupyterlab"],
+                "tasks": {
+                  ".": [
+                    {
+                      "actions": [["yarn", "build:css"]],
+                      "file_dep": ["jupyterlab_pygments/style.py"],
+                      "name": "build:css",
+                      "targets": ["style/base.css"]
+                    },
+                    {
+                      "actions": [["yarn", "build:lib", "--skipLibCheck"]],
+                      "file_dep": ["src/**/*.ts"],
+                      "name": "build:lib",
+                      "targets": ["tsconfig.tsbuildinfo"]
+                    }
+                  ]
+                }
+              },
+              "name": "jupyterlab_pygments",
+              "py": {
+                "lab_extensions": {
+                  ".": {
+                    "file_dep": ["tsconfig.tsbuildinfo", "style/base.css"],
+                    "targets": ["jupyterlab_pygments/labextension/package.json"]
+                  }
+                },
+                "pyproject_tomls": ["pyproject.toml"]
               }
             }
           },
