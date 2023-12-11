@@ -10,6 +10,7 @@ permissions:
 
 env:
   JPYK_ALLOW_NO_CONFIG: 1
+  JPYK_SELF_DIST: dist/SHA256SUMSss
 
 jobs:
   build:
@@ -25,6 +26,8 @@ jobs:
           miniforge-variant: Mambaforge
           use-mamba: true
       - run: doit bootstrap
+      - run: doit self:js:*
+      - run: doit self:build:*
       - run: doit shave:git:*
         env:
           JPYK_LOG_NAME: git
