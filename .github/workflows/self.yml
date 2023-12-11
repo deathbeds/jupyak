@@ -31,6 +31,7 @@ jobs:
           miniforge-variant: Mambaforge
           use-mamba: true
       - run: doit bootstrap
+      - run: doit self:schema:*
       - run: doit self:js:*
       - run: doit self:build:*
       - run: doit self:test:*
