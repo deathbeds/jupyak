@@ -15,6 +15,7 @@ concurrency:
 
 env:
   JPYK_ALLOW_NO_CONFIG: 1
+  CACHE_EPOCH: 0
 
 jobs:
   self:
@@ -31,6 +32,12 @@ jobs:
           miniforge-variant: Mambaforge
           use-mamba: true
       - run: doit bootstrap
+      - uses: actions/cache@v3
+        id: cache-node-modules
+        with:
+          path: '**/node_modules'
+          key: |
+            ${{ env.CACHE_EPOCH }}-node_modules-${{ hashFiles('yarn.lock', '.github/conda-linux-64.lock') }}
       - run: doit self:js:*
       - run: doit self:schema:*
       - run: doit self:build:*

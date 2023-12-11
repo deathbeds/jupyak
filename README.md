@@ -1,13 +1,21 @@
+<!-- this can be viewed as a slideshow in jupyterlab deck -->
+
+---
+
 # jupyak
 
 > get a statically-hosted JupyterLite preview of pull requests from across the Jupyter
 > stack
+
+---
 
 ## what does it do?
 
 This repo accepts [pull requests](#how-does-it-work) that build static
 [preview sites](#how-do-i-get-a-preview-site) to the
 [Jupyter(Lite) stack](#what-can-it-build).
+
+---
 
 ## how do I get a preview site?
 
@@ -17,6 +25,8 @@ This repo accepts [pull requests](#how-does-it-work) that build static
 - Start a [Pull Request][pulls] (PR) including the `jupyak_config.toml`
 - Wait for the PR to build a site on ReadTheDocs (RTD)
 - Make changes to the PR to trigger re-building the preview site
+
+---
 
 ## where does it do it?
 
@@ -38,6 +48,8 @@ This repo accepts [pull requests](#how-does-it-work) that build static
 > taken to make _anything_ run on any other system, and likely won't be tested anywhere
 > else.
 
+---
+
 ## how does it work?
 
 Delivering a preview site uses a few different GitHub Actions workflows and ReadTheDocs
@@ -53,6 +65,8 @@ configurations. Once a PR is created:
     built RTD site will contain human-readable error logs
 - Additional commits on the PR can trigger a rebuild of the site
 
+---
+
 ## what can it build?
 
 `jupyak` understand how to work with one or more fragments of human-readable GitHub URLs
@@ -64,6 +78,8 @@ of the forms:
   - > note that the `/tree/{:tag}` form will fail loudly
 
 ...from the following repos to see novel behavior.
+
+---
 
 | repo                                              | browser UI | kernel |
 | ------------------------------------------------- | :--------: | :----: |
@@ -80,9 +96,15 @@ of the forms:
 | https://github.com/jupyterlite/jupyterlite        |     ✅     |        |
 | https://github.com/jupyterlite/pyodide-kernel     |     ✅     |   ✅   |
 
+---
+
+### what about configuring JupyterLite?
+
 Additionally, a single GitHub [Gist][gist] can be used as the contents of the preview
 site. If the gist contains `jupyter_lite_config.json` and/or `jupyter-lite.json`, these
 will be merged into the [configuration][lite-config] used to build and host the site.
+
+---
 
 ## what does it _not_ build?
 
@@ -97,6 +119,10 @@ have little measurable experience the UI.
 | https://github.com/jupyter-server/jupyter_server_terminals | what's a process?              |
 | https://github.com/jupyterlab/jupyterlab_server            | heavy deps                     |
 | https://github.com/jupyter/nbconvert                       | heavy deps, no `data_files`    |
+
+---
+
+### what else is it not building?
 
 For each repo, a few more things _could_ be built, and might be interesting to evaluate
 a PR stack. However, each of these would come at the expense of a lower chance of a
