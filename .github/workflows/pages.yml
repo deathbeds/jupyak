@@ -10,7 +10,6 @@ permissions:
 
 env:
   JPYK_ALLOW_NO_CONFIG: 1
-  JPYK_SELF_DIST: dist/SHA256SUMSss
 
 jobs:
   build:
