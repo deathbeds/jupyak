@@ -483,12 +483,35 @@ dependencies = [
   "jupyterlab_server",
   "ipykernel",
   "notebook_shim",
+  "jupyter_lsp",
 ]
 file_dep = [
   "dev_mode/static/package.json",
 ]
 pyproject_tomls = [
   "pyproject.toml",
+]
+
+[[properties.repos.additionalProperties.anyOf]]
+title = "jupyterlab_lsp"
+allOf = [
+  { type = "object", properties = { name = { type = "string", const = "jupyterlab_lsp" } } },
+  { "$ref" = "#/$defs/Repo" },
+]
+
+[properties.repos.additionalProperties.anyOf.default]
+name = "jupyterlab_lsp"
+
+[properties.repos.additionalProperties.anyOf.default.github]
+baseline = "tree/main"
+url = "https://github.com/jupyter-lsp/jupyterlab-lsp"
+
+[properties.repos.additionalProperties.anyOf.default.py]
+dependencies = [
+  "jupyter_server",
+]
+setup_cfgs = [
+  "python_packages/jupyter_lsp/setup.cfg",
 ]
 
 [[properties.repos.additionalProperties.anyOf]]
@@ -1127,7 +1150,7 @@ type = "string"
 ["$defs".PythonOptions.properties.lab_extensions]
 type = "object"
 title = "lab_extensions"
-description = "paths with extra file depenendencies needed to build an extension in this repo"
+description = "paths with extra file dependencies needed to build an extension in this repo"
 
 ["$defs".PythonOptions.properties.modules]
 type = "array"
@@ -1140,9 +1163,17 @@ type = "string"
 ["$defs".PythonOptions.properties.pyproject_tomls]
 type = "array"
 title = "pyproject_tomls"
-description = "pyproject toml files for installable packages"
+description = "pyproject.toml files for installable packages"
 
 ["$defs".PythonOptions.properties.pyproject_tomls.items]
+type = "string"
+
+["$defs".PythonOptions.properties.setup_cfgs]
+type = "array"
+title = "setup_cfgs"
+description = "legacy setup.cfg files for installable packages"
+
+["$defs".PythonOptions.properties.setup_cfgs.items]
 type = "string"
 
 ["$defs".Repo]

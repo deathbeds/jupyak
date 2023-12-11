@@ -63,20 +63,21 @@ of the forms:
 - `/releases/tag/{:tag}`
   - > note that the `/tree/{:tag}` form will fail loudly
 
-...from the following repos:
+...from the following repos to see novel behavior.
 
-- https://github.com/ipython/traitlets
-- https://github.com/ipython/comm
-- https://github.com/ipython/ipython
-- https://github.com/jupyter-widgets/ipywidgets
-- https://github.com/jupyter/jupyter_core
-- https://github.com/jupyter/jupyter_server
-- https://github.com/jupyter/notebook
-- https://github.com/jupyterlab/jupyterlab
-- https://github.com/jupyterlab/jupyterlab_server
-- https://github.com/jupyterlab/lumino
-- https://github.com/jupyterlite/jupyterlite
-- https://github.com/jupyterlite/pyodide-kernel
+| repo                                          | browser UI | kernel |
+| --------------------------------------------- | :--------: | :----: |
+| https://github.com/ipython/comm               |            |   ✅   |
+| https://github.com/ipython/ipython            |            |   ✅   |
+| https://github.com/ipython/traitlets          |            |   ✅   |
+| https://github.com/jupyter-widgets/ipywidgets |     ✅     |   ✅   |
+| https://github.com/jupyter/jupyter_core       |            |   ✅   |
+| https://github.com/jupyter/nbformat           |            |   ✅   |
+| https://github.com/jupyter/notebook           |     ✅     |        |
+| https://github.com/jupyterlab/jupyterlab      |     ✅     |        |
+| https://github.com/jupyterlab/lumino          |     ✅     |        |
+| https://github.com/jupyterlite/jupyterlite    |     ✅     |        |
+| https://github.com/jupyterlite/pyodide-kernel |     ✅     |   ✅   |
 
 Additionally, a single GitHub [Gist][gist] can be used as the contents of the preview
 site. If the gist contains `jupyter_lite_config.json` and/or `jupyter-lite.json`, these
@@ -84,13 +85,25 @@ will be merged into the [configuration][lite-config] used to build and host the 
 
 ## what does it _not_ build?
 
-A few more things _could_ be built, and might be interesting to evaluate a PR stack, ar
-note. However, each of these would come at the expense of a lower chance of a usable
-JupyterLite site at the end of each PR build. These include:
+The following repos are cloned and installed to satisfy build-time requirements, but
+have little measurable experience the UI.
+
+| repo                                                       | why not?                       |
+| ---------------------------------------------------------- | ------------------------------ |
+| https://github.com/ipython/ipykernel                       | heavy deps, patched in pyodide |
+| https://github.com/jupyter-lsp/jupyterlab-lsp              | needs mock JS server           |
+| https://github.com/jupyter-server/jupyter_server           | heavy deps                     |
+| https://github.com/jupyter-server/jupyter_server_terminals | what's a process?              |
+| https://github.com/jupyterlab/jupyterlab_server            | heavy deps                     |
+| https://github.com/jupyter/nbconvert                       | heavy deps, no `data_files`    |
+
+For each repo, a few more things _could_ be built, and might be interesting to evaluate
+a PR stack. However, each of these would come at the expense of a lower chance of a
+usable JupyterLite site at the end of each PR build. These include:
 
 - test reports
 - examples
-- per-project documentation
+- documentation
 - lint reports
 - anything that doesn't work in the browser
 - anything that requires a `c`/`rust`/`emscripten` compiler or other heavy dependencies
