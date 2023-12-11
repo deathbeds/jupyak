@@ -7,6 +7,7 @@ from pathlib import Path
 
 import tomli
 
+RTD = json.loads(os.environ.get("READTHEDOCS", "False").lower())
 CONF_PY = Path(__file__)
 HERE = CONF_PY.parent
 ROOT = HERE.parent
@@ -80,12 +81,6 @@ html_theme_options = {
             "url": PROJ_DATA["project"]["urls"]["PyPI"],
             "icon": "fa-brands fa-python",
         },
-        {
-            "name": "conda-forge",
-            "url": "https://github.com/conda-forge/jupyak",
-            "icon": "_static/img/anvil.svg",
-            "type": "local",
-        },
     ],
     "footer_end": ["mermaid10", "shaver"],
     "secondary_sidebar_items": [],
@@ -101,7 +96,10 @@ html_sidebars = {
 }
 
 if REPO_INFO is not None:
-    html_context = {**REPO_INFO.groupdict(), "doc_path": "docs"}
+    html_context.update(**REPO_INFO.groupdict(), doc_path="docs")
+
+if RTD:
+    html_context["prjsf_url"] = "https://deathbeds.github.io/_static/prjsf/prjsf.js"
 
 if ALLOW_NO_CONFIG or JUPYAK_CONF_CANDIDATES:
     html_sidebars["*"] = [
