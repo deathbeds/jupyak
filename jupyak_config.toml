@@ -14,5 +14,6 @@ jupyterlab.github.merge_with = [
     "pull/14766",
     "pull/14854",
     "pull/15222",
-    "pull/15347"
-]
+    "pull/15347",
+    "pull/15048",
+] 
