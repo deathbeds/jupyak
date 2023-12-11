@@ -1082,7 +1082,11 @@
         "pypi_to_conda": {
           "type": "object",
           "title": "pypi_to_conda",
-          "description": "names of PyPI distributions to replace with their conda-forge counterparts"
+          "description": "names of PyPI distributions to replace with their conda-forge counterparts",
+          "additionalProperties": {
+            "type": "string",
+            "description": "a normalized conda-forge name"
+          }
         },
         "python_version": {
           "type": "string",
@@ -1372,7 +1376,14 @@
         "wheel_file_dep": {
           "type": "object",
           "title": "wheel_file_dep",
-          "description": "extra files needed to build a given wheel"
+          "description": "extra files needed to build a given wheel",
+          "additionalProperties": {
+            "type": "array",
+            "description": "globs to files that need to be built before the wheel can be built",
+            "items": {
+              "type": "string"
+            }
+          }
         }
       }
     },

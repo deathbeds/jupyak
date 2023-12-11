@@ -1067,6 +1067,10 @@ type = "object"
 title = "pypi_to_conda"
 description = "names of PyPI distributions to replace with their conda-forge counterparts"
 
+["$defs".CondaEnv.properties.pypi_to_conda.additionalProperties]
+type = "string"
+description = "a normalized conda-forge name"
+
 ["$defs".CondaEnv.properties.python_version]
 type = "string"
 title = "python_version"
@@ -1334,6 +1338,13 @@ description = "whether to build and ship a noarch wheel for pyodide"
 type = "object"
 title = "wheel_file_dep"
 description = "extra files needed to build a given wheel"
+
+["$defs".RepoLiteOptions.properties.wheel_file_dep.additionalProperties]
+type = "array"
+description = "globs to files that need to be built before the wheel can be built"
+
+["$defs".RepoLiteOptions.properties.wheel_file_dep.additionalProperties.items]
+type = "string"
 
 ["$defs".Task]
 title = "Task"
