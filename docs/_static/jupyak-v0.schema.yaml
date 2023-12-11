@@ -363,8 +363,79 @@ properties:
                 - jupyterlab_server
                 - ipykernel
                 - notebook_shim
+                - jupyter_lsp
+                - jupyterlab_pygments
               file_dep:
                 - dev_mode/static/package.json
+              pyproject_tomls:
+                - pyproject.toml
+        - title: jupyterlab_lsp
+          allOf:
+            - type: object
+              properties:
+                name:
+                  type: string
+                  const: jupyterlab_lsp
+            - $ref: '#/$defs/Repo'
+          default:
+            github:
+              baseline: tree/main
+              url: https://github.com/jupyter-lsp/jupyterlab-lsp
+            name: jupyterlab_lsp
+            py:
+              dependencies:
+                - jupyter_server
+              setup_cfgs:
+                - python_packages/jupyter_lsp/setup.cfg
+        - title: jupyterlab_pygments
+          allOf:
+            - type: object
+              properties:
+                name:
+                  type: string
+                  const: jupyterlab_pygments
+            - $ref: '#/$defs/Repo'
+          default:
+            github:
+              baseline: tree/main
+              url: https://github.com/jupyterlab/jupyterlab_pygments
+            js:
+              dependencies:
+                - lumino
+                - jupyterlab
+              tasks:
+                .:
+                  - actions:
+                      - - yarn
+                        - build:css
+                    file_dep:
+                      - jupyterlab_pygments/style.py
+                    name: build:css
+                    targets:
+                      - style/base.css
+                  - actions:
+                      - - yarn
+                        - build:lib
+                        - --skipLibCheck
+                    file_dep:
+                      - src/**/*.ts
+                    name: build:lib
+                    targets:
+                      - tsconfig.tsbuildinfo
+            lite:
+              wheel: true
+              wheel_file_dep:
+                jupyterlab_pygments:
+                  - jupyterlab_pygments/labextension/package.json
+            name: jupyterlab_pygments
+            py:
+              lab_extensions:
+                .:
+                  file_dep:
+                    - tsconfig.tsbuildinfo
+                    - style/base.css
+                  targets:
+                    - jupyterlab_pygments/labextension/package.json
               pyproject_tomls:
                 - pyproject.toml
         - title: jupyterlab_server
@@ -872,7 +943,7 @@ $defs:
         type: object
         title: lab_extensions
         description:
-          paths with extra file depenendencies needed to build an extension in this repo
+          paths with extra file dependencies needed to build an extension in this repo
       modules:
         type: array
         title: modules
@@ -882,7 +953,13 @@ $defs:
       pyproject_tomls:
         type: array
         title: pyproject_tomls
-        description: pyproject toml files for installable packages
+        description: pyproject.toml files for installable packages
+        items:
+          type: string
+      setup_cfgs:
+        type: array
+        title: setup_cfgs
+        description: legacy setup.cfg files for installable packages
         items:
           type: string
   Repo:
