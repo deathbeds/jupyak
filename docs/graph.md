@@ -51,11 +51,9 @@ classDef git fill:#f1502f,color:#fff;
 classDef hack fill:#000,color:#fff;
 shave:js:jupyterlab:yarn:build:prod:dev_mode --> jupyterlab:sweep:assets
 shave:js:jupyterlab:yarn:builder:. --> jupyterlab:sweep:labextension
-shave:git:lite:gist:fetch:main --> shave:git:lite:gist:checkout
 shave:git:traitlets:fetch:main --> shave:git:traitlets:checkout
 shave:git:comm:fetch:main --> shave:git:comm:checkout
 shave:git:lumino:fetch:main --> shave:git:lumino:checkout
-shave:git:lumino:fetch:pr-655 --> shave:git:lumino:checkout
 shave:git:jupyter_server_terminals:fetch:main --> shave:git:jupyter_server_terminals:checkout
 shave:git:jupyter_core:fetch:main --> shave:git:jupyter_core:checkout
 shave:git:jupyter_events:fetch:main --> shave:git:jupyter_events:checkout
@@ -71,13 +69,6 @@ shave:git:notebook_shim:fetch:main --> shave:git:notebook_shim:checkout
 shave:git:jupyterlab_server:fetch:main --> shave:git:jupyterlab_server:checkout
 shave:git:jupyterlab_lsp:fetch:main --> shave:git:jupyterlab_lsp:checkout
 shave:git:jupyterlab:fetch:main --> shave:git:jupyterlab:checkout
-shave:git:jupyterlab:fetch:pr-14575 --> shave:git:jupyterlab:checkout
-shave:git:jupyterlab:fetch:pr-14597 --> shave:git:jupyterlab:checkout
-shave:git:jupyterlab:fetch:pr-14766 --> shave:git:jupyterlab:checkout
-shave:git:jupyterlab:fetch:pr-14854 --> shave:git:jupyterlab:checkout
-shave:git:jupyterlab:fetch:pr-15222 --> shave:git:jupyterlab:checkout
-shave:git:jupyterlab:fetch:pr-15347 --> shave:git:jupyterlab:checkout
-shave:git:jupyterlab:fetch:pr-15048 --> shave:git:jupyterlab:checkout
 shave:git:notebook:fetch:main --> shave:git:notebook:checkout
 shave:git:ipywidgets:fetch:main --> shave:git:ipywidgets:checkout
 shave:git:jupyterlite:fetch:main --> shave:git:jupyterlite:checkout
@@ -302,7 +293,6 @@ jupyterlab:sweep:labextension --> shave:py:jupyterlite_pyodide_kernel:labext:pyo
 shave:js:jupyterlite_pyodide_kernel:yarn:build:py:wheels:pyodide-kernel --> shave:py:jupyterlite_pyodide_kernel:labext:pyodide-kernel-extension
 shave:js:jupyterlite_pyodide_kernel:yarn:build:lib:pyodide-kernel-extension --> shave:py:jupyterlite_pyodide_kernel:labext:pyodide-kernel-extension
 shave:py:jupyterlab:pip:jupyterlab --> shave:py:jupyterlite_pyodide_kernel:labext:pyodide-kernel-extension
-shave:git:lite:gist:checkout --> shave:lite:config
 shave:py:traitlets:wheel:traitlets --> shave:lite:config
 shave:py:comm:wheel:comm --> shave:lite:config
 shave:py:jupyter_core:wheel:jupyter_core --> shave:lite:config
@@ -315,7 +305,6 @@ shave:py:ipywidgets:labext:jupyterlab_widgets --> shave:lite:config
 shave:py:jupyterlite:labext:jupyterlite-javascript-kernel --> shave:lite:config
 shave:py:jupyterlite_pyodide_kernel:labext:pyodide-kernel-extension --> shave:lite:config
 jupyterlab:sweep:assets --> shave:lite:build
-shave:git:lite:gist:checkout --> shave:lite:build
 shave:py:traitlets:wheel:traitlets --> shave:lite:build
 shave:py:comm:wheel:comm --> shave:lite:build
 shave:py:jupyter_core:wheel:jupyter_core --> shave:lite:build
@@ -334,14 +323,7 @@ subgraph jupyterlab
   jupyterlab:sweep:assets(("`✅ **assets**`")):::hack
   jupyterlab:sweep:labextension(("`✅ **labextension**`")):::hack
   shave:git:jupyterlab:fetch:main[("`✅ **fetch main**`")]:::git
-  shave:git:jupyterlab:fetch:pr-14575[("`✅ **fetch pr-14575**`")]:::git
-  shave:git:jupyterlab:fetch:pr-14597[("`✅ **fetch pr-14597**`")]:::git
-  shave:git:jupyterlab:fetch:pr-14766[("`✅ **fetch pr-14766**`")]:::git
-  shave:git:jupyterlab:fetch:pr-14854[("`✅ **fetch pr-14854**`")]:::git
-  shave:git:jupyterlab:fetch:pr-15222[("`✅ **fetch pr-15222**`")]:::git
-  shave:git:jupyterlab:fetch:pr-15347[("`✅ **fetch pr-15347**`")]:::git
-  shave:git:jupyterlab:fetch:pr-15048[("`✅ **fetch pr-15048**`")]:::git
-  shave:git:jupyterlab:checkout[("`✅ **checkout**`")]:::git
+  shave:git:jupyterlab:checkout[("`💭 **checkout**`")]:::git
   shave:js:jupyterlab:yarn:install{{"`✅ **yarn install**`"}}:::js
   shave:js:jupyterlab:yarn:buildutils:.{{"`✅ **yarn buildutils .**`"}}:::js
   shave:js:jupyterlab:yarn:builder:.{{"`✅ **yarn builder .**`"}}:::js
@@ -349,12 +331,6 @@ subgraph jupyterlab
   shave:js:jupyterlab:yarn:build:prod:dev_mode{{"`✅ **yarn build prod dev_mode**`"}}:::js
   shave:js:jupyterlab:dist{{"`✅ **dist**`"}}:::js
   shave:py:jupyterlab:pip:jupyterlab["`✅ **pip jupyterlab**`"]:::py
-end
-subgraph lite
-  shave:git:lite:gist:fetch:main[("`✅ **gist fetch main**`")]:::git
-  shave:git:lite:gist:checkout[("`✅ **gist checkout**`")]:::git
-  shave:lite:config(["`✅ **config**`"]):::jupyter
-  shave:lite:build(["`✅ **build**`"]):::jupyter
 end
 subgraph traitlets
   shave:git:traitlets:fetch:main[("`✅ **fetch main**`")]:::git
@@ -370,8 +346,7 @@ subgraph comm
 end
 subgraph lumino
   shave:git:lumino:fetch:main[("`✅ **fetch main**`")]:::git
-  shave:git:lumino:fetch:pr-655[("`✅ **fetch pr-655**`")]:::git
-  shave:git:lumino:checkout[("`✅ **checkout**`")]:::git
+  shave:git:lumino:checkout[("`💭 **checkout**`")]:::git
   shave:js:lumino:yarn:install{{"`✅ **yarn install**`"}}:::js
   shave:js:lumino:yarn:build:.{{"`✅ **yarn build .**`"}}:::js
   shave:js:lumino:dist{{"`✅ **dist**`"}}:::js
@@ -506,6 +481,10 @@ subgraph jupyterlite_pyodide_kernel
 end
 subgraph yarnrc
   shave:js:yarnrc{{"`✅ **yarnrc**`"}}:::js
+end
+subgraph lite
+  shave:lite:config(["`💭 **config**`"]):::jupyter
+  shave:lite:build(["`💭 **build**`"]):::jupyter
 end
 </div>
 </div>
