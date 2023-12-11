@@ -1223,6 +1223,28 @@
         }
       }
     },
+    "LabExtension": {
+      "title": "LabExtension",
+      "description": "A description of the inputs and outputs of \"jupyter labextension build\"",
+      "properties": {
+        "file_dep": {
+          "type": "array",
+          "title": "file_dep",
+          "description": "paths or globs to files that would trigger a need to rebuild",
+          "items": {
+            "type": "string"
+          }
+        },
+        "targets": {
+          "type": "array",
+          "title": "targets",
+          "description": "canary files that will be generated (usually a package.json)",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "LiteOptions": {
       "title": "LiteOptions",
       "description": "options for the final jupyterlite build",
@@ -1257,7 +1279,10 @@
         "lab_extensions": {
           "type": "object",
           "title": "lab_extensions",
-          "description": "paths with extra file dependencies needed to build an extension in this repo"
+          "description": "paths with extra file dependencies needed to build an extension in this repo",
+          "additionalProperties": {
+            "$ref": "#/$defs/LabExtension"
+          }
         },
         "modules": {
           "type": "array",

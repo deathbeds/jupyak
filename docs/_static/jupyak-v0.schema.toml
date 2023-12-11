@@ -1192,6 +1192,26 @@ anyOf = [
   { "$ref" = "#/$defs/Task" },
 ]
 
+["$defs".LabExtension]
+title = "LabExtension"
+description = "A description of the inputs and outputs of \"jupyter labextension build\""
+
+["$defs".LabExtension.properties.file_dep]
+type = "array"
+title = "file_dep"
+description = "paths or globs to files that would trigger a need to rebuild"
+
+["$defs".LabExtension.properties.file_dep.items]
+type = "string"
+
+["$defs".LabExtension.properties.targets]
+type = "array"
+title = "targets"
+description = "canary files that will be generated (usually a package.json)"
+
+["$defs".LabExtension.properties.targets.items]
+type = "string"
+
 ["$defs".LiteOptions]
 title = "LiteOptions"
 description = "options for the final jupyterlite build"
@@ -1225,6 +1245,9 @@ type = "string"
 type = "object"
 title = "lab_extensions"
 description = "paths with extra file dependencies needed to build an extension in this repo"
+
+["$defs".PythonOptions.properties.lab_extensions.additionalProperties]
+"$ref" = "#/$defs/LabExtension"
 
 ["$defs".PythonOptions.properties.modules]
 type = "array"
