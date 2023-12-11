@@ -187,6 +187,8 @@ shave:py:traitlets:pip:traitlets --> shave:py:ipython:pip:ipython
 shave:git:ipython:checkout --> shave:py:ipython:wheel:ipython
 shave:py:traitlets:pip:traitlets --> shave:py:ipython:wheel:ipython
 shave:git:jupyterlab_pygments:checkout --> shave:py:jupyterlab_pygments:pip:jupyterlab_pygments
+shave:git:jupyterlab_pygments:checkout --> shave:py:jupyterlab_pygments:wheel:jupyterlab_pygments
+shave:py:jupyterlab_pygments:labext:jupyterlab_pygments --> shave:py:jupyterlab_pygments:wheel:jupyterlab_pygments
 jupyterlab:sweep:labextension --> shave:py:jupyterlab_pygments:labext:jupyterlab_pygments
 shave:js:jupyterlab_pygments:yarn:build:css:. --> shave:py:jupyterlab_pygments:labext:jupyterlab_pygments
 shave:js:jupyterlab_pygments:yarn:build:lib:. --> shave:py:jupyterlab_pygments:labext:jupyterlab_pygments
@@ -305,6 +307,8 @@ shave:py:traitlets:wheel:traitlets --> shave:lite:config
 shave:py:comm:wheel:comm --> shave:lite:config
 shave:py:jupyter_core:wheel:jupyter_core --> shave:lite:config
 shave:py:ipython:wheel:ipython --> shave:lite:config
+shave:py:jupyterlab_pygments:wheel:jupyterlab_pygments --> shave:lite:config
+shave:py:jupyterlab_pygments:labext:jupyterlab_pygments --> shave:lite:config
 shave:py:ipywidgets:wheel:ipywidgets --> shave:lite:config
 shave:py:ipywidgets:wheel:jupyterlab_widgets --> shave:lite:config
 shave:py:ipywidgets:labext:jupyterlab_widgets --> shave:lite:config
@@ -316,6 +320,8 @@ shave:py:traitlets:wheel:traitlets --> shave:lite:build
 shave:py:comm:wheel:comm --> shave:lite:build
 shave:py:jupyter_core:wheel:jupyter_core --> shave:lite:build
 shave:py:ipython:wheel:ipython --> shave:lite:build
+shave:py:jupyterlab_pygments:wheel:jupyterlab_pygments --> shave:lite:build
+shave:py:jupyterlab_pygments:labext:jupyterlab_pygments --> shave:lite:build
 shave:py:ipywidgets:wheel:ipywidgets --> shave:lite:build
 shave:py:ipywidgets:wheel:jupyterlab_widgets --> shave:lite:build
 shave:py:ipywidgets:labext:jupyterlab_widgets --> shave:lite:build
@@ -400,6 +406,7 @@ subgraph jupyterlab_pygments
   shave:js:jupyterlab_pygments:yarn:build:lib:.{{"`✅ **yarn build lib .**`"}}:::js
   shave:js:jupyterlab_pygments:dist{{"`✅ **dist**`"}}:::js
   shave:py:jupyterlab_pygments:pip:jupyterlab_pygments["`✅ **pip jupyterlab_pygments**`"]:::py
+  shave:py:jupyterlab_pygments:wheel:jupyterlab_pygments["`✅ **wheel jupyterlab_pygments**`"]:::py
   shave:py:jupyterlab_pygments:labext:jupyterlab_pygments(["`✅ **labext jupyterlab_pygments**`"]):::jupyter
 end
 subgraph jupyter_client

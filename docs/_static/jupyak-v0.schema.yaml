@@ -422,6 +422,11 @@ properties:
                     name: build:lib
                     targets:
                       - tsconfig.tsbuildinfo
+            lite:
+              wheel: true
+              wheel_file_dep:
+                jupyterlab_pygments:
+                  - jupyterlab_pygments/labextension/package.json
             name: jupyterlab_pygments
             py:
               lab_extensions:

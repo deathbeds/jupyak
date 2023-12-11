@@ -65,19 +65,20 @@ of the forms:
 
 ...from the following repos to see novel behavior.
 
-| repo                                          | browser UI | kernel |
-| --------------------------------------------- | :--------: | :----: |
-| https://github.com/ipython/comm               |            |   ✅   |
-| https://github.com/ipython/ipython            |            |   ✅   |
-| https://github.com/ipython/traitlets          |            |   ✅   |
-| https://github.com/jupyter-widgets/ipywidgets |     ✅     |   ✅   |
-| https://github.com/jupyter/jupyter_core       |            |   ✅   |
-| https://github.com/jupyter/nbformat           |            |   ✅   |
-| https://github.com/jupyter/notebook           |     ✅     |        |
-| https://github.com/jupyterlab/jupyterlab      |     ✅     |        |
-| https://github.com/jupyterlab/lumino          |     ✅     |        |
-| https://github.com/jupyterlite/jupyterlite    |     ✅     |        |
-| https://github.com/jupyterlite/pyodide-kernel |     ✅     |   ✅   |
+| repo                                              | browser UI | kernel |
+| ------------------------------------------------- | :--------: | :----: |
+| https://github.com/ipython/comm                   |            |   ✅   |
+| https://github.com/ipython/ipython                |            |   ✅   |
+| https://github.com/ipython/traitlets              |            |   ✅   |
+| https://github.com/jupyter-widgets/ipywidgets     |     ✅     |   ✅   |
+| https://github.com/jupyter/jupyter_core           |            |   ✅   |
+| https://github.com/jupyter/nbformat               |            |   ✅   |
+| https://github.com/jupyter/notebook               |     ✅     |        |
+| https://github.com/jupyterlab/jupyterlab          |     ✅     |        |
+| https://github.com/jupyterlab/jupyterlab_pygments |     ✅     |   ✅   |
+| https://github.com/jupyterlab/lumino              |     ✅     |        |
+| https://github.com/jupyterlite/jupyterlite        |     ✅     |        |
+| https://github.com/jupyterlite/pyodide-kernel     |     ✅     |   ✅   |
 
 Additionally, a single GitHub [Gist][gist] can be used as the contents of the preview
 site. If the gist contains `jupyter_lite_config.json` and/or `jupyter-lite.json`, these

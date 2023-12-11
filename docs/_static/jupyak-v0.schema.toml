@@ -566,6 +566,14 @@ targets = [
   "tsconfig.tsbuildinfo",
 ]
 
+[properties.repos.additionalProperties.anyOf.default.lite]
+wheel = true
+
+[properties.repos.additionalProperties.anyOf.default.lite.wheel_file_dep]
+jupyterlab_pygments = [
+  "jupyterlab_pygments/labextension/package.json",
+]
+
 [properties.repos.additionalProperties.anyOf.default.py]
 pyproject_tomls = [
   "pyproject.toml",
