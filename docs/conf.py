@@ -99,7 +99,8 @@ if REPO_INFO is not None:
     html_context.update(**REPO_INFO.groupdict(), doc_path="docs")
 
 if RTD:
-    html_context["prjsf_url"] = "https://deathbeds.github.io/_static/prjsf/prjsf.js"
+    gh_pages = "https://deathbeds.github.io/jupyak"
+    html_context["prjsf_url"] = f"{gh_pages}/_static/prjsf/prjsf.js"
 
 if ALLOW_NO_CONFIG or JUPYAK_CONF_CANDIDATES:
     html_sidebars["*"] = [
