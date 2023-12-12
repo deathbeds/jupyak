@@ -3,11 +3,21 @@
 [lite]
 gist = "60d9f604bdf00715e3d25f6436f8751f"
 
+[repos.ipywidgets.github]
+merge_with = [
+  "pull/3847",
+]
+
 [repos.jupyterlite.github]
-merge_with=["pull/1263"]
+merge_strategy = "ort"
+merge_options = ["theirs"]
+merge_with = [
+  "pull/1267",
+  "pull/1263",
+]
 
 [repos.jupyterlite.js]
-link_exclude_patterns=[
-  "^@jupyterlab/(celltags-extension|debugger(-extension)?|extensionmanager(-extension)?|hub-extension|nbconvert-css|pluginmanager-extension|terminal(-extension)?|template)$",
+link_exclude_patterns = [
+  "^@jupyterlab/(debugger(-extension)?|extensionmanager(-extension)?|hub-extension|nbconvert-css|pluginmanager-extension|terminal(-extension)?|template)$",
   "^@jupyter-notebook/(documentsearch-extension|lab-extension|terminal-extension)$",
 ]
