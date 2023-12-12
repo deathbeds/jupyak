@@ -4,10 +4,13 @@
 gist = "60d9f604bdf00715e3d25f6436f8751f"
 
 [repos.jupyterlite.github]
-merge_with=["pull/1263"]
+merge_with=[
+  "pull/1267",
+  "pull/1263",
+]
 
 [repos.jupyterlite.js]
 link_exclude_patterns=[
-  "^@jupyterlab/(celltags-extension|debugger(-extension)?|extensionmanager(-extension)?|hub-extension|nbconvert-css|pluginmanager-extension|terminal(-extension)?|template)$",
+  "^@jupyterlab/(debugger(-extension)?|extensionmanager(-extension)?|hub-extension|nbconvert-css|pluginmanager-extension|terminal(-extension)?|template)$",
   "^@jupyter-notebook/(documentsearch-extension|lab-extension|terminal-extension)$",
 ]
