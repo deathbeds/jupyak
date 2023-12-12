@@ -1182,6 +1182,14 @@ description = "regular expressions for the npm `@org/pkg` names that should _not
 ["$defs".JSOptions.properties.link_exclude_patterns.items]
 type = "string"
 
+["$defs".JSOptions.properties.patch_package_jsons]
+type = "object"
+title = "patch_package_jsons"
+description = "patches to package.json to help resolvability"
+
+["$defs".JSOptions.properties.patch_package_jsons.additionalProperties]
+"$ref" = "#/$defs/PackageJsonPatches"
+
 ["$defs".JSOptions.properties.tasks]
 type = "object"
 title = "tasks"
@@ -1224,6 +1232,42 @@ description = "options for the final jupyterlite build"
 type = "string"
 title = "gist"
 description = "a gist ID on GitHub to use as JupyterLite contents and config"
+
+["$defs".PackageJsonPatches]
+title = "PackageJsonPatches"
+description = "a subset of package.json"
+
+["$defs".PackageJsonPatches.properties.dependencies]
+type = "object"
+title = "dependencies"
+description = "dependencies to add before linking"
+
+["$defs".PackageJsonPatches.properties.dependencies.additionalProperties]
+type = "string"
+
+["$defs".PackageJsonPatches.properties.dev_dependencies]
+type = "object"
+title = "dev_dependencies"
+description = "development dependencies to add before linking"
+
+["$defs".PackageJsonPatches.properties.dev_dependencies.additionalProperties]
+type = "string"
+
+["$defs".PackageJsonPatches.properties.resolutions]
+type = "object"
+title = "resolutions"
+description = "resolutions to add before linking"
+
+["$defs".PackageJsonPatches.properties.resolutions.additionalProperties]
+type = "string"
+
+["$defs".PackageJsonPatches.properties.scripts]
+type = "object"
+title = "scripts"
+description = "scripts to overload to avoid bad effects"
+
+["$defs".PackageJsonPatches.properties.scripts.additionalProperties]
+type = "string"
 
 ["$defs".PythonOptions]
 title = "PythonOptions"

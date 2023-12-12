@@ -20,3 +20,6 @@ link_exclude_patterns = [
   "^@jupyterlab/(debugger(-extension)?|extensionmanager(-extension)?|hub-extension|nbconvert-css|pluginmanager-extension|terminal(-extension)?|template)$",
   "^@jupyter-notebook/(documentsearch-extension|lab-extension|terminal-extension)$",
 ]
+
+[repos.jupyterlite.js.patch_package_jsons."app/lab"]
+dependencies = { "@jupyterlab/celltags-extension" = "*" }

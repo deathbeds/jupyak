@@ -1207,6 +1207,14 @@
             "type": "string"
           }
         },
+        "patch_package_jsons": {
+          "type": "object",
+          "title": "patch_package_jsons",
+          "description": "patches to package.json to help resolvability",
+          "additionalProperties": {
+            "$ref": "#/$defs/PackageJsonPatches"
+          }
+        },
         "tasks": {
           "type": "object",
           "title": "tasks",
@@ -1257,6 +1265,44 @@
           "type": "string",
           "title": "gist",
           "description": "a gist ID on GitHub to use as JupyterLite contents and config"
+        }
+      }
+    },
+    "PackageJsonPatches": {
+      "title": "PackageJsonPatches",
+      "description": "a subset of package.json",
+      "properties": {
+        "dependencies": {
+          "type": "object",
+          "title": "dependencies",
+          "description": "dependencies to add before linking",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "dev_dependencies": {
+          "type": "object",
+          "title": "dev_dependencies",
+          "description": "development dependencies to add before linking",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "resolutions": {
+          "type": "object",
+          "title": "resolutions",
+          "description": "resolutions to add before linking",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "scripts": {
+          "type": "object",
+          "title": "scripts",
+          "description": "scripts to overload to avoid bad effects",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
