@@ -12,8 +12,8 @@ merge_with = [
 merge_strategy = "ort"
 merge_options = ["theirs"]
 merge_with = [
-  "pull/1267",
   "pull/1263",
+  "pull/1267",
 ]
 
 [repos.jupyterlite.js]
