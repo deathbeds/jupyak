@@ -100,32 +100,6 @@ table.jsonschema h2 {
   transition: stroke stroke-width 0.5s;
 }
 
-#task-graph-legend {
-  position: fixed;
-  bottom: 100px;
-  right: 0;
-  pointer-events: none;
-  opacity: 0.75;
-  width: 800px;
-}
-
-input[id*='svg-zoom-1']:checked ~ svg {
-  width: 100%;
-  transition: width 0.5s;
-}
-input[id*='svg-zoom-2']:checked ~ svg {
-  width: 200%;
-  transition: width 0.5s;
-}
-input[id*='svg-zoom-4']:checked ~ svg {
-  width: 400%;
-  transition: width 0.5s;
-}
-input[id*='svg-zoom-8']:checked ~ svg {
-  width: 800%;
-  transition: width 0.5s;
-}
-
 /* form sidebar*/
 
 form#propose button {

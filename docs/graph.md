@@ -1,13 +1,60 @@
+
+<style>
+h1, footer, .bd-header-article {
+    display: none;
+}
+.blurb {
+    position: fixed;
+    top: 5em;
+    right: 1em;
+    max-width: 20em;
+    background-color: var(--pst-color-on-background);
+    padding: 0.5em;
+}
+
+#task-graph-legend {
+  position: fixed;
+  bottom: 1em;
+  right: 0;
+  pointer-events: none;
+  opacity: 0.75;
+  width: 800px;
+}
+
+input[id*='svg-zoom-1']:checked ~ svg {
+  width: 100%;
+  transition: width 0.5s;
+}
+input[id*='svg-zoom-2']:checked ~ svg {
+  width: 200%;
+  transition: width 0.5s;
+}
+input[id*='svg-zoom-4']:checked ~ svg {
+  width: 400%;
+  transition: width 0.5s;
+}
+input[id*='svg-zoom-8']:checked ~ svg {
+  width: 800%;
+  transition: width 0.5s;
+}
+</style>
+
 # graph
 
+<div class="blurb">
 
-The graph below shows the current state of the executed graph of tasks to go from
+<details>
+<summary>what is this?</summary>
+
+This graph shows the last state of the executed tasks to go from
 <code>git clone</code> to <code>jupyter lite build</code>.
 
 <blockquote>
 Some tasks, such as extracting <code>conda</code> dependencies from <code>pyproject.toml</code>
 files, have been elided to highlight the relationships between repositories.
 </blockquote>
+</details>
+
 
 
 <div class="jp-Mermaid" id="task-graph-legend">
@@ -35,6 +82,9 @@ end
 </div>
 </div>
 
+</div>
+
+
 <div class="jp-Mermaid" id="task-graph">
 <label>Zoom: </label>
 <input type="radio" id="task-graph-svg-zoom-1" name="task-graph-svg-zoom" checked><label for="svg-zoom-1"> 1x</label>
@@ -51,6 +101,7 @@ classDef git fill:#f1502f,color:#fff;
 classDef hack fill:#000,color:#fff;
 shave:js:jupyterlab:yarn:build:prod:dev_mode --> jupyterlab:sweep:assets
 shave:js:jupyterlab:yarn:builder:. --> jupyterlab:sweep:labextension
+shave:git:lite:gist:fetch:main --> shave:git:lite:gist:checkout
 shave:git:traitlets:fetch:main --> shave:git:traitlets:checkout
 shave:git:comm:fetch:main --> shave:git:comm:checkout
 shave:git:lumino:fetch:main --> shave:git:lumino:checkout
@@ -71,7 +122,9 @@ shave:git:jupyterlab_lsp:fetch:main --> shave:git:jupyterlab_lsp:checkout
 shave:git:jupyterlab:fetch:main --> shave:git:jupyterlab:checkout
 shave:git:notebook:fetch:main --> shave:git:notebook:checkout
 shave:git:ipywidgets:fetch:main --> shave:git:ipywidgets:checkout
+shave:git:ipywidgets:fetch:pr-3847 --> shave:git:ipywidgets:checkout
 shave:git:jupyterlite:fetch:main --> shave:git:jupyterlite:checkout
+shave:git:jupyterlite:fetch:pr-1263 --> shave:git:jupyterlite:checkout
 shave:git:jupyterlite_pyodide_kernel:fetch:main --> shave:git:jupyterlite_pyodide_kernel:checkout
 shave:git:lumino:checkout --> shave:js:lumino:yarn:install
 shave:js:yarnrc --> shave:js:lumino:yarn:install
@@ -293,6 +346,7 @@ jupyterlab:sweep:labextension --> shave:py:jupyterlite_pyodide_kernel:labext:pyo
 shave:js:jupyterlite_pyodide_kernel:yarn:build:py:wheels:pyodide-kernel --> shave:py:jupyterlite_pyodide_kernel:labext:pyodide-kernel-extension
 shave:js:jupyterlite_pyodide_kernel:yarn:build:lib:pyodide-kernel-extension --> shave:py:jupyterlite_pyodide_kernel:labext:pyodide-kernel-extension
 shave:py:jupyterlab:pip:jupyterlab --> shave:py:jupyterlite_pyodide_kernel:labext:pyodide-kernel-extension
+shave:git:lite:gist:checkout --> shave:lite:config
 shave:py:traitlets:wheel:traitlets --> shave:lite:config
 shave:py:comm:wheel:comm --> shave:lite:config
 shave:py:jupyter_core:wheel:jupyter_core --> shave:lite:config
@@ -323,7 +377,7 @@ subgraph jupyterlab
   jupyterlab:sweep:assets(("`✅ **assets**`")):::hack
   jupyterlab:sweep:labextension(("`✅ **labextension**`")):::hack
   shave:git:jupyterlab:fetch:main[("`✅ **fetch main**`")]:::git
-  shave:git:jupyterlab:checkout[("`💭 **checkout**`")]:::git
+  shave:git:jupyterlab:checkout[("`✅ **checkout**`")]:::git
   shave:js:jupyterlab:yarn:install{{"`✅ **yarn install**`"}}:::js
   shave:js:jupyterlab:yarn:buildutils:.{{"`✅ **yarn buildutils .**`"}}:::js
   shave:js:jupyterlab:yarn:builder:.{{"`✅ **yarn builder .**`"}}:::js
@@ -331,6 +385,12 @@ subgraph jupyterlab
   shave:js:jupyterlab:yarn:build:prod:dev_mode{{"`✅ **yarn build prod dev_mode**`"}}:::js
   shave:js:jupyterlab:dist{{"`✅ **dist**`"}}:::js
   shave:py:jupyterlab:pip:jupyterlab["`✅ **pip jupyterlab**`"]:::py
+end
+subgraph lite
+  shave:git:lite:gist:fetch:main[("`💭 **gist fetch main**`")]:::git
+  shave:git:lite:gist:checkout[("`💭 **gist checkout**`")]:::git
+  shave:lite:config(["`❌ **config**`"]):::jupyter
+  shave:lite:build(["`✅ **build**`"]):::jupyter
 end
 subgraph traitlets
   shave:git:traitlets:fetch:main[("`✅ **fetch main**`")]:::git
@@ -346,7 +406,7 @@ subgraph comm
 end
 subgraph lumino
   shave:git:lumino:fetch:main[("`✅ **fetch main**`")]:::git
-  shave:git:lumino:checkout[("`💭 **checkout**`")]:::git
+  shave:git:lumino:checkout[("`✅ **checkout**`")]:::git
   shave:js:lumino:yarn:install{{"`✅ **yarn install**`"}}:::js
   shave:js:lumino:yarn:build:.{{"`✅ **yarn build .**`"}}:::js
   shave:js:lumino:dist{{"`✅ **dist**`"}}:::js
@@ -441,7 +501,8 @@ subgraph notebook
 end
 subgraph ipywidgets
   shave:git:ipywidgets:fetch:main[("`✅ **fetch main**`")]:::git
-  shave:git:ipywidgets:checkout[("`✅ **checkout**`")]:::git
+  shave:git:ipywidgets:fetch:pr-3847[("`💭 **fetch pr-3847**`")]:::git
+  shave:git:ipywidgets:checkout[("`💭 **checkout**`")]:::git
   shave:js:ipywidgets:yarn:install{{"`✅ **yarn install**`"}}:::js
   shave:js:ipywidgets:yarn:build:base{{"`✅ **yarn build base**`"}}:::js
   shave:js:ipywidgets:yarn:build:controls{{"`✅ **yarn build controls**`"}}:::js
@@ -459,8 +520,9 @@ subgraph ipywidgets
 end
 subgraph jupyterlite
   shave:git:jupyterlite:fetch:main[("`✅ **fetch main**`")]:::git
-  shave:git:jupyterlite:checkout[("`✅ **checkout**`")]:::git
-  shave:js:jupyterlite:yarn:install{{"`✅ **yarn install**`"}}:::js
+  shave:git:jupyterlite:fetch:pr-1263[("`💭 **fetch pr-1263**`")]:::git
+  shave:git:jupyterlite:checkout[("`💭 **checkout**`")]:::git
+  shave:js:jupyterlite:yarn:install{{"`💭 **yarn install**`"}}:::js
   shave:js:jupyterlite:yarn:build:.{{"`✅ **yarn build .**`"}}:::js
   shave:js:jupyterlite:dist{{"`✅ **dist**`"}}:::js
   shave:py:jupyterlite:pip:jupyterlite["`✅ **pip jupyterlite**`"]:::py
@@ -481,10 +543,6 @@ subgraph jupyterlite_pyodide_kernel
 end
 subgraph yarnrc
   shave:js:yarnrc{{"`✅ **yarnrc**`"}}:::js
-end
-subgraph lite
-  shave:lite:config(["`💭 **config**`"]):::jupyter
-  shave:lite:build(["`💭 **build**`"]):::jupyter
 end
 </div>
 </div>
