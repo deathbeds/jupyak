@@ -18,9 +18,13 @@
 
 <!-- please describe the steps one should follow to evaluate -->
 
-1. go to `{readthedocs url}/_static/work/lite/lab/?path={file to open}`
-2. navigate to ...
-3. see ...
+1. open a new **private** browser window
+2. go to ...
+
+- https://jupyak--{PR#}.org.readthedocs.build/en/{PR#}/\_static/work/lite/lab/
+
+3. navigate to ...
+4. see ...
 
 ### where is the main discussion?
 
