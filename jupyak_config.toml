@@ -1,6 +1,3 @@
-[lite]
-gist = "7232671f04a5de8f1ce4b810f5ea8a3a"
-
 [repos]
 lumino.github.merge_with = [
     "pull/655",
