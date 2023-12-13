@@ -28,19 +28,11 @@ jobs:
       - run: doit self:js:*
       - run: doit self:build:*
       - run: doit shave:git:*
-        env:
-          JPYK_LOG_NAME: git
       - run: doit shave
-        env:
-          JPYK_LOG_NAME: shave
       - run: doit self:docs:*
       - uses: actions/upload-pages-artifact@v1
         with:
           path: build/docs
-      - if: failure()
-        uses: actions/upload-artifact@v3
-        with:
-          path: work/logs
 
   deploy:
     needs: build
