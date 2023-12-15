@@ -9,3 +9,4 @@ work/
 jupyak_config.*
 *.tsbuildinfo
 node_modules/
+last-known-good/

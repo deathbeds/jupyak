@@ -8,18 +8,20 @@ build:
     pre_build:
       - git config --global user.email "jupyak@example.com"
       - git config --global user.name "jupyak"
-      - JPYK_ALLOW_NO_CONFIG=1    doit bootstrap                          || echo 'ok'
+      - JPYK_ALLOW_NO_CONFIG=1        doit bootstrap                         || echo 'ok'
       # check out everything
-      - JPYK_LOG_NAME=git         doit shave:git:*                        || echo 'ok'
+      - JPYK_LOG_NAME=git             doit shave:git:*                       || echo 'ok'
       # prepare the work conda env
-      - JPYK_LOG_NAME=env         doit shave:env:*                        || echo 'ok'
+      - JPYK_LOG_NAME=env             doit shave:env:*                       || echo 'ok'
       # preflight some JS stuff
-      - JPYK_LOG_NAME=lumino      doit shave:js:lumino:*                  || echo 'ok'
+      - JPYK_LOG_NAME=lumino          doit shave:js:lumino:*                 || echo 'ok'
       # final pass
-      - JPYK_LOG_NAME=shave       doit shave                              || echo 'ok'
-      - JPYK_LOG_NAME=shave2      doit shave                              || echo 'ok'
-      - doit self:docs:deploy:work                                        || echo 'ok'
-      - JPYK_ALLOW_NO_CONFIG=1    doit self:docs:graph                    || echo 'ok'
+      - JPYK_LOG_NAME=shave           doit shave                             || echo 'ok'
+      - JPYK_LOG_NAME=shave2          doit shave                             || echo 'ok'
+      - doit self:docs:deploy:work                                           || echo 'ok'
+      - JPYK_ALLOW_NO_CONFIG=1        doit self:docs:graph                   || echo 'ok'
+      - JPYK_FETCH_LAST_KNOWN_GOOD=1  doit self:last_known_good              || echo 'ok'
+      - JPYK_FETCH_LAST_KNOWN_GOOD=1  doit self:docs:deploy:last-known-good  || echo 'ok'
 
 sphinx:
   builder: html
