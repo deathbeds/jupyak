@@ -39,6 +39,15 @@
         "options": {
           "arrayAutoCollapse": false
         }
+      },
+      {
+        "files": [
+          "*.yaml",
+          "*.yml"
+        ],
+        "options": {
+          "printWidth": 120
+        }
       }
     ]
   },

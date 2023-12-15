@@ -45,6 +45,7 @@ dependencies:
   - myst-nb
   - nbconvert
   - pydata-sphinx-theme
+  - python-libarchive-c
   - sphinx-copybutton
   - sphinxcontrib-mermaid
   - sphinxext-rediraffe
