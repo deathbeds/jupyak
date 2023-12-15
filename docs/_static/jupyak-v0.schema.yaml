@@ -13,8 +13,7 @@ properties:
   repos:
     type: object
     title: repos
-    description:
-      git-hosted projects to clone, build, and use to deploy a JupyterLite site
+    description: git-hosted projects to clone, build, and use to deploy a JupyterLite site
     additionalProperties:
       anyOf:
         - $ref: '#/$defs/Repo'
@@ -802,8 +801,7 @@ $defs:
       pypi_to_conda:
         type: object
         title: pypi_to_conda
-        description:
-          names of PyPI distributions to replace with their conda-forge counterparts
+        description: names of PyPI distributions to replace with their conda-forge counterparts
         additionalProperties:
           type: string
           description: a normalized conda-forge name
@@ -815,9 +813,7 @@ $defs:
       variables:
         type: object
         title: variables
-        description:
-          environment variables to set for all repos when the work environment is
-          created
+        description: environment variables to set for all repos when the work environment is created
         additionalProperties:
           type: string
       yarn_version:
@@ -877,32 +873,25 @@ $defs:
         type: array
         title: dependencies
         description:
-          the names of other members of `repos` that need to built and linked into this
-          repo in the JS environment
+          the names of other members of `repos` that need to built and linked into this repo in the JS environment
         items:
           type: string
       dist_exclude_patterns:
         type: array
         title: dist_exclude_patterns
-        description:
-          regular expressions for the paths in this repo that should _not_ be built and
-          linked in other repos
+        description: regular expressions for the paths in this repo that should _not_ be built and linked in other repos
         items:
           type: string
       install_exclude_resolutions:
         type: array
         title: install_exclude_resolutions
-        description:
-          regular expressions for the npm `@org/pkg` names that should _not_ be
-          installed, ever, in this repo
+        description: regular expressions for the npm `@org/pkg` names that should _not_ be installed, ever, in this repo
         items:
           type: string
       link_exclude_patterns:
         type: array
         title: link_exclude_patterns
-        description:
-          regular expressions for the npm `@org/pkg` names that should _not_ be linked
-          into this repo
+        description: regular expressions for the npm `@org/pkg` names that should _not_ be linked into this repo
         items:
           type: string
       patch_package_jsons:
@@ -981,22 +970,19 @@ $defs:
         type: array
         title: dependencies
         description:
-          the names of other members of `repos` that need to built and linked into this
-          repo in the Python environment
+          the names of other members of `repos` that need to built and linked into this repo in the Python environment
         items:
           type: string
       file_dep:
         type: array
         title: file_dep
-        description:
-          files needed (usually created by js tasks) before and editable python install
+        description: files needed (usually created by js tasks) before and editable python install
         items:
           type: string
       lab_extensions:
         type: object
         title: lab_extensions
-        description:
-          paths with extra file dependencies needed to build an extension in this repo
+        description: paths with extra file dependencies needed to build an extension in this repo
         additionalProperties:
           $ref: '#/$defs/LabExtension'
       modules:
@@ -1033,8 +1019,7 @@ $defs:
       name:
         type: string
         title: name
-        description:
-          the duplicated name from the parent ``repos`` dictionary used for dependencies
+        description: the duplicated name from the parent ``repos`` dictionary used for dependencies
       py:
         $ref: '#/$defs/PythonOptions'
         title: py
@@ -1050,9 +1035,7 @@ $defs:
       needs_pth:
         type: array
         title: needs_pth
-        description:
-          names of packages this repo provides that need to be installed before a lite
-          site build
+        description: names of packages this repo provides that need to be installed before a lite site build
         items:
           type: string
       skip_wheel_patterns:
@@ -1071,8 +1054,7 @@ $defs:
         description: extra files needed to build a given wheel
         additionalProperties:
           type: array
-          description:
-            globs to files that need to be built before the wheel can be built
+          description: globs to files that need to be built before the wheel can be built
           items:
             type: string
   Task:
@@ -1090,8 +1072,7 @@ $defs:
       file_dep:
         type: array
         title: file_dep
-        description:
-          relative globs for files that, when changed, trigger a need to run this task
+        description: relative globs for files that, when changed, trigger a need to run this task
         items:
           type: string
       name:
@@ -1101,16 +1082,13 @@ $defs:
       needs_pth:
         type: array
         title: needs_pth
-        description:
-          key of a repo that needs to be installed as a python .pth file before running
-          this task
+        description: key of a repo that needs to be installed as a python .pth file before running this task
         items:
           type: string
       targets:
         type: array
         title: targets
-        description:
-          relative globs for files that, when changed, trigger a need to run this task
+        description: relative globs for files that, when changed, trigger a need to run this task
         items:
           anyOf:
             - type: string
