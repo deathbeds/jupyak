@@ -11,7 +11,7 @@ merge_with = [
 [repos.jupyterlite.github]
 merge_strategy = "ort"
 # (un)comment the below to (un)break the build
-# merge_options = ["theirs"]
+merge_options = ["theirs"]
 merge_with = [
   "pull/1263",
 ]
