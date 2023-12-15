@@ -22,6 +22,7 @@ RE_GH = (
 REPO_INFO = re.search(RE_GH, PROJ_DATA["project"]["urls"]["Source"])
 NOW = datetime.datetime.now(tz=datetime.timezone.utc).date()
 WORK_DIST = HERE / "_static/work"
+LAST_KNOWN_GOOD = HERE / "_static/last-known-good"
 JUPYAK_CONF_CANDIDATES = [
     ROOT / f"jupyak_config.{ext}"
     for ext in ["toml", "yaml", "yml", "json"]
@@ -103,10 +104,8 @@ if RTD:
     html_context["prjsf_url"] = f"{gh_pages}/_static/prjsf/prjsf.js"
 
 if ALLOW_NO_CONFIG or JUPYAK_CONF_CANDIDATES:
-    html_sidebars["*"] = [
-        "demo",
-        *html_sidebars["*"],
-    ]
+    if "demo" not in html_sidebars["*"]:
+        html_sidebars["*"] = ["demo", *html_sidebars["*"]]
     if WORK_DIST.exists():
         html_context["lite_links"] = {
             "lab": {"label": "Lab", "icon": "fas fa-flask"},
@@ -118,3 +117,18 @@ if ALLOW_NO_CONFIG or JUPYAK_CONF_CANDIDATES:
             f"preview/{frag}/index": f"_static/work/lite/{frag}/index"
             for frag in html_context["lite_links"]
         }
+
+if LAST_KNOWN_GOOD.exists():
+    if "demo" not in html_sidebars["*"]:
+        html_sidebars["*"] = ["demo", *html_sidebars["*"]]
+
+    html_context["last_known_good_links"] = {
+        "lab": {"label": "Lab", "icon": "fas fa-flask"},
+        "repl": {"label": "Console", "icon": "fas fa-terminal"},
+        "tree": {"label": "File Tree", "icon": "fas fa-folder-tree"},
+    }
+
+    rediraffe_redirects = {
+        f"last-known-good/{frag}/index": f"_static/last-known-good/{frag}/index"
+        for frag in html_context["last_known_good_links"]
+    }

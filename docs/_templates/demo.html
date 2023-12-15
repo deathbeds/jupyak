@@ -30,3 +30,31 @@
     </p>
   </div>
 </div>
+
+{% if last_known_good_links %}
+<br/>
+
+<div class="work-sidebar">
+  <div class="work-sidebar-header">
+    <i class="fas fa-square-arrow-up-right"></i>
+    last-known-good preview site
+  </div>
+  <div class="work-sidebar-content">
+    <blockquote>
+      The current build seems to have failed, but a last-known-good site is available.
+    </blockquote>
+    <p>
+      {% for frag, info in lite_links.items() %}
+        <a
+          href="{{ pathto('last-known-good/' ~ frag ~ '/index') }}"
+          class="btn btn-primary"
+          target="_blank"
+          title="Try {{ info.label }} in your browser."
+        >
+          <i class="{{ info.icon }}"></i> {{ info.label }}
+        </a>
+      {% endfor %}
+    </p>
+  </div>
+</div>
+{% endif %}
