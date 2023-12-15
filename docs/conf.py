@@ -88,7 +88,7 @@ html_theme_options = {
 }
 
 
-html_context = {}
+html_context = {"lite_links": {}, "last_known_good_links": {}}
 rediraffe_redirects = {}
 html_sidebars = {
     "*": ["page-toc", "edit-this-page", "sourcelink"],
