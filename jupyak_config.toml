@@ -1,0 +1,16 @@
+[repos]
+lumino.github.merge_with = [ 
+    "pull/633",
+    "pull/637",
+    "pull/655",
+    "pull/666"
+]
+
+jupyterlab.github.merge_strategy = "ort"
+jupyterlab.github.merge_options = ["theirs"]
+jupyterlab.github.merge_with = [
+    "pull/15048",
+    "pull/15155",
+    "pull/15347",
+    "pull/15554"
+] 
